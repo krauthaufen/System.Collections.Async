@@ -10,7 +10,7 @@ namespace System.Collections.Async
     public interface IAsyncEnumerable<T>
     {
         /// <summary>
-        /// Gets async enumerator.
+        /// Asynchronously gets enumerator.
         /// </summary>
         Task<IAsyncEnumerator<T>> GetEnumerator(CancellationToken ct);
     }

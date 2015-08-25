@@ -15,7 +15,7 @@ namespace System.Collections.Async
         T Current { get; }
 
         /// <summary>
-        /// Advances the enumerator to the next element of the collection.
+        /// Asynchronously advances the enumerator to the next element of the collection.
         /// Returns true if the enumerator successfully advanced to the next element;
         /// false if it passed the end of the collection.
         /// </summary>
