@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>System.Collections.Async</id>
+        <version>1.0.0</version>
+        <authors>Stefan Maierhofer</authors>
+        <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>System.Collections.Async.</description>
+		<releaseNotes>An implementation of async enumerables including many LINQ operators.</releaseNotes>
+		<projectUrl>https://github.com/stefanmaierhofer/System.Collections.Async</projectUrl>
+		<copyright>Copyright © 2015 Stefan Maierhofer.</copyright>
+        <language>en-US</language>
+        <tags>async enumerable linq</tags>
+    </metadata>
+    <files>
+		<file src="..\src\System.Collections.Async\bin\Release\System.Collections.Async.dll" target="lib\net45\Uncodium.Perplexity.dll" />
+		<file src="..\src\System.Collections.Async\bin\Release\System.Collections.Async.dll" target="lib\net45\Uncodium.Perplexity.pdb" />
+    </files>
+</package>
