@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="LastOrDefaultTests.cs" />
     <Compile Include="SelectManyTests.cs" />
+    <Compile Include="ToAsyncEnumerableTests.cs" />
     <Compile Include="ToListTests.cs" />
     <Compile Include="ToArrayTests.cs" />
     <Compile Include="WhereTests.cs" />
