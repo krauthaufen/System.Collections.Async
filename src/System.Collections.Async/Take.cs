@@ -9,7 +9,7 @@ namespace System.Collections.Async
 {
     public static partial class AsyncEnumerable
     {
-        public static IAsyncEnumerable<TSource> TakeAsync<TSource>(this IAsyncEnumerable<TSource> source, int count, CancellationToken ct)
+        public static IAsyncEnumerable<TSource> TakeAsync<TSource>(this IAsyncEnumerable<TSource> source, int count, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
 

@@ -9,7 +9,7 @@ namespace System.Collections.Async
 {
     public static partial class AsyncEnumerable
     {
-        public static IAsyncEnumerable<TResult> SelectManyAsync<TSource, TResult>(this IAsyncEnumerable<TSource> source, Func<TSource, IEnumerable<TResult>> selector, CancellationToken ct)
+        public static IAsyncEnumerable<TResult> SelectManyAsync<TSource, TResult>(this IAsyncEnumerable<TSource> source, Func<TSource, IEnumerable<TResult>> selector, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");

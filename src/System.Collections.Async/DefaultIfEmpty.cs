@@ -9,12 +9,12 @@ namespace System.Collections.Async
 {
     public static partial class AsyncEnumerable
     {
-        public static IAsyncEnumerable<TSource> DefaultIfEmptyAsync<TSource>(this IAsyncEnumerable<TSource> source, CancellationToken ct)
+        public static IAsyncEnumerable<TSource> DefaultIfEmptyAsync<TSource>(this IAsyncEnumerable<TSource> source, CancellationToken ct = default(CancellationToken))
         {
             return DefaultIfEmptyAsync(source, default(TSource), ct);
         }
 
-        public static IAsyncEnumerable<TSource> DefaultIfEmptyAsync<TSource>(this IAsyncEnumerable<TSource> source, TSource defaultValue, CancellationToken ct)
+        public static IAsyncEnumerable<TSource> DefaultIfEmptyAsync<TSource>(this IAsyncEnumerable<TSource> source, TSource defaultValue, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
 
