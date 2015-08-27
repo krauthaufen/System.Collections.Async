@@ -13,22 +13,57 @@ namespace Examples
         static void Main(string[] args)
         {
             Example1().Wait();
+            Example2().Wait();
         }
 
         static async Task Example1()
         {
-            var work = Enumerable.Range(1, 5)
+            var work = Enumerable.Range(1, 3)
                 .ToAsyncEnumerable(async x =>
                 {
+                    // async work ...
                     await Task.Delay(TimeSpan.FromSeconds(x));
                     return x;
                 })
-                .ForEachAsync(x => Console.WriteLine("work {0}", x), CancellationToken.None)
+                .ForEachAsync(x => Console.WriteLine("work {0}", x))
                 ;
 
-            Console.WriteLine("doing something else");
+            Console.WriteLine("Example 1");
 
             await work;
         }
+
+        static async Task Example2()
+        {
+            var work = PagedDataGenerator()
+                .ToAsyncEnumerable()
+                .SelectManyAsync(x => x)
+                .WhereAsync(x => x % 5 == 0)
+                .ForEachAsync(Console.WriteLine)
+                ;
+
+            Console.WriteLine("Example 2");
+
+            await work;
+        }
+
+
+        static IEnumerable<Task<int[]>> PagedDataGenerator()
+        {
+            var r = new Random();
+            while (true)
+            {
+                yield return Task
+                    .Delay(TimeSpan.FromSeconds(r.NextDouble()))
+                    .ContinueWith(_ =>
+                    {
+                        var xs = new int[10];
+                        for (var i = 0; i < 10; i++) xs[i] = r.Next(100);
+                        return xs;
+                    })
+                    ;
+            }
+        }
+
     }
 }
