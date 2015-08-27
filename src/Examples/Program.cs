@@ -12,7 +12,7 @@ namespace Examples
     {
         static void Main(string[] args)
         {
-            //Example1().Wait();
+            Example1().Wait();
             Example2().Wait();
         }
 

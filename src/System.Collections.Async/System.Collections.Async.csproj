@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Concat.cs" />
     <Compile Include="DefaultIfEmpty.cs" />
+    <Compile Include="Aggregate.cs" />
     <Compile Include="LastOrDefault.cs" />
     <Compile Include="Last.cs" />
     <Compile Include="TakeFor.cs" />
