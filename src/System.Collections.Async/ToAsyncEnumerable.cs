@@ -9,6 +9,27 @@ namespace System.Collections.Async
 {
     public static partial class AsyncEnumerable
     {
+        public static IAsyncEnumerable<TSource> ToAsyncEnumerable<TSource>(this IEnumerable<Task<TSource>> source)
+        {
+            if (source == null) throw new ArgumentNullException("source");
+
+            return new _AsyncEnumerable<TSource>(ct2 =>
+            {
+                var e = source.GetEnumerator();
+                return new _AsyncEnumerator<TSource>(async () =>
+                {
+                    if (e.MoveNext())
+                    {
+                        return Tuple.Create(await e.Current, true);
+                    }
+                    else
+                    {
+                        return Tuple.Create(default(TSource), false);
+                    }
+                });
+            });
+        }
+
         public static IAsyncEnumerable<TResult> ToAsyncEnumerable<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, Task<TResult>> selector)
         {
             if (source == null) throw new ArgumentNullException("source");
