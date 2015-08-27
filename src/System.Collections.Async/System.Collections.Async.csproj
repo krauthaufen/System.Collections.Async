@@ -44,6 +44,7 @@
     <Compile Include="DefaultIfEmpty.cs" />
     <Compile Include="LastOrDefault.cs" />
     <Compile Include="Last.cs" />
+    <Compile Include="TakeFor.cs" />
     <Compile Include="ToAsyncEnumerable.cs" />
     <Compile Include="Single.cs" />
     <Compile Include="SkipWhile.cs" />

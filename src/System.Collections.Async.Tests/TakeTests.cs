@@ -12,7 +12,7 @@ namespace System.Collections.Async.Tests
         {
             try
             {
-                AsyncEnumerable.TakeAsync<int>(null, 5, CancellationToken.None);
+                AsyncEnumerable.Take<int>(null, 5, CancellationToken.None);
                 Assert.Fail();
             }
             catch (ArgumentNullException)
@@ -28,7 +28,7 @@ namespace System.Collections.Async.Tests
         public void EmptyTakeNone()
         {
             var xs = AsyncEnumerable.Empty<int>();
-            var rs = xs.TakeAsync(0, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.Take(0, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 0);
         }
 
@@ -36,7 +36,7 @@ namespace System.Collections.Async.Tests
         public void EmptyTakeOne()
         {
             var xs = AsyncEnumerable.Empty<int>();
-            var rs = xs.TakeAsync(1, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.Take(1, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 0);
         }
 
@@ -44,7 +44,7 @@ namespace System.Collections.Async.Tests
         public void SingleElementTakeOne()
         {
             var xs = AsyncEnumerable.FromValue(42);
-            var rs = xs.TakeAsync(1, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.Take(1, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 1 && rs[0] == 42);
         }
 
@@ -52,7 +52,7 @@ namespace System.Collections.Async.Tests
         public void SingleElementTakeNone()
         {
             var xs = AsyncEnumerable.FromValue(42);
-            var rs = xs.TakeAsync(0, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.Take(0, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 0);
         }
 
@@ -60,7 +60,7 @@ namespace System.Collections.Async.Tests
         public void SingleElementTakeTwo()
         {
             var xs = AsyncEnumerable.FromValue(42);
-            var rs = xs.TakeAsync(2, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.Take(2, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 1 && rs[0] == 42);
         }
 
@@ -68,7 +68,7 @@ namespace System.Collections.Async.Tests
         public void SingleElementTakeNegative()
         {
             var xs = AsyncEnumerable.FromValue(42);
-            var rs = xs.TakeAsync(-1, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.Take(-1, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 0);
         }
         
@@ -76,7 +76,7 @@ namespace System.Collections.Async.Tests
         public void MultipleElementsTakeNone()
         {
             var xs = AsyncEnumerable.FromValues(new[] { 10, 20, 30 });
-            var rs = xs.TakeAsync(0, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.Take(0, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 0);
         }
 
@@ -84,7 +84,7 @@ namespace System.Collections.Async.Tests
         public void MultipleElementsTakeOne()
         {
             var xs = AsyncEnumerable.FromValues(new[] { 10, 20, 30 });
-            var rs = xs.TakeAsync(1, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.Take(1, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 1 && rs[0] == 10);
         }
 
@@ -92,7 +92,7 @@ namespace System.Collections.Async.Tests
         public void MultipleElementsTakeMultiple()
         {
             var xs = AsyncEnumerable.FromValues(new[] { 10, 20, 30, 40, 50 });
-            var rs = xs.TakeAsync(3, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.Take(3, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 3 && rs[0] == 10 && rs[1] == 20 && rs[2] == 30);
         }
 
@@ -100,7 +100,7 @@ namespace System.Collections.Async.Tests
         public void MultipleElementsTakeAll()
         {
             var xs = AsyncEnumerable.FromValues(new[] { 10, 20, 30, 40, 50 });
-            var rs = xs.TakeAsync(5, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.Take(5, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 5 && rs[0] == 10 && rs[1] == 20 && rs[2] == 30 && rs[3] == 40 && rs[4] == 50);
         }
 
@@ -108,7 +108,7 @@ namespace System.Collections.Async.Tests
         public void MultipleElementsTakeMoreThanAll()
         {
             var xs = AsyncEnumerable.FromValues(new[] { 10, 20, 30, 40, 50 });
-            var rs = xs.TakeAsync(50, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.Take(50, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 5 && rs[0] == 10 && rs[1] == 20 && rs[2] == 30 && rs[3] == 40 && rs[4] == 50);
         }
 
@@ -116,7 +116,7 @@ namespace System.Collections.Async.Tests
         public void MultipleElementsTakeNegative()
         {
             var xs = AsyncEnumerable.FromValues(new[] { 10, 20, 30 });
-            var rs = xs.TakeAsync(-2, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.Take(-2, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 0);
         }
     }

@@ -12,7 +12,7 @@ namespace Examples
     {
         static void Main(string[] args)
         {
-            Example1().Wait();
+            //Example1().Wait();
             Example2().Wait();
         }
 
@@ -37,8 +37,9 @@ namespace Examples
         {
             var work = PagedDataGenerator()
                 .ToAsyncEnumerable()
-                .SelectManyAsync(x => x)
-                .WhereAsync(x => x % 5 == 0)
+                .SelectMany(x => x)
+                .TakeFor(TimeSpan.FromSeconds(5))
+                .Where(x => x % 5 == 0)
                 .ForEachAsync(Console.WriteLine)
                 ;
 

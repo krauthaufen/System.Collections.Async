@@ -9,17 +9,18 @@ namespace System.Collections.Async
 {
     public static partial class AsyncEnumerable
     {
-        public static IAsyncEnumerable<TSource> Take<TSource>(this IAsyncEnumerable<TSource> source, int count, CancellationToken ct = default(CancellationToken))
+        public static IAsyncEnumerable<TSource> TakeFor<TSource>(this IAsyncEnumerable<TSource> source, TimeSpan duration, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
 
             return new _AsyncEnumerable<TSource>(async ct2 =>
             {
-                var taken = 0;
+                var stop = DateTime.UtcNow + duration;
                 var e = await source.GetEnumerator(ct2);
                 return new _AsyncEnumerator<TSource>(async () =>
                 {
-                    if (taken++ < count && await e.MoveNext(ct))
+                    var isValid = await e.MoveNext(ct);
+                    if (isValid && DateTime.UtcNow < stop)
                     {
                         return Tuple.Create(e.Current, true);
                     }

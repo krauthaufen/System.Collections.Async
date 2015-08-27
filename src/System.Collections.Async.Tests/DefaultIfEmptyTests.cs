@@ -12,7 +12,7 @@ namespace System.Collections.Async.Tests
         {
             try
             {
-                AsyncEnumerable.DefaultIfEmptyAsync<int>(null, CancellationToken.None);
+                AsyncEnumerable.DefaultIfEmpty<int>(null, CancellationToken.None);
                 Assert.Fail();
             }
             catch (ArgumentNullException)
@@ -29,7 +29,7 @@ namespace System.Collections.Async.Tests
         {
             try
             {
-                AsyncEnumerable.DefaultIfEmptyAsync<int>(null, 42, CancellationToken.None);
+                AsyncEnumerable.DefaultIfEmpty<int>(null, 42, CancellationToken.None);
                 Assert.Fail();
             }
             catch (ArgumentNullException)
@@ -45,16 +45,16 @@ namespace System.Collections.Async.Tests
         public void EmptyCase()
         {
             var xs = AsyncEnumerable.Empty<int>();
-            Assert.IsTrue(xs.DefaultIfEmptyAsync(CancellationToken.None).SingleAsync(CancellationToken.None).Result == 0);
-            Assert.IsTrue(xs.DefaultIfEmptyAsync(42, CancellationToken.None).SingleAsync(CancellationToken.None).Result == 42);
+            Assert.IsTrue(xs.DefaultIfEmpty(CancellationToken.None).SingleAsync(CancellationToken.None).Result == 0);
+            Assert.IsTrue(xs.DefaultIfEmpty(42, CancellationToken.None).SingleAsync(CancellationToken.None).Result == 42);
         }
         
         [TestMethod]
         public void NonEmptyCase()
         {
             var xs = AsyncEnumerable.FromValue(17);
-            Assert.IsTrue(xs.DefaultIfEmptyAsync(CancellationToken.None).SingleAsync(CancellationToken.None).Result == 17);
-            Assert.IsTrue(xs.DefaultIfEmptyAsync(42, CancellationToken.None).SingleAsync(CancellationToken.None).Result == 17);
+            Assert.IsTrue(xs.DefaultIfEmpty(CancellationToken.None).SingleAsync(CancellationToken.None).Result == 17);
+            Assert.IsTrue(xs.DefaultIfEmpty(42, CancellationToken.None).SingleAsync(CancellationToken.None).Result == 17);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace System.Collections.Async.Tests
         {
             try
             {
-                AsyncEnumerable.SkipAsync<int>(null, 5, CancellationToken.None);
+                AsyncEnumerable.Skip<int>(null, 5, CancellationToken.None);
                 Assert.Fail();
             }
             catch (ArgumentNullException)
@@ -28,7 +28,7 @@ namespace System.Collections.Async.Tests
         public void EmptySkipNone()
         {
             var xs = AsyncEnumerable.Empty<int>();
-            var rs = xs.SkipAsync(0, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.Skip(0, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 0);
         }
 
@@ -36,7 +36,7 @@ namespace System.Collections.Async.Tests
         public void EmptySkipOne()
         {
             var xs = AsyncEnumerable.Empty<int>();
-            var rs = xs.SkipAsync(1, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.Skip(1, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 0);
         }
 
@@ -44,7 +44,7 @@ namespace System.Collections.Async.Tests
         public void SingleElementSkipOne()
         {
             var xs = AsyncEnumerable.FromValue(42);
-            var rs = xs.SkipAsync(1, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.Skip(1, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 0);
         }
 
@@ -52,7 +52,7 @@ namespace System.Collections.Async.Tests
         public void SingleElementSkipNone()
         {
             var xs = AsyncEnumerable.FromValue(42);
-            var rs = xs.SkipAsync(0, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.Skip(0, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 1 && rs[0] == 42);
         }
 
@@ -60,7 +60,7 @@ namespace System.Collections.Async.Tests
         public void SingleElementSkipTwo()
         {
             var xs = AsyncEnumerable.FromValue(42);
-            var rs = xs.SkipAsync(2, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.Skip(2, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 0);
         }
 
@@ -68,7 +68,7 @@ namespace System.Collections.Async.Tests
         public void SingleElementSkipNegative()
         {
             var xs = AsyncEnumerable.FromValue(42);
-            var rs = xs.SkipAsync(-1, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.Skip(-1, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 1 && rs[0] == 42);
         }
         
@@ -76,7 +76,7 @@ namespace System.Collections.Async.Tests
         public void MultipleElementsSkipNone()
         {
             var xs = AsyncEnumerable.FromValues(new[] { 10, 20, 30 });
-            var rs = xs.SkipAsync(0, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.Skip(0, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 3 && rs[0] == 10 && rs[1] == 20 && rs[2] == 30);
         }
 
@@ -84,7 +84,7 @@ namespace System.Collections.Async.Tests
         public void MultipleElementsSkipOne()
         {
             var xs = AsyncEnumerable.FromValues(new[] { 10, 20, 30 });
-            var rs = xs.SkipAsync(1, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.Skip(1, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 2 && rs[0] == 20 && rs[1] == 30);
         }
 
@@ -92,7 +92,7 @@ namespace System.Collections.Async.Tests
         public void MultipleElementsSkipMultiple()
         {
             var xs = AsyncEnumerable.FromValues(new[] { 10, 20, 30, 40, 50 });
-            var rs = xs.SkipAsync(3, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.Skip(3, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 2 && rs[0] == 40 && rs[1] == 50);
         }
 
@@ -100,7 +100,7 @@ namespace System.Collections.Async.Tests
         public void MultipleElementsSkipAll()
         {
             var xs = AsyncEnumerable.FromValues(new[] { 10, 20, 30, 40, 50 });
-            var rs = xs.SkipAsync(5, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.Skip(5, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 0);
         }
 
@@ -108,7 +108,7 @@ namespace System.Collections.Async.Tests
         public void MultipleElementsSkipMoreThanAll()
         {
             var xs = AsyncEnumerable.FromValues(new[] { 10, 20, 30, 40, 50 });
-            var rs = xs.SkipAsync(50, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.Skip(50, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 0);
         }
 
@@ -116,7 +116,7 @@ namespace System.Collections.Async.Tests
         public void MultipleElementsSkipNegative()
         {
             var xs = AsyncEnumerable.FromValues(new[] { 10, 20, 30 });
-            var rs = xs.SkipAsync(-2, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.Skip(-2, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 3 && rs[0] == 10 && rs[1] == 20 && rs[2] == 30);
         }
     }

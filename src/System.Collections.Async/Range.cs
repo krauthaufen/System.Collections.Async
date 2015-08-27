@@ -9,7 +9,7 @@ namespace System.Collections.Async
 {
     public static partial class AsyncEnumerable
     {
-        public static IAsyncEnumerable<int> RangeAsync(int start, int count, CancellationToken ct = default(CancellationToken))
+        public static IAsyncEnumerable<int> Range(int start, int count, CancellationToken ct = default(CancellationToken))
         {
             ct.ThrowIfCancellationRequested();
             if (count < 0) throw new ArgumentOutOfRangeException("count");

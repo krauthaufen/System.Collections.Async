@@ -12,7 +12,7 @@ namespace System.Collections.Async.Tests
         {
             try
             {
-                AsyncEnumerable.SelectAsync<int, int>(null, x => x, CancellationToken.None);
+                AsyncEnumerable.Select<int, int>(null, x => x, CancellationToken.None);
                 Assert.Fail();
             }
             catch (ArgumentNullException)
@@ -30,7 +30,7 @@ namespace System.Collections.Async.Tests
             try
             {
                 var xs = AsyncEnumerable.Empty<int>();
-                AsyncEnumerable.SelectAsync<int, int>(xs, null, CancellationToken.None);
+                AsyncEnumerable.Select<int, int>(xs, null, CancellationToken.None);
                 Assert.Fail();
             }
             catch (ArgumentNullException)
@@ -46,7 +46,7 @@ namespace System.Collections.Async.Tests
         public void EmptyCase()
         {
             var xs = AsyncEnumerable.Empty<int>();
-            var rs = xs.SelectAsync(x => x, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.Select(x => x, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 0);
         }
 
@@ -54,7 +54,7 @@ namespace System.Collections.Async.Tests
         public void SingleElement()
         {
             var xs = AsyncEnumerable.FromValue(42);
-            var rs = xs.SelectAsync(x => x * 2, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.Select(x => x * 2, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 1 && rs[0] == 84);
         }
 
@@ -62,7 +62,7 @@ namespace System.Collections.Async.Tests
         public void MultipleElements()
         {
             var xs = AsyncEnumerable.FromValues(new[] { 10, 20, 30 });
-            var rs = xs.SelectAsync(x => x / 2, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.Select(x => x / 2, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 3 && rs[0] == 5 && rs[1] == 10 && rs[2] == 15);
         }
 
@@ -70,7 +70,7 @@ namespace System.Collections.Async.Tests
         public void TSourceIsDifferentFromTResult()
         {
             var xs = AsyncEnumerable.FromValues(new[] { 10, 20, 30 });
-            var rs = xs.SelectAsync(x => "x" + x, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.Select(x => "x" + x, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 3 && rs[0] == "x10" && rs[1] == "x20" && rs[2] == "x30");
         }
     }

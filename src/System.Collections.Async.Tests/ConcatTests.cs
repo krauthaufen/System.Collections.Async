@@ -12,7 +12,7 @@ namespace System.Collections.Async.Tests
         {
             try
             {
-                AsyncEnumerable.ConcatAsync(null, AsyncEnumerable.FromValues(new[] { 1, 2, 3, 4, 5 }), CancellationToken.None);
+                AsyncEnumerable.Concat(null, AsyncEnumerable.FromValues(new[] { 1, 2, 3, 4, 5 }), CancellationToken.None);
                 Assert.Fail();
             }
             catch (ArgumentNullException)
@@ -30,7 +30,7 @@ namespace System.Collections.Async.Tests
         {
             try
             {
-                AsyncEnumerable.ConcatAsync(AsyncEnumerable.FromValues(new[] { 1, 2, 3, 4, 5 }), null, CancellationToken.None);
+                AsyncEnumerable.Concat(AsyncEnumerable.FromValues(new[] { 1, 2, 3, 4, 5 }), null, CancellationToken.None);
                 Assert.Fail();
             }
             catch (ArgumentNullException)
@@ -48,7 +48,7 @@ namespace System.Collections.Async.Tests
         {
             try
             {
-                AsyncEnumerable.ConcatAsync<int>(null, null, CancellationToken.None);
+                AsyncEnumerable.Concat<int>(null, null, CancellationToken.None);
                 Assert.Fail();
             }
             catch (ArgumentNullException)
@@ -66,7 +66,7 @@ namespace System.Collections.Async.Tests
         {
             var a = AsyncEnumerable.FromValues(new int[] { });
             var b = AsyncEnumerable.FromValues(new int[] { });
-            var c = a.ConcatAsync(b, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var c = a.Concat(b, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(c.Length == 0);
         }
 
@@ -75,7 +75,7 @@ namespace System.Collections.Async.Tests
         {
             var a = AsyncEnumerable.FromValues(new int[] { });
             var b = AsyncEnumerable.FromValues(new int[] { 42 });
-            var c = a.ConcatAsync(b, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var c = a.Concat(b, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(c.Length == 1 && c[0] == 42);
         }
 
@@ -84,7 +84,7 @@ namespace System.Collections.Async.Tests
         {
             var a = AsyncEnumerable.FromValues(new int[] { });
             var b = AsyncEnumerable.FromValues(new int[] { 1, 2, 3 });
-            var c = a.ConcatAsync(b, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var c = a.Concat(b, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(c.Length == 3 && c[0] == 1 && c[1] == 2 && c[2] == 3);
         }
 
@@ -93,7 +93,7 @@ namespace System.Collections.Async.Tests
         {
             var a = AsyncEnumerable.FromValues(new int[] { 17 });
             var b = AsyncEnumerable.FromValues(new int[] { });
-            var c = a.ConcatAsync(b, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var c = a.Concat(b, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(c.Length == 1 && c[0] == 17);
         }
 
@@ -102,7 +102,7 @@ namespace System.Collections.Async.Tests
         {
             var a = AsyncEnumerable.FromValues(new int[] { 17 });
             var b = AsyncEnumerable.FromValues(new int[] { 42 });
-            var c = a.ConcatAsync(b, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var c = a.Concat(b, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(c.Length == 2 && c[0] == 17 && c[1] == 42);
         }
 
@@ -111,7 +111,7 @@ namespace System.Collections.Async.Tests
         {
             var a = AsyncEnumerable.FromValues(new int[] { 17 });
             var b = AsyncEnumerable.FromValues(new int[] { 1, 2, 3 });
-            var c = a.ConcatAsync(b, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var c = a.Concat(b, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(c.Length == 4 && c[0] == 17 && c[1] == 1 && c[2] == 2 && c[3] == 3);
         }
 
@@ -120,7 +120,7 @@ namespace System.Collections.Async.Tests
         {
             var a = AsyncEnumerable.FromValues(new int[] { 17, 18, 19 });
             var b = AsyncEnumerable.FromValues(new int[] { });
-            var c = a.ConcatAsync(b, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var c = a.Concat(b, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(c.Length == 3 && c[0] == 17 && c[1] == 18 && c[2] == 19);
         }
 
@@ -129,7 +129,7 @@ namespace System.Collections.Async.Tests
         {
             var a = AsyncEnumerable.FromValues(new int[] { 17, 18, 19 });
             var b = AsyncEnumerable.FromValues(new int[] { 42 });
-            var c = a.ConcatAsync(b, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var c = a.Concat(b, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(c.Length == 4 && c[0] == 17 && c[1] == 18 && c[2] == 19 && c[3] == 42);
         }
 
@@ -138,7 +138,7 @@ namespace System.Collections.Async.Tests
         {
             var a = AsyncEnumerable.FromValues(new int[] { 17, 18, 19 });
             var b = AsyncEnumerable.FromValues(new int[] { 1, 2, 3 });
-            var c = a.ConcatAsync(b, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+            var c = a.Concat(b, CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
             Assert.IsTrue(c.Length == 6 && c[0] == 17 && c[1] == 18 && c[2] == 19 && c[3] == 1 && c[4] == 2 && c[5] == 3);
         }
     }
