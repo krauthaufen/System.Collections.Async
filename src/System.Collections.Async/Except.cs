@@ -17,7 +17,8 @@ namespace System.Collections.Async
             return new _AsyncEnumerable<TSource>(async ct2 =>
             {
                 IEqualityComparer<TSource> comparer = EqualityComparer<TSource>.Default;
-                
+
+                var distinct = new HashSet<TSource>(comparer);
                 var except = new HashSet<TSource>(comparer);
                 var s = await second.GetEnumerator(ct2);
                 while (await s.MoveNext(ct2)) except.Add(s.Current);
@@ -29,7 +30,7 @@ namespace System.Collections.Async
                     {
                         if (await e.MoveNext(ct))
                         {
-                            if (except.Contains(e.Current)) continue;
+                            if (!distinct.Add(e.Current) || except.Contains(e.Current)) continue;
                             return Tuple.Create(e.Current, true);
                         }
                         else
@@ -48,6 +49,7 @@ namespace System.Collections.Async
 
             return new _AsyncEnumerable<TSource>(async ct2 =>
             {
+                var distinct = new HashSet<TSource>(comparer);
                 var except = new HashSet<TSource>(comparer);
                 var s = await second.GetEnumerator(ct2);
                 while (await s.MoveNext(ct2)) except.Add(s.Current);
@@ -59,7 +61,7 @@ namespace System.Collections.Async
                     {
                         if (await e.MoveNext(ct))
                         {
-                            if (except.Contains(e.Current)) continue;
+                            if (!distinct.Add(e.Current) || except.Contains(e.Current)) continue;
                             return Tuple.Create(e.Current, true);
                         }
                         else
@@ -79,6 +81,8 @@ namespace System.Collections.Async
             return new _AsyncEnumerable<TSource>(async ct2 =>
             {
                 var comparer = EqualityComparer<TSource>.Default;
+
+                var distinct = new HashSet<TSource>(comparer);
                 var except = new HashSet<TSource>(second, comparer);
 
                 var e = await first.GetEnumerator(ct2);
@@ -88,7 +92,7 @@ namespace System.Collections.Async
                     {
                         if (await e.MoveNext(ct))
                         {
-                            if (except.Contains(e.Current)) continue;
+                            if (!distinct.Add(e.Current) || except.Contains(e.Current)) continue;
                             return Tuple.Create(e.Current, true);
                         }
                         else
@@ -107,6 +111,7 @@ namespace System.Collections.Async
 
             return new _AsyncEnumerable<TSource>(async ct2 =>
             {
+                var distinct = new HashSet<TSource>(comparer);
                 var except = new HashSet<TSource>(second, comparer);
 
                 var e = await first.GetEnumerator(ct2);
@@ -116,7 +121,7 @@ namespace System.Collections.Async
                     {
                         if (await e.MoveNext(ct))
                         {
-                            if (except.Contains(e.Current)) continue;
+                            if (!distinct.Add(e.Current) || except.Contains(e.Current)) continue;
                             return Tuple.Create(e.Current, true);
                         }
                         else
