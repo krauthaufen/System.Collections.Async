@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Intersect.cs" />
     <Compile Include="Except.cs" />
     <Compile Include="ElementAtOrDefaultAsync.cs" />
     <Compile Include="ElementAtAsync.cs" />
