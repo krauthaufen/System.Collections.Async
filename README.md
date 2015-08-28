@@ -40,20 +40,31 @@ Imagine iterating over a collection of large files where a call to MoveNext trig
 
 ## Operators
 The following operators are implemented:
+* Aggregate
 * All
 * Any
 * Concat
+* Contains
 * Count
 * DefaultIfEmpty
 * Distinct
+* ElementAt
+* ElementAtOrDefault
+* Empty
+* Except
 * First
 * FirstOrDefault
 * ForEach
 * FromValue
 * FromValues
+* Intersect
 * Last
 * LastOrDefault
+* LongCount
+* Max
+* Min
 * Range
+* Repeat
 * Select
 * SelectMany
 * Single
