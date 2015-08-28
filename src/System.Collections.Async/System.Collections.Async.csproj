@@ -53,6 +53,7 @@
     <Compile Include="Last.cs" />
     <Compile Include="Min.cs" />
     <Compile Include="Max.cs" />
+    <Compile Include="Repeat.cs" />
     <Compile Include="TakeFor.cs" />
     <Compile Include="ToAsyncEnumerable.cs" />
     <Compile Include="Single.cs" />
