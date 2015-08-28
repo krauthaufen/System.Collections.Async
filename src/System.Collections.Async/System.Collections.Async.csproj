@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ElementAtOrDefaultAsync.cs" />
+    <Compile Include="ElementAtAsync.cs" />
     <Compile Include="Contains.cs" />
     <Compile Include="Concat.cs" />
     <Compile Include="DefaultIfEmpty.cs" />
