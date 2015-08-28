@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Generate.cs" />
     <Compile Include="LongCount.cs" />
     <Compile Include="Intersect.cs" />
     <Compile Include="Except.cs" />

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace System.Collections.Async.Tests
         {
             try
             {
-                AsyncEnumerable.ToAsyncEnumerable<int>(null);
+                AsyncEnumerable.ToAsyncEnumerable<int>((IEnumerable<Task<int>>)null);
                 Assert.Fail();
             }
             catch (ArgumentNullException)
@@ -28,6 +29,23 @@ namespace System.Collections.Async.Tests
 
         [TestMethod]
         public void ThrowsWhenSourceIsNull2()
+        {
+            try
+            {
+                AsyncEnumerable.ToAsyncEnumerable<int>((Task<int>)null);
+                Assert.Fail();
+            }
+            catch (ArgumentNullException)
+            {
+            }
+            catch
+            {
+                Assert.Fail();
+            }
+        }
+
+        [TestMethod]
+        public void ThrowsWhenSourceIsNull3()
         {
             try
             {

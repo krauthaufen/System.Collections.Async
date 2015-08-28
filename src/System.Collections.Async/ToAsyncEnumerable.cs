@@ -30,6 +30,28 @@ namespace System.Collections.Async
             });
         }
 
+        public static IAsyncEnumerable<TSource> ToAsyncEnumerable<TSource>(this Task<TSource> source)
+        {
+            if (source == null) throw new ArgumentNullException("source");
+
+            return new _AsyncEnumerable<TSource>(ct2 =>
+            {
+                var done = false;
+                return new _AsyncEnumerator<TSource>(async () =>
+                {
+                    if (done)
+                    {
+                        return Tuple.Create(default(TSource), false);
+                    }
+                    else
+                    {
+                        done = true;
+                        return Tuple.Create(await source, true);
+                    }
+                });
+            });
+        }
+
         public static IAsyncEnumerable<TResult> ToAsyncEnumerable<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, Task<TResult>> selector)
         {
             if (source == null) throw new ArgumentNullException("source");
