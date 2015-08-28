@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contains.cs" />
     <Compile Include="Concat.cs" />
     <Compile Include="DefaultIfEmpty.cs" />
     <Compile Include="Aggregate.cs" />
