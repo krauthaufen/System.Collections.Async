@@ -50,9 +50,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="MinTests.cs" />
     <Compile Include="SourceTests.cs" />
     <Compile Include="LastOrDefaultTests.cs" />
     <Compile Include="SelectManyTests.cs" />
+    <Compile Include="MaxTests.cs" />
+    <Compile Include="TestHelpers.cs" />
     <Compile Include="ToAsyncEnumerableTests.cs" />
     <Compile Include="ToListTests.cs" />
     <Compile Include="ToArrayTests.cs" />

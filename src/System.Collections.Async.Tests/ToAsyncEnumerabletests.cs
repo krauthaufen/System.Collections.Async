@@ -79,7 +79,7 @@ namespace System.Collections.Async.Tests
         }
 
         [TestMethod]
-        public void EmptyCase()
+        public void EmptyCase1()
         {
             var xs = Enumerable.Empty<Task<int>>();
             var rs = xs.ToAsyncEnumerable().ToArrayAsync().Result;
@@ -95,10 +95,18 @@ namespace System.Collections.Async.Tests
         }
 
         [TestMethod]
-        public void SingleElement()
+        public void SingleElement1()
         {
             var xs = new[] { Task.FromResult(42) };
             var rs = xs.ToAsyncEnumerable().ToArrayAsync().Result;
+            Assert.IsTrue(rs.Length == 1 && rs[0] == 42);
+        }
+
+        [TestMethod]
+        public void SingleElement2()
+        {
+            var x = Task.FromResult(42);
+            var rs = x.ToAsyncEnumerable().ToArrayAsync().Result;
             Assert.IsTrue(rs.Length == 1 && rs[0] == 42);
         }
 

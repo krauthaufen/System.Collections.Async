@@ -149,6 +149,63 @@ namespace System.Collections.Async
             }
             return result;
         }
+        public static async Task<uint> MaxAsync(this IAsyncEnumerable<uint> source, CancellationToken ct = default(CancellationToken))
+        {
+            if (source == null) throw new ArgumentNullException("source");
+
+            var e = await source.GetEnumerator(ct);
+            if (!await e.MoveNext(ct)) throw new InvalidOperationException();
+            var result = e.Current;
+            while (await e.MoveNext(ct))
+            {
+                var x = e.Current;
+                if (x > result) result = x;
+            }
+            return result;
+        }
+        public static async Task<uint?> MaxAsync(this IAsyncEnumerable<uint?> source, CancellationToken ct = default(CancellationToken))
+        {
+            if (source == null) throw new ArgumentNullException("source");
+
+            var e = await source.GetEnumerator(ct);
+            if (!await e.MoveNext(ct)) throw new InvalidOperationException();
+            var result = e.Current;
+            while (await e.MoveNext(ct))
+            {
+                var x = e.Current;
+                if (x > result) result = x;
+            }
+            return result;
+        }
+        public static async Task<ulong> MaxAsync(this IAsyncEnumerable<ulong> source, CancellationToken ct = default(CancellationToken))
+        {
+            if (source == null) throw new ArgumentNullException("source");
+
+            var e = await source.GetEnumerator(ct);
+            if (!await e.MoveNext(ct)) throw new InvalidOperationException();
+            var result = e.Current;
+            while (await e.MoveNext(ct))
+            {
+                var x = e.Current;
+                if (x > result) result = x;
+            }
+            return result;
+        }
+        public static async Task<ulong?> MaxAsync(this IAsyncEnumerable<ulong?> source, CancellationToken ct = default(CancellationToken))
+        {
+            if (source == null) throw new ArgumentNullException("source");
+
+            var e = await source.GetEnumerator(ct);
+            if (!await e.MoveNext(ct)) throw new InvalidOperationException();
+            var result = e.Current;
+            while (await e.MoveNext(ct))
+            {
+                var x = e.Current;
+                if (x > result) result = x;
+            }
+            return result;
+        }
+
 
         public static async Task<decimal> MaxAsync<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, decimal> selector, CancellationToken ct = default(CancellationToken))
         {
@@ -286,6 +343,66 @@ namespace System.Collections.Async
             return result;
         }
         public static async Task<long?> MaxAsync<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, long?> selector, CancellationToken ct = default(CancellationToken))
+        {
+            if (source == null) throw new ArgumentNullException("source");
+            if (selector == null) throw new ArgumentNullException("selector");
+
+            var e = await source.GetEnumerator(ct);
+            if (!await e.MoveNext(ct)) throw new InvalidOperationException();
+            var result = selector(e.Current);
+            while (await e.MoveNext(ct))
+            {
+                var x = selector(e.Current);
+                if (x > result) result = x;
+            }
+            return result;
+        }
+        public static async Task<uint> MaxAsync<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, uint> selector, CancellationToken ct = default(CancellationToken))
+        {
+            if (source == null) throw new ArgumentNullException("source");
+            if (selector == null) throw new ArgumentNullException("selector");
+
+            var e = await source.GetEnumerator(ct);
+            if (!await e.MoveNext(ct)) throw new InvalidOperationException();
+            var result = selector(e.Current);
+            while (await e.MoveNext(ct))
+            {
+                var x = selector(e.Current);
+                if (x > result) result = x;
+            }
+            return result;
+        }
+        public static async Task<uint?> MaxAsync<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, uint?> selector, CancellationToken ct = default(CancellationToken))
+        {
+            if (source == null) throw new ArgumentNullException("source");
+            if (selector == null) throw new ArgumentNullException("selector");
+
+            var e = await source.GetEnumerator(ct);
+            if (!await e.MoveNext(ct)) throw new InvalidOperationException();
+            var result = selector(e.Current);
+            while (await e.MoveNext(ct))
+            {
+                var x = selector(e.Current);
+                if (x > result) result = x;
+            }
+            return result;
+        }
+        public static async Task<ulong> MaxAsync<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, ulong> selector, CancellationToken ct = default(CancellationToken))
+        {
+            if (source == null) throw new ArgumentNullException("source");
+            if (selector == null) throw new ArgumentNullException("selector");
+
+            var e = await source.GetEnumerator(ct);
+            if (!await e.MoveNext(ct)) throw new InvalidOperationException();
+            var result = selector(e.Current);
+            while (await e.MoveNext(ct))
+            {
+                var x = selector(e.Current);
+                if (x > result) result = x;
+            }
+            return result;
+        }
+        public static async Task<ulong?> MaxAsync<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, ulong?> selector, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");

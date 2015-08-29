@@ -13,7 +13,7 @@ namespace System.Collections.Async
         {
             if (source == null) throw new ArgumentNullException("source");
 
-            var result = default(decimal);
+            var result = (decimal)0;
             var e = await source.GetEnumerator(ct);
             while (await e.MoveNext(ct)) result += e.Current;
             return result;
@@ -22,7 +22,7 @@ namespace System.Collections.Async
         {
             if (source == null) throw new ArgumentNullException("source");
 
-            var result = default(decimal?);
+            var result = (decimal?)0;
             var e = await source.GetEnumerator(ct);
             while (await e.MoveNext(ct)) result += e.Current;
             return result;
@@ -31,7 +31,7 @@ namespace System.Collections.Async
         {
             if (source == null) throw new ArgumentNullException("source");
 
-            var result = default(double);
+            var result = (double)0;
             var e = await source.GetEnumerator(ct);
             while (await e.MoveNext(ct)) result += e.Current;
             return result;
@@ -40,7 +40,7 @@ namespace System.Collections.Async
         {
             if (source == null) throw new ArgumentNullException("source");
 
-            var result = default(double?);
+            var result = (double?)0;
             var e = await source.GetEnumerator(ct);
             while (await e.MoveNext(ct)) result += e.Current;
             return result;
@@ -49,7 +49,7 @@ namespace System.Collections.Async
         {
             if (source == null) throw new ArgumentNullException("source");
 
-            var result = default(float);
+            var result = (float)0;
             var e = await source.GetEnumerator(ct);
             while (await e.MoveNext(ct)) result += e.Current;
             return result;
@@ -58,7 +58,7 @@ namespace System.Collections.Async
         {
             if (source == null) throw new ArgumentNullException("source");
 
-            var result = default(float?);
+            var result = (float?)0;
             var e = await source.GetEnumerator(ct);
             while (await e.MoveNext(ct)) result += e.Current;
             return result;
@@ -67,7 +67,7 @@ namespace System.Collections.Async
         {
             if (source == null) throw new ArgumentNullException("source");
 
-            var result = default(int);
+            var result = (int)0;
             var e = await source.GetEnumerator(ct);
             while (await e.MoveNext(ct)) result += e.Current;
             return result;
@@ -76,7 +76,7 @@ namespace System.Collections.Async
         {
             if (source == null) throw new ArgumentNullException("source");
 
-            var result = default(int?);
+            var result = (int?)0;
             var e = await source.GetEnumerator(ct);
             while (await e.MoveNext(ct)) result += e.Current;
             return result;
@@ -85,7 +85,7 @@ namespace System.Collections.Async
         {
             if (source == null) throw new ArgumentNullException("source");
 
-            var result = default(long);
+            var result = (long)0;
             var e = await source.GetEnumerator(ct);
             while (await e.MoveNext(ct)) result += e.Current;
             return result;
@@ -94,7 +94,7 @@ namespace System.Collections.Async
         {
             if (source == null) throw new ArgumentNullException("source");
 
-            var result = default(long?);
+            var result = (long?)0;
             var e = await source.GetEnumerator(ct);
             while (await e.MoveNext(ct)) result += e.Current;
             return result;
@@ -103,7 +103,7 @@ namespace System.Collections.Async
         {
             if (source == null) throw new ArgumentNullException("source");
 
-            var result = default(uint);
+            var result = (uint)0;
             var e = await source.GetEnumerator(ct);
             while (await e.MoveNext(ct)) result += e.Current;
             return result;
@@ -112,7 +112,7 @@ namespace System.Collections.Async
         {
             if (source == null) throw new ArgumentNullException("source");
 
-            var result = default(uint?);
+            var result = (uint?)0;
             var e = await source.GetEnumerator(ct);
             while (await e.MoveNext(ct)) result += e.Current;
             return result;
@@ -121,7 +121,7 @@ namespace System.Collections.Async
         {
             if (source == null) throw new ArgumentNullException("source");
 
-            var result = default(ulong);
+            var result = (ulong)0;
             var e = await source.GetEnumerator(ct);
             while (await e.MoveNext(ct)) result += e.Current;
             return result;
@@ -130,7 +130,7 @@ namespace System.Collections.Async
         {
             if (source == null) throw new ArgumentNullException("source");
 
-            var result = default(ulong?);
+            var result = (ulong?)0;
             var e = await source.GetEnumerator(ct);
             while (await e.MoveNext(ct)) result += e.Current;
             return result;
@@ -141,7 +141,7 @@ namespace System.Collections.Async
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
 
-            var result = default(decimal);
+            var result = (decimal)0;
             var e = await source.GetEnumerator(ct);
             while (await e.MoveNext(ct)) result += selector(e.Current);
             return result;
@@ -151,7 +151,7 @@ namespace System.Collections.Async
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
 
-            var result = default(decimal?);
+            var result = (decimal?)0;
             var e = await source.GetEnumerator(ct);
             while (await e.MoveNext(ct)) result += selector(e.Current);
             return result;
@@ -161,7 +161,7 @@ namespace System.Collections.Async
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
 
-            var result = default(double);
+            var result = (double)0;
             var e = await source.GetEnumerator(ct);
             while (await e.MoveNext(ct)) result += selector(e.Current);
             return result;
@@ -171,7 +171,7 @@ namespace System.Collections.Async
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
 
-            var result = default(double?);
+            var result = (double?)0;
             var e = await source.GetEnumerator(ct);
             while (await e.MoveNext(ct)) result += selector(e.Current);
             return result;
@@ -181,7 +181,7 @@ namespace System.Collections.Async
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
 
-            var result = default(float);
+            var result = (float)0;
             var e = await source.GetEnumerator(ct);
             while (await e.MoveNext(ct)) result += selector(e.Current);
             return result;
@@ -191,7 +191,7 @@ namespace System.Collections.Async
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
 
-            var result = default(float?);
+            var result = (float?)0;
             var e = await source.GetEnumerator(ct);
             while (await e.MoveNext(ct)) result += selector(e.Current);
             return result;
@@ -201,7 +201,7 @@ namespace System.Collections.Async
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
 
-            var result = default(int);
+            var result = (int)0;
             var e = await source.GetEnumerator(ct);
             while (await e.MoveNext(ct)) result += selector(e.Current);
             return result;
@@ -211,7 +211,7 @@ namespace System.Collections.Async
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
 
-            var result = default(int?);
+            var result = (int?)0;
             var e = await source.GetEnumerator(ct);
             while (await e.MoveNext(ct)) result += selector(e.Current);
             return result;
@@ -221,7 +221,7 @@ namespace System.Collections.Async
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
 
-            var result = default(long);
+            var result = (long)0;
             var e = await source.GetEnumerator(ct);
             while (await e.MoveNext(ct)) result += selector(e.Current);
             return result;
@@ -231,7 +231,7 @@ namespace System.Collections.Async
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
 
-            var result = default(long?);
+            var result = (long?)0;
             var e = await source.GetEnumerator(ct);
             while (await e.MoveNext(ct)) result += selector(e.Current);
             return result;
@@ -241,7 +241,7 @@ namespace System.Collections.Async
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
 
-            var result = default(uint);
+            var result = (uint)0;
             var e = await source.GetEnumerator(ct);
             while (await e.MoveNext(ct)) result += selector(e.Current);
             return result;
@@ -251,7 +251,7 @@ namespace System.Collections.Async
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
 
-            var result = default(uint?);
+            var result = (uint?)0;
             var e = await source.GetEnumerator(ct);
             while (await e.MoveNext(ct)) result += selector(e.Current);
             return result;
@@ -261,7 +261,7 @@ namespace System.Collections.Async
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
 
-            var result = default(ulong);
+            var result = (ulong)0;
             var e = await source.GetEnumerator(ct);
             while (await e.MoveNext(ct)) result += selector(e.Current);
             return result;
@@ -271,7 +271,7 @@ namespace System.Collections.Async
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
 
-            var result = default(ulong?);
+            var result = (ulong?)0;
             var e = await source.GetEnumerator(ct);
             while (await e.MoveNext(ct)) result += selector(e.Current);
             return result;
