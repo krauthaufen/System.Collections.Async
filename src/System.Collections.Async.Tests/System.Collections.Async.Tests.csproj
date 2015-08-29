@@ -50,6 +50,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="SourceTests.cs" />
     <Compile Include="LastOrDefaultTests.cs" />
     <Compile Include="SelectManyTests.cs" />
     <Compile Include="ToAsyncEnumerableTests.cs" />
