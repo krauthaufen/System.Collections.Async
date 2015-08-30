@@ -19,12 +19,13 @@ namespace Examples
         static async Task Example1()
         {
             var work = Enumerable.Range(1, 3)
-                .ToAsyncEnumerable(async x =>
+                .Select(async x =>
                 {
                     // async work ...
                     await Task.Delay(TimeSpan.FromSeconds(x));
                     return x;
                 })
+                .ToAsyncEnumerable()
                 .ForEach(x => Console.WriteLine("work {0}", x))
                 ;
 

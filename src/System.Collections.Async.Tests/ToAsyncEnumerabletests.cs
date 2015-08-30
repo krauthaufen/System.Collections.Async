@@ -13,70 +13,54 @@ namespace System.Collections.Async.Tests
         [TestMethod]
         public void ThrowsWhenSourceIsNull1()
         {
-            try
-            {
-                AsyncEnumerable.ToAsyncEnumerable<int>((IEnumerable<Task<int>>)null);
-                Assert.Fail();
-            }
-            catch (ArgumentNullException)
-            {
-            }
-            catch
-            {
-                Assert.Fail();
-            }
+            TestHelpers.ThrowsArgumentNullException(() =>
+                AsyncEnumerable.ToAsyncEnumerable((IEnumerable<Task<int>>)null)
+                );
         }
-
         [TestMethod]
         public void ThrowsWhenSourceIsNull2()
         {
-            try
-            {
-                AsyncEnumerable.ToAsyncEnumerable<int>((Task<int>)null);
-                Assert.Fail();
-            }
-            catch (ArgumentNullException)
-            {
-            }
-            catch
-            {
-                Assert.Fail();
-            }
+            TestHelpers.ThrowsArgumentNullException(() =>
+                AsyncEnumerable.ToAsyncEnumerable((Task<int>)null)
+                );
         }
 
+
+
         [TestMethod]
-        public void ThrowsWhenSourceIsNull3()
+        public void ThrowsWhenFaulted1()
         {
             try
             {
-                AsyncEnumerable.ToAsyncEnumerable<int, int>(null, x => Task.FromResult(x));
+                var x = TestHelpers.FaultedTask;
+                var rs = x.ToAsyncEnumerable().ToArray().Result;
                 Assert.Fail();
             }
-            catch (ArgumentNullException)
+            catch (Exception e)
             {
-            }
-            catch
-            {
-                Assert.Fail();
+                var a = e as AggregateException;
+                if (a == null || a.InnerExceptions.Count != 1 || !(a.InnerException.Message == "Test"))
+                    Assert.Fail();
             }
         }
-
         [TestMethod]
-        public void ThrowsWhenSelectorIsNull()
+        public void ThrowsWhenFaulted2()
         {
             try
             {
-                AsyncEnumerable.ToAsyncEnumerable<int, int>(new[] { 1, 2, 3, 4, 5 }, null);
+                var xs = new[] { Task.FromResult(1), TestHelpers.FaultedTask, Task.FromResult(2) };
+                var rs = xs.ToAsyncEnumerable().ToArray().Result;
                 Assert.Fail();
             }
-            catch (ArgumentNullException)
+            catch (Exception e)
             {
-            }
-            catch
-            {
-                Assert.Fail();
+                var a = e as AggregateException;
+                if (a == null || a.InnerExceptions.Count != 1 || !(a.InnerException.Message == "Test"))
+                    Assert.Fail();
             }
         }
+
+
 
         [TestMethod]
         public void EmptyCase1()
@@ -85,47 +69,44 @@ namespace System.Collections.Async.Tests
             var rs = xs.ToAsyncEnumerable().ToArray().Result;
             Assert.IsTrue(rs.Length == 0);
         }
-
-        [TestMethod]
-        public void EmptyCaseWithSelector()
-        {
-            var xs = Enumerable.Empty<int>();
-            var rs = xs.ToAsyncEnumerable(x => Task.FromResult(x)).ToArray().Result;
-            Assert.IsTrue(rs.Length == 0);
-        }
-
         [TestMethod]
         public void SingleElement1()
-        {
-            var xs = new[] { Task.FromResult(42) };
-            var rs = xs.ToAsyncEnumerable().ToArray().Result;
-            Assert.IsTrue(rs.Length == 1 && rs[0] == 42);
-        }
-
-        [TestMethod]
-        public void SingleElement2()
         {
             var x = Task.FromResult(42);
             var rs = x.ToAsyncEnumerable().ToArray().Result;
             Assert.IsTrue(rs.Length == 1 && rs[0] == 42);
         }
-
         [TestMethod]
-        public void SingleElementWithSelector()
+        public void SingleElement2()
         {
-            var xs = new[] { 42 };
-            var rs = xs.ToAsyncEnumerable(x => Task.FromResult(x)).ToArray().Result;
+            var xs = new[] { Task.FromResult(42) };
+            var rs = xs.ToAsyncEnumerable().ToArray().Result;
             Assert.IsTrue(rs.Length == 1 && rs[0] == 42);
         }
-
         [TestMethod]
         public void MultipleElements()
         {
             var xs = new[] { 10, 20, 30 };
-            var rs = xs.ToAsyncEnumerable(x => Task.FromResult(x)).ToArray().Result;
+            var rs = xs.Select(x => Task.FromResult(x)).ToAsyncEnumerable().ToArray().Result;
             Assert.IsTrue(rs.Length == 3 && rs[0] == 10 && rs[1] == 20 && rs[2] == 30);
         }
 
+
+
+        [TestMethod]
+        public void EmptyCaseWithSelector()
+        {
+            var xs = Enumerable.Empty<int>();
+            var rs = xs.Select(x => Task.FromResult(x)).ToAsyncEnumerable().ToArray().Result;
+            Assert.IsTrue(rs.Length == 0);
+        }
+        [TestMethod]
+        public void SingleElementWithSelector()
+        {
+            var xs = new[] { 42 };
+            var rs = xs.Select(x => Task.FromResult(x)).ToAsyncEnumerable().ToArray().Result;
+            Assert.IsTrue(rs.Length == 1 && rs[0] == 42);
+        }
         [TestMethod]
         public void MultipleElementsWithSelector()
         {

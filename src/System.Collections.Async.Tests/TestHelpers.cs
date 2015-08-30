@@ -9,6 +9,31 @@ namespace System.Collections.Async.Tests
 {
     internal static class TestHelpers
     {
+        public static Task<int> FaultedTask
+        {
+            get
+            {
+                var x = new TaskCompletionSource<int>();
+                x.SetException(new Exception("Test"));
+                return x.Task;
+            }
+        }
+        public static void ThrowsArgumentNullException(Action action)
+        {
+            try
+            {
+                action();
+                Assert.Fail();
+            }
+            catch (ArgumentNullException)
+            {
+            }
+            catch
+            {
+                Assert.Fail();
+            }
+        }
+
         public static void ThrowsAggregateArgumentNullException(Action action)
         {
             try

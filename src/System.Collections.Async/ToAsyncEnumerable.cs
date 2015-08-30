@@ -9,32 +9,11 @@ namespace System.Collections.Async
 {
     public static partial class AsyncEnumerable
     {
-        public static IAsyncEnumerable<TSource> ToAsyncEnumerable<TSource>(this IEnumerable<Task<TSource>> source)
-        {
-            if (source == null) throw new ArgumentNullException("source");
-
-            return new _AsyncEnumerable<TSource>(ct2 =>
-            {
-                var e = source.GetEnumerator();
-                return new _AsyncEnumerator<TSource>(async () =>
-                {
-                    if (e.MoveNext())
-                    {
-                        return MoveNext.Value(await e.Current);
-                    }
-                    else
-                    {
-                        return MoveNext.Completed<TSource>();
-                    }
-                });
-            });
-        }
-
         public static IAsyncEnumerable<TSource> ToAsyncEnumerable<TSource>(this Task<TSource> source)
         {
             if (source == null) throw new ArgumentNullException("source");
 
-            return new _AsyncEnumerable<TSource>(ct2 =>
+            return new _AsyncEnumerable<TSource>(ct =>
             {
                 var done = false;
                 return new _AsyncEnumerator<TSource>(async () =>
@@ -52,24 +31,22 @@ namespace System.Collections.Async
             });
         }
 
-        public static IAsyncEnumerable<TResult> ToAsyncEnumerable<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, Task<TResult>> selector)
+        public static IAsyncEnumerable<TSource> ToAsyncEnumerable<TSource>(this IEnumerable<Task<TSource>> source)
         {
             if (source == null) throw new ArgumentNullException("source");
-            if (selector == null) throw new ArgumentNullException("selector");
 
-            return new _AsyncEnumerable<TResult>(ct2 =>
+            return new _AsyncEnumerable<TSource>(ct =>
             {
                 var e = source.GetEnumerator();
-                return new _AsyncEnumerator<TResult>(async () =>
+                return new _AsyncEnumerator<TSource>(async () =>
                 {
                     if (e.MoveNext())
                     {
-                        var x = selector(e.Current);
-                        return MoveNext.Value(await x);
+                        return MoveNext.Value(await e.Current);
                     }
                     else
                     {
-                        return MoveNext.Completed<TResult>();
+                        return MoveNext.Completed<TSource>();
                     }
                 });
             });
