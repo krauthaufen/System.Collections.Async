@@ -25,7 +25,7 @@ namespace Examples
                     await Task.Delay(TimeSpan.FromSeconds(x));
                     return x;
                 })
-                .ForEachAsync(x => Console.WriteLine("work {0}", x))
+                .ForEach(x => Console.WriteLine("work {0}", x))
                 ;
 
             Console.WriteLine("Example 1");

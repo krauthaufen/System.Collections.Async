@@ -201,7 +201,7 @@
 //        public void YieldElementsFromTask()
 //        {
 //            var source = AsyncEnumerable.Source<int>();
-//            var sum = source.SumAsync();
+//            var sum = source.Sum();
 
 //            Task.Run(() =>
 //            {
@@ -217,12 +217,12 @@
 //        {
 //            var source = AsyncEnumerable.Source<int>();
 
-//            var sum1 = source.SumAsync(); // enumerator 1
+//            var sum1 = source.Sum(); // enumerator 1
 
 //            source.Yield(1).Wait();
 //            source.Yield(2).Wait();
 
-//            var sum2 = source.SumAsync(); // enumerator 2
+//            var sum2 = source.Sum(); // enumerator 2
 
 //            source.Yield(4).Wait();
 //            source.Yield(8).Wait();

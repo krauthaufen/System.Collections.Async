@@ -13,48 +13,48 @@ namespace System.Collections.Async.Tests
         public void ThrowsWhenSourceIsNull1()
         {
             TestHelpers.ThrowsAggregateArgumentNullException(
-                () => AsyncEnumerable.MaxAsync((IAsyncEnumerable<decimal>)null, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max((IAsyncEnumerable<decimal>)null, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateArgumentNullException(
-                () => AsyncEnumerable.MaxAsync((IAsyncEnumerable<double>)null, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max((IAsyncEnumerable<double>)null, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateArgumentNullException(
-                () => AsyncEnumerable.MaxAsync((IAsyncEnumerable<float>)null, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max((IAsyncEnumerable<float>)null, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateArgumentNullException(
-                () => AsyncEnumerable.MaxAsync((IAsyncEnumerable<int>)null, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max((IAsyncEnumerable<int>)null, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateArgumentNullException(
-                () => AsyncEnumerable.MaxAsync((IAsyncEnumerable<long>)null, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max((IAsyncEnumerable<long>)null, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateArgumentNullException(
-                () => AsyncEnumerable.MaxAsync((IAsyncEnumerable<uint>)null, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max((IAsyncEnumerable<uint>)null, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateArgumentNullException(
-                () => AsyncEnumerable.MaxAsync((IAsyncEnumerable<ulong>)null, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max((IAsyncEnumerable<ulong>)null, CancellationToken.None).Wait()
                 );
 
 
             TestHelpers.ThrowsAggregateArgumentNullException(
-                () => AsyncEnumerable.MaxAsync((IAsyncEnumerable<decimal?>)null, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max((IAsyncEnumerable<decimal?>)null, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateArgumentNullException(
-                () => AsyncEnumerable.MaxAsync((IAsyncEnumerable<double?>)null, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max((IAsyncEnumerable<double?>)null, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateArgumentNullException(
-                () => AsyncEnumerable.MaxAsync((IAsyncEnumerable<float?>)null, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max((IAsyncEnumerable<float?>)null, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateArgumentNullException(
-                () => AsyncEnumerable.MaxAsync((IAsyncEnumerable<int?>)null, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max((IAsyncEnumerable<int?>)null, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateArgumentNullException(
-                () => AsyncEnumerable.MaxAsync((IAsyncEnumerable<long?>)null, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max((IAsyncEnumerable<long?>)null, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateArgumentNullException(
-                () => AsyncEnumerable.MaxAsync((IAsyncEnumerable<uint?>)null, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max((IAsyncEnumerable<uint?>)null, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateArgumentNullException(
-                () => AsyncEnumerable.MaxAsync((IAsyncEnumerable<ulong?>)null, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max((IAsyncEnumerable<ulong?>)null, CancellationToken.None).Wait()
                 );
         }
 
@@ -62,48 +62,48 @@ namespace System.Collections.Async.Tests
         public void ThrowsWhenSourceIsNull2()
         {
             TestHelpers.ThrowsAggregateArgumentNullException(
-                () => AsyncEnumerable.MaxAsync((IAsyncEnumerable<decimal>)null, x => x, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max((IAsyncEnumerable<decimal>)null, x => x, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateArgumentNullException(
-                () => AsyncEnumerable.MaxAsync((IAsyncEnumerable<double>)null, x => x, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max((IAsyncEnumerable<double>)null, x => x, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateArgumentNullException(
-                () => AsyncEnumerable.MaxAsync((IAsyncEnumerable<float>)null, x => x, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max((IAsyncEnumerable<float>)null, x => x, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateArgumentNullException(
-                () => AsyncEnumerable.MaxAsync((IAsyncEnumerable<int>)null, x => x, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max((IAsyncEnumerable<int>)null, x => x, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateArgumentNullException(
-                () => AsyncEnumerable.MaxAsync((IAsyncEnumerable<long>)null, x => x, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max((IAsyncEnumerable<long>)null, x => x, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateArgumentNullException(
-                () => AsyncEnumerable.MaxAsync((IAsyncEnumerable<uint>)null, x => x, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max((IAsyncEnumerable<uint>)null, x => x, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateArgumentNullException(
-                () => AsyncEnumerable.MaxAsync((IAsyncEnumerable<ulong>)null, x => x, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max((IAsyncEnumerable<ulong>)null, x => x, CancellationToken.None).Wait()
                 );
 
 
             TestHelpers.ThrowsAggregateArgumentNullException(
-                () => AsyncEnumerable.MaxAsync((IAsyncEnumerable<decimal?>)null, x => x, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max((IAsyncEnumerable<decimal?>)null, x => x, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateArgumentNullException(
-                () => AsyncEnumerable.MaxAsync((IAsyncEnumerable<double?>)null, x => x, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max((IAsyncEnumerable<double?>)null, x => x, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateArgumentNullException(
-                () => AsyncEnumerable.MaxAsync((IAsyncEnumerable<float?>)null, x => x, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max((IAsyncEnumerable<float?>)null, x => x, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateArgumentNullException(
-                () => AsyncEnumerable.MaxAsync((IAsyncEnumerable<int?>)null, x => x, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max((IAsyncEnumerable<int?>)null, x => x, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateArgumentNullException(
-                () => AsyncEnumerable.MaxAsync((IAsyncEnumerable<long?>)null, x => x, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max((IAsyncEnumerable<long?>)null, x => x, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateArgumentNullException(
-                () => AsyncEnumerable.MaxAsync((IAsyncEnumerable<uint?>)null, x => x, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max((IAsyncEnumerable<uint?>)null, x => x, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateArgumentNullException(
-                () => AsyncEnumerable.MaxAsync((IAsyncEnumerable<ulong?>)null, x => x, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max((IAsyncEnumerable<ulong?>)null, x => x, CancellationToken.None).Wait()
                 );
         }
 
@@ -111,48 +111,48 @@ namespace System.Collections.Async.Tests
         public void ThrowsWhenSourceIsEmpty1()
         {
             TestHelpers.ThrowsAggregateInvalidOperationException(
-                () => AsyncEnumerable.MaxAsync(AsyncEnumerable.Empty<decimal>(), CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max(AsyncEnumerable.Empty<decimal>(), CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateInvalidOperationException(
-                () => AsyncEnumerable.MaxAsync(AsyncEnumerable.Empty<double>(), CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max(AsyncEnumerable.Empty<double>(), CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateInvalidOperationException(
-                () => AsyncEnumerable.MaxAsync(AsyncEnumerable.Empty<float>(), CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max(AsyncEnumerable.Empty<float>(), CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateInvalidOperationException(
-                () => AsyncEnumerable.MaxAsync(AsyncEnumerable.Empty<int>(), CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max(AsyncEnumerable.Empty<int>(), CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateInvalidOperationException(
-                () => AsyncEnumerable.MaxAsync(AsyncEnumerable.Empty<long>(), CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max(AsyncEnumerable.Empty<long>(), CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateInvalidOperationException(
-                () => AsyncEnumerable.MaxAsync(AsyncEnumerable.Empty<uint>(), CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max(AsyncEnumerable.Empty<uint>(), CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateInvalidOperationException(
-                () => AsyncEnumerable.MaxAsync(AsyncEnumerable.Empty<ulong>(), CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max(AsyncEnumerable.Empty<ulong>(), CancellationToken.None).Wait()
                 );
 
 
             TestHelpers.ThrowsAggregateInvalidOperationException(
-                () => AsyncEnumerable.MaxAsync(AsyncEnumerable.Empty<decimal?>(), CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max(AsyncEnumerable.Empty<decimal?>(), CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateInvalidOperationException(
-                () => AsyncEnumerable.MaxAsync(AsyncEnumerable.Empty<double?>(), CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max(AsyncEnumerable.Empty<double?>(), CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateInvalidOperationException(
-                () => AsyncEnumerable.MaxAsync(AsyncEnumerable.Empty<float?>(), CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max(AsyncEnumerable.Empty<float?>(), CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateInvalidOperationException(
-                () => AsyncEnumerable.MaxAsync(AsyncEnumerable.Empty<int?>(), CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max(AsyncEnumerable.Empty<int?>(), CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateInvalidOperationException(
-                () => AsyncEnumerable.MaxAsync(AsyncEnumerable.Empty<long?>(), CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max(AsyncEnumerable.Empty<long?>(), CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateInvalidOperationException(
-                () => AsyncEnumerable.MaxAsync(AsyncEnumerable.Empty<uint?>(), CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max(AsyncEnumerable.Empty<uint?>(), CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateInvalidOperationException(
-                () => AsyncEnumerable.MaxAsync(AsyncEnumerable.Empty<ulong?>(), CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max(AsyncEnumerable.Empty<ulong?>(), CancellationToken.None).Wait()
                 );
         }
 
@@ -160,48 +160,48 @@ namespace System.Collections.Async.Tests
         public void ThrowsWhenSourceIsEmpty2()
         {
             TestHelpers.ThrowsAggregateInvalidOperationException(
-                () => AsyncEnumerable.MaxAsync(AsyncEnumerable.Empty<decimal>(), x => x, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max(AsyncEnumerable.Empty<decimal>(), x => x, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateInvalidOperationException(
-                () => AsyncEnumerable.MaxAsync(AsyncEnumerable.Empty<double>(), x => x, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max(AsyncEnumerable.Empty<double>(), x => x, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateInvalidOperationException(
-                () => AsyncEnumerable.MaxAsync(AsyncEnumerable.Empty<float>(), x => x, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max(AsyncEnumerable.Empty<float>(), x => x, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateInvalidOperationException(
-                () => AsyncEnumerable.MaxAsync(AsyncEnumerable.Empty<int>(), x => x, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max(AsyncEnumerable.Empty<int>(), x => x, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateInvalidOperationException(
-                () => AsyncEnumerable.MaxAsync(AsyncEnumerable.Empty<long>(), x => x, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max(AsyncEnumerable.Empty<long>(), x => x, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateInvalidOperationException(
-                () => AsyncEnumerable.MaxAsync(AsyncEnumerable.Empty<uint>(), x => x, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max(AsyncEnumerable.Empty<uint>(), x => x, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateInvalidOperationException(
-                () => AsyncEnumerable.MaxAsync(AsyncEnumerable.Empty<ulong>(), x => x, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max(AsyncEnumerable.Empty<ulong>(), x => x, CancellationToken.None).Wait()
                 );
 
 
             TestHelpers.ThrowsAggregateInvalidOperationException(
-                () => AsyncEnumerable.MaxAsync(AsyncEnumerable.Empty<decimal>(), x => x, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max(AsyncEnumerable.Empty<decimal>(), x => x, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateInvalidOperationException(
-                () => AsyncEnumerable.MaxAsync(AsyncEnumerable.Empty<double>(), x => x, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max(AsyncEnumerable.Empty<double>(), x => x, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateInvalidOperationException(
-                () => AsyncEnumerable.MaxAsync(AsyncEnumerable.Empty<float>(), x => x, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max(AsyncEnumerable.Empty<float>(), x => x, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateInvalidOperationException(
-                () => AsyncEnumerable.MaxAsync(AsyncEnumerable.Empty<int>(), x => x, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max(AsyncEnumerable.Empty<int>(), x => x, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateInvalidOperationException(
-                () => AsyncEnumerable.MaxAsync(AsyncEnumerable.Empty<long>(), x => x, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max(AsyncEnumerable.Empty<long>(), x => x, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateInvalidOperationException(
-                () => AsyncEnumerable.MaxAsync(AsyncEnumerable.Empty<uint>(), x => x, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max(AsyncEnumerable.Empty<uint>(), x => x, CancellationToken.None).Wait()
                 );
             TestHelpers.ThrowsAggregateInvalidOperationException(
-                () => AsyncEnumerable.MaxAsync(AsyncEnumerable.Empty<ulong>(), x => x, CancellationToken.None).Wait()
+                () => AsyncEnumerable.Max(AsyncEnumerable.Empty<ulong>(), x => x, CancellationToken.None).Wait()
                 );
         }
 
@@ -211,74 +211,74 @@ namespace System.Collections.Async.Tests
             TestHelpers.ThrowsAggregateArgumentNullException(() =>
             {
                 var xs = AsyncEnumerable.FromValues(new decimal[0]);
-                AsyncEnumerable.MaxAsync(xs, (Func<decimal, decimal>)null, CancellationToken.None).Wait();
+                AsyncEnumerable.Max(xs, (Func<decimal, decimal>)null, CancellationToken.None).Wait();
             });
             TestHelpers.ThrowsAggregateArgumentNullException(() =>
             {
                 var xs = AsyncEnumerable.FromValues(new double[0]);
-                AsyncEnumerable.MaxAsync(xs, (Func<double, double>)null, CancellationToken.None).Wait();
+                AsyncEnumerable.Max(xs, (Func<double, double>)null, CancellationToken.None).Wait();
             });
             TestHelpers.ThrowsAggregateArgumentNullException(() =>
             {
                 var xs = AsyncEnumerable.FromValues(new float[0]);
-                AsyncEnumerable.MaxAsync(xs, (Func<float, float>)null, CancellationToken.None).Wait();
+                AsyncEnumerable.Max(xs, (Func<float, float>)null, CancellationToken.None).Wait();
             });
             TestHelpers.ThrowsAggregateArgumentNullException(() =>
             {
                 var xs = AsyncEnumerable.FromValues(new int[0]);
-                AsyncEnumerable.MaxAsync(xs, (Func<int, int>)null, CancellationToken.None).Wait();
+                AsyncEnumerable.Max(xs, (Func<int, int>)null, CancellationToken.None).Wait();
             });
             TestHelpers.ThrowsAggregateArgumentNullException(() =>
             {
                 var xs = AsyncEnumerable.FromValues(new long[0]);
-                AsyncEnumerable.MaxAsync(xs, (Func<long, long>)null, CancellationToken.None).Wait();
+                AsyncEnumerable.Max(xs, (Func<long, long>)null, CancellationToken.None).Wait();
             });
             TestHelpers.ThrowsAggregateArgumentNullException(() =>
             {
                 var xs = AsyncEnumerable.FromValues(new uint[0]);
-                AsyncEnumerable.MaxAsync(xs, (Func<uint, uint>)null, CancellationToken.None).Wait();
+                AsyncEnumerable.Max(xs, (Func<uint, uint>)null, CancellationToken.None).Wait();
             });
             TestHelpers.ThrowsAggregateArgumentNullException(() =>
             {
                 var xs = AsyncEnumerable.FromValues(new ulong[0]);
-                AsyncEnumerable.MaxAsync(xs, (Func<ulong, ulong>)null, CancellationToken.None).Wait();
+                AsyncEnumerable.Max(xs, (Func<ulong, ulong>)null, CancellationToken.None).Wait();
             });
 
 
             TestHelpers.ThrowsAggregateArgumentNullException(() =>
             {
                 var xs = AsyncEnumerable.FromValues(new decimal?[0]);
-                AsyncEnumerable.MaxAsync(xs, (Func<decimal?, decimal?>)null, CancellationToken.None).Wait();
+                AsyncEnumerable.Max(xs, (Func<decimal?, decimal?>)null, CancellationToken.None).Wait();
             });
             TestHelpers.ThrowsAggregateArgumentNullException(() =>
             {
                 var xs = AsyncEnumerable.FromValues(new double?[0]);
-                AsyncEnumerable.MaxAsync(xs, (Func<double?, double?>)null, CancellationToken.None).Wait();
+                AsyncEnumerable.Max(xs, (Func<double?, double?>)null, CancellationToken.None).Wait();
             });
             TestHelpers.ThrowsAggregateArgumentNullException(() =>
             {
                 var xs = AsyncEnumerable.FromValues(new float?[0]);
-                AsyncEnumerable.MaxAsync(xs, (Func<float?, float?>)null, CancellationToken.None).Wait();
+                AsyncEnumerable.Max(xs, (Func<float?, float?>)null, CancellationToken.None).Wait();
             });
             TestHelpers.ThrowsAggregateArgumentNullException(() =>
             {
                 var xs = AsyncEnumerable.FromValues(new int?[0]);
-                AsyncEnumerable.MaxAsync(xs, (Func<int?, int?>)null, CancellationToken.None).Wait();
+                AsyncEnumerable.Max(xs, (Func<int?, int?>)null, CancellationToken.None).Wait();
             });
             TestHelpers.ThrowsAggregateArgumentNullException(() =>
             {
                 var xs = AsyncEnumerable.FromValues(new long?[0]);
-                AsyncEnumerable.MaxAsync(xs, (Func<long?, long?>)null, CancellationToken.None).Wait();
+                AsyncEnumerable.Max(xs, (Func<long?, long?>)null, CancellationToken.None).Wait();
             });
             TestHelpers.ThrowsAggregateArgumentNullException(() =>
             {
                 var xs = AsyncEnumerable.FromValues(new uint?[0]);
-                AsyncEnumerable.MaxAsync(xs, (Func<uint?, uint?>)null, CancellationToken.None).Wait();
+                AsyncEnumerable.Max(xs, (Func<uint?, uint?>)null, CancellationToken.None).Wait();
             });
             TestHelpers.ThrowsAggregateArgumentNullException(() =>
             {
                 var xs = AsyncEnumerable.FromValues(new ulong?[0]);
-                AsyncEnumerable.MaxAsync(xs, (Func<ulong?, ulong?>)null, CancellationToken.None).Wait();
+                AsyncEnumerable.Max(xs, (Func<ulong?, ulong?>)null, CancellationToken.None).Wait();
             });
         }
 
@@ -301,21 +301,21 @@ namespace System.Collections.Async.Tests
         [TestMethod]
         public void MaxFailsWhenCancelled()
         {
-            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<decimal>().MaxAsync(x => x, Helper.CANCELLED).Result == 0));
-            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<double>().MaxAsync(x => x, Helper.CANCELLED).Result == 0));
-            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<float>().MaxAsync(x => x, Helper.CANCELLED).Result == 0));
-            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<int>().MaxAsync(x => x, Helper.CANCELLED).Result == 0));
-            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<long>().MaxAsync(x => x, Helper.CANCELLED).Result == 0));
-            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<uint>().MaxAsync(x => x, Helper.CANCELLED).Result == 0));
-            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<ulong>().MaxAsync(x => x, Helper.CANCELLED).Result == 0));
+            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<decimal>().Max(x => x, Helper.CANCELLED).Result == 0));
+            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<double>().Max(x => x, Helper.CANCELLED).Result == 0));
+            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<float>().Max(x => x, Helper.CANCELLED).Result == 0));
+            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<int>().Max(x => x, Helper.CANCELLED).Result == 0));
+            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<long>().Max(x => x, Helper.CANCELLED).Result == 0));
+            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<uint>().Max(x => x, Helper.CANCELLED).Result == 0));
+            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<ulong>().Max(x => x, Helper.CANCELLED).Result == 0));
 
-            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<decimal?>().MaxAsync(x => x, Helper.CANCELLED).Result == 0));
-            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<double?>().MaxAsync(x => x, Helper.CANCELLED).Result == 0));
-            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<float?>().MaxAsync(x => x, Helper.CANCELLED).Result == 0));
-            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<int?>().MaxAsync(x => x, Helper.CANCELLED).Result == 0));
-            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<long?>().MaxAsync(x => x, Helper.CANCELLED).Result == 0));
-            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<uint?>().MaxAsync(x => x, Helper.CANCELLED).Result == 0));
-            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<ulong?>().MaxAsync(x => x, Helper.CANCELLED).Result == 0));
+            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<decimal?>().Max(x => x, Helper.CANCELLED).Result == 0));
+            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<double?>().Max(x => x, Helper.CANCELLED).Result == 0));
+            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<float?>().Max(x => x, Helper.CANCELLED).Result == 0));
+            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<int?>().Max(x => x, Helper.CANCELLED).Result == 0));
+            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<long?>().Max(x => x, Helper.CANCELLED).Result == 0));
+            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<uint?>().Max(x => x, Helper.CANCELLED).Result == 0));
+            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<ulong?>().Max(x => x, Helper.CANCELLED).Result == 0));
         }
 
         #endregion
@@ -326,50 +326,50 @@ namespace System.Collections.Async.Tests
         public void MaxDecimalValues()
         {
             var xs = AsyncEnumerable.FromValues(new decimal[] { 1, 2, 6, 4 });
-            Assert.IsTrue(xs.MaxAsync(CancellationToken.None).Result == 6);
-            Assert.IsTrue(xs.MaxAsync(x => x, CancellationToken.None).Result == 6);
+            Assert.IsTrue(xs.Max(CancellationToken.None).Result == 6);
+            Assert.IsTrue(xs.Max(x => x, CancellationToken.None).Result == 6);
         }
         [TestMethod]
         public void MaxDoubleValues()
         {
             var xs = AsyncEnumerable.FromValues(new double[] { 1, 2, 6, 4 });
-            Assert.IsTrue(xs.MaxAsync(CancellationToken.None).Result == 6);
-            Assert.IsTrue(xs.MaxAsync(x => x, CancellationToken.None).Result == 6);
+            Assert.IsTrue(xs.Max(CancellationToken.None).Result == 6);
+            Assert.IsTrue(xs.Max(x => x, CancellationToken.None).Result == 6);
         }
         [TestMethod]
         public void MaxFloatValues()
         {
             var xs = AsyncEnumerable.FromValues(new float[] { 1, 2, 6, 4 });
-            Assert.IsTrue(xs.MaxAsync(CancellationToken.None).Result == 6);
-            Assert.IsTrue(xs.MaxAsync(x => x, CancellationToken.None).Result == 6);
+            Assert.IsTrue(xs.Max(CancellationToken.None).Result == 6);
+            Assert.IsTrue(xs.Max(x => x, CancellationToken.None).Result == 6);
         }
         [TestMethod]
         public void MaxIntValues()
         {
             var xs = AsyncEnumerable.FromValues(new int[] { 1, 2, 6, 4 });
-            Assert.IsTrue(xs.MaxAsync(CancellationToken.None).Result == 6);
-            Assert.IsTrue(xs.MaxAsync(x => x, CancellationToken.None).Result == 6);
+            Assert.IsTrue(xs.Max(CancellationToken.None).Result == 6);
+            Assert.IsTrue(xs.Max(x => x, CancellationToken.None).Result == 6);
         }
         [TestMethod]
         public void MaxLongValues()
         {
             var xs = AsyncEnumerable.FromValues(new long[] { 1, 2, 6, 4 });
-            Assert.IsTrue(xs.MaxAsync(CancellationToken.None).Result == 6);
-            Assert.IsTrue(xs.MaxAsync(x => x, CancellationToken.None).Result == 6);
+            Assert.IsTrue(xs.Max(CancellationToken.None).Result == 6);
+            Assert.IsTrue(xs.Max(x => x, CancellationToken.None).Result == 6);
         }
         [TestMethod]
         public void MaxUIntValues()
         {
             var xs = AsyncEnumerable.FromValues(new uint[] { 1, 2, 6, 4 });
-            Assert.IsTrue(xs.MaxAsync(CancellationToken.None).Result == 6);
-            Assert.IsTrue(xs.MaxAsync(x => x, CancellationToken.None).Result == 6);
+            Assert.IsTrue(xs.Max(CancellationToken.None).Result == 6);
+            Assert.IsTrue(xs.Max(x => x, CancellationToken.None).Result == 6);
         }
         [TestMethod]
         public void MaxULongValues()
         {
             var xs = AsyncEnumerable.FromValues(new ulong[] { 1, 2, 6, 4 });
-            Assert.IsTrue(xs.MaxAsync(CancellationToken.None).Result == 6);
-            Assert.IsTrue(xs.MaxAsync(x => x, CancellationToken.None).Result == 6);
+            Assert.IsTrue(xs.Max(CancellationToken.None).Result == 6);
+            Assert.IsTrue(xs.Max(x => x, CancellationToken.None).Result == 6);
         }
 
 
@@ -377,50 +377,50 @@ namespace System.Collections.Async.Tests
         public void MaxNullableDecimalValues()
         {
             var xs = AsyncEnumerable.FromValues(new decimal?[] { 1, 2, 6, 4 });
-            Assert.IsTrue(xs.MaxAsync(CancellationToken.None).Result == 6);
-            Assert.IsTrue(xs.MaxAsync(x => x, CancellationToken.None).Result == 6);
+            Assert.IsTrue(xs.Max(CancellationToken.None).Result == 6);
+            Assert.IsTrue(xs.Max(x => x, CancellationToken.None).Result == 6);
         }
         [TestMethod]
         public void MaxNullableDoubleValues()
         {
             var xs = AsyncEnumerable.FromValues(new double?[] { 1, 2, 6, 4 });
-            Assert.IsTrue(xs.MaxAsync(CancellationToken.None).Result == 6);
-            Assert.IsTrue(xs.MaxAsync(x => x, CancellationToken.None).Result == 6);
+            Assert.IsTrue(xs.Max(CancellationToken.None).Result == 6);
+            Assert.IsTrue(xs.Max(x => x, CancellationToken.None).Result == 6);
         }
         [TestMethod]
         public void MaxNullableFloatValues()
         {
             var xs = AsyncEnumerable.FromValues(new float?[] { 1, 2, 6, 4 });
-            Assert.IsTrue(xs.MaxAsync(CancellationToken.None).Result == 6);
-            Assert.IsTrue(xs.MaxAsync(x => x, CancellationToken.None).Result == 6);
+            Assert.IsTrue(xs.Max(CancellationToken.None).Result == 6);
+            Assert.IsTrue(xs.Max(x => x, CancellationToken.None).Result == 6);
         }
         [TestMethod]
         public void MaxNullableIntValues()
         {
             var xs = AsyncEnumerable.FromValues(new int?[] { 1, 2, 6, 4 });
-            Assert.IsTrue(xs.MaxAsync(CancellationToken.None).Result == 6);
-            Assert.IsTrue(xs.MaxAsync(x => x, CancellationToken.None).Result == 6);
+            Assert.IsTrue(xs.Max(CancellationToken.None).Result == 6);
+            Assert.IsTrue(xs.Max(x => x, CancellationToken.None).Result == 6);
         }
         [TestMethod]
         public void MaxNullableLongValues()
         {
             var xs = AsyncEnumerable.FromValues(new long?[] { 1, 2, 6, 4 });
-            Assert.IsTrue(xs.MaxAsync(CancellationToken.None).Result == 6);
-            Assert.IsTrue(xs.MaxAsync(x => x, CancellationToken.None).Result == 6);
+            Assert.IsTrue(xs.Max(CancellationToken.None).Result == 6);
+            Assert.IsTrue(xs.Max(x => x, CancellationToken.None).Result == 6);
         }
         [TestMethod]
         public void MaxNullableUIntValues()
         {
             var xs = AsyncEnumerable.FromValues(new uint?[] { 1, 2, 6, 4 });
-            Assert.IsTrue(xs.MaxAsync(CancellationToken.None).Result == 6);
-            Assert.IsTrue(xs.MaxAsync(x => x, CancellationToken.None).Result == 6);
+            Assert.IsTrue(xs.Max(CancellationToken.None).Result == 6);
+            Assert.IsTrue(xs.Max(x => x, CancellationToken.None).Result == 6);
         }
         [TestMethod]
         public void MaxNullableULongValues()
         {
             var xs = AsyncEnumerable.FromValues(new ulong?[] { 1, 2, 6, 4 });
-            Assert.IsTrue(xs.MaxAsync(CancellationToken.None).Result == 6);
-            Assert.IsTrue(xs.MaxAsync(x => x, CancellationToken.None).Result == 6);
+            Assert.IsTrue(xs.Max(CancellationToken.None).Result == 6);
+            Assert.IsTrue(xs.Max(x => x, CancellationToken.None).Result == 6);
         }
 
         #endregion

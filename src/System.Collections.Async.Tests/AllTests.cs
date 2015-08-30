@@ -12,7 +12,7 @@ namespace System.Collections.Async.Tests
         {
             try
             {
-                AsyncEnumerable.AllAsync<int>(null, _ => true, CancellationToken.None).Wait();
+                AsyncEnumerable.All<int>(null, _ => true, CancellationToken.None).Wait();
                 Assert.Fail();
             }
             catch (Exception e)
@@ -31,7 +31,7 @@ namespace System.Collections.Async.Tests
             try
             {
                 var xs = AsyncEnumerable.FromValues(new[] { 10, 20, 30, 40, 50 });
-                xs.AllAsync(null, CancellationToken.None).Wait();
+                xs.All(null, CancellationToken.None).Wait();
                 Assert.Fail();
             }
             catch (Exception e)
@@ -48,21 +48,21 @@ namespace System.Collections.Async.Tests
         public void TrueWhenEmpty()
         {
             var xs = AsyncEnumerable.Empty<int>();
-            Assert.IsTrue(xs.AllAsync(x => x == 0, CancellationToken.None).Result);
+            Assert.IsTrue(xs.All(x => x == 0, CancellationToken.None).Result);
         }
         
         [TestMethod]
         public void TrueWhenNotEmptyWithPredicateMatch()
         {
             var xs = AsyncEnumerable.FromValues(new[] { 10, 20, 30, 40, 50 });
-            Assert.IsTrue(xs.AllAsync(x => x % 10 == 0, CancellationToken.None).Result);
+            Assert.IsTrue(xs.All(x => x % 10 == 0, CancellationToken.None).Result);
         }
 
         [TestMethod]
         public void FalseWhenNotEmptyWithPredicateNonMatch()
         {
             var xs = AsyncEnumerable.FromValues(new[] { 10, 20, 30, 4, 50 });
-            Assert.IsFalse(xs.AllAsync(x => x % 10 == 0, CancellationToken.None).Result);
+            Assert.IsFalse(xs.All(x => x % 10 == 0, CancellationToken.None).Result);
         }
     }
 }

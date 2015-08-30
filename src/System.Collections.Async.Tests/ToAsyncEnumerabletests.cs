@@ -82,7 +82,7 @@ namespace System.Collections.Async.Tests
         public void EmptyCase1()
         {
             var xs = Enumerable.Empty<Task<int>>();
-            var rs = xs.ToAsyncEnumerable().ToArrayAsync().Result;
+            var rs = xs.ToAsyncEnumerable().ToArray().Result;
             Assert.IsTrue(rs.Length == 0);
         }
 
@@ -90,7 +90,7 @@ namespace System.Collections.Async.Tests
         public void EmptyCaseWithSelector()
         {
             var xs = Enumerable.Empty<int>();
-            var rs = xs.ToAsyncEnumerable(x => Task.FromResult(x)).ToArrayAsync().Result;
+            var rs = xs.ToAsyncEnumerable(x => Task.FromResult(x)).ToArray().Result;
             Assert.IsTrue(rs.Length == 0);
         }
 
@@ -98,7 +98,7 @@ namespace System.Collections.Async.Tests
         public void SingleElement1()
         {
             var xs = new[] { Task.FromResult(42) };
-            var rs = xs.ToAsyncEnumerable().ToArrayAsync().Result;
+            var rs = xs.ToAsyncEnumerable().ToArray().Result;
             Assert.IsTrue(rs.Length == 1 && rs[0] == 42);
         }
 
@@ -106,7 +106,7 @@ namespace System.Collections.Async.Tests
         public void SingleElement2()
         {
             var x = Task.FromResult(42);
-            var rs = x.ToAsyncEnumerable().ToArrayAsync().Result;
+            var rs = x.ToAsyncEnumerable().ToArray().Result;
             Assert.IsTrue(rs.Length == 1 && rs[0] == 42);
         }
 
@@ -114,7 +114,7 @@ namespace System.Collections.Async.Tests
         public void SingleElementWithSelector()
         {
             var xs = new[] { 42 };
-            var rs = xs.ToAsyncEnumerable(x => Task.FromResult(x)).ToArrayAsync().Result;
+            var rs = xs.ToAsyncEnumerable(x => Task.FromResult(x)).ToArray().Result;
             Assert.IsTrue(rs.Length == 1 && rs[0] == 42);
         }
 
@@ -122,7 +122,7 @@ namespace System.Collections.Async.Tests
         public void MultipleElements()
         {
             var xs = new[] { 10, 20, 30 };
-            var rs = xs.ToAsyncEnumerable(x => Task.FromResult(x)).ToArrayAsync().Result;
+            var rs = xs.ToAsyncEnumerable(x => Task.FromResult(x)).ToArray().Result;
             Assert.IsTrue(rs.Length == 3 && rs[0] == 10 && rs[1] == 20 && rs[2] == 30);
         }
 
@@ -130,7 +130,7 @@ namespace System.Collections.Async.Tests
         public void MultipleElementsWithSelector()
         {
             var xs = new[] { Task.FromResult(10), Task.FromResult(20), Task.FromResult(30) };
-            var rs = xs.ToAsyncEnumerable().ToArrayAsync().Result;
+            var rs = xs.ToAsyncEnumerable().ToArray().Result;
             Assert.IsTrue(rs.Length == 3 && rs[0] == 10 && rs[1] == 20 && rs[2] == 30);
         }
     }

@@ -12,7 +12,7 @@ namespace System.Collections.Async.Tests
         {
             try
             {
-                AsyncEnumerable.AnyAsync<int>(null, CancellationToken.None).Wait();
+                AsyncEnumerable.Any<int>(null, CancellationToken.None).Wait();
                 Assert.Fail();
             }
             catch (Exception e)
@@ -30,7 +30,7 @@ namespace System.Collections.Async.Tests
         {
             try
             {
-                AsyncEnumerable.AnyAsync<int>(null, _ => true, CancellationToken.None).Wait();
+                AsyncEnumerable.Any<int>(null, _ => true, CancellationToken.None).Wait();
                 Assert.Fail();
             }
             catch (Exception e)
@@ -49,7 +49,7 @@ namespace System.Collections.Async.Tests
             try
             {
                 var xs = AsyncEnumerable.FromValues(new[] { 10, 20, 30, 40, 50 });
-                xs.AnyAsync(null, CancellationToken.None).Wait();
+                xs.Any(null, CancellationToken.None).Wait();
                 Assert.Fail();
             }
             catch (Exception e)
@@ -66,35 +66,35 @@ namespace System.Collections.Async.Tests
         public void FalseWhenEmpty()
         {
             var xs = AsyncEnumerable.Empty<int>();
-            Assert.IsFalse(xs.AnyAsync(CancellationToken.None).Result);
+            Assert.IsFalse(xs.Any(CancellationToken.None).Result);
         }
 
         [TestMethod]
         public void TrueWhenNotEmpty()
         {
             var xs = AsyncEnumerable.FromValue(42);
-            Assert.IsTrue(xs.AnyAsync(CancellationToken.None).Result);
+            Assert.IsTrue(xs.Any(CancellationToken.None).Result);
         }
 
         [TestMethod]
         public void FalseWhenEmptyWithPredicate()
         {
             var xs = AsyncEnumerable.Empty<int>();
-            Assert.IsFalse(xs.AnyAsync(_ => true, CancellationToken.None).Result);
+            Assert.IsFalse(xs.Any(_ => true, CancellationToken.None).Result);
         }
 
         [TestMethod]
         public void TrueWhenNotEmptyWithPredicateMatch()
         {
             var xs = AsyncEnumerable.FromValues(new[] { 1, 2, 3, 4, 5 });
-            Assert.IsTrue(xs.AnyAsync(x => x == 3, CancellationToken.None).Result);
+            Assert.IsTrue(xs.Any(x => x == 3, CancellationToken.None).Result);
         }
 
         [TestMethod]
         public void FalseWhenNotEmptyWithPredicateNonMatch()
         {
             var xs = AsyncEnumerable.FromValues(new[] { 1, 2, 3, 4, 5 });
-            Assert.IsFalse(xs.AnyAsync(x => x == 0, CancellationToken.None).Result);
+            Assert.IsFalse(xs.Any(x => x == 0, CancellationToken.None).Result);
         }
     }
 }

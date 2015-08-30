@@ -9,11 +9,11 @@ namespace System.Collections.Async
 {
     public static partial class AsyncEnumerable
     {
-        public static async Task<TSource[]> ToArrayAsync<TSource>(this IAsyncEnumerable<TSource> source, CancellationToken ct = default(CancellationToken))
+        public static async Task<TSource[]> ToArray<TSource>(this IAsyncEnumerable<TSource> source, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
 
-            return (await source.ToListAsync(CancellationToken.None)).ToArray();
+            return (await source.ToList(CancellationToken.None)).ToArray();
         }
     }
 }

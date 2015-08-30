@@ -12,7 +12,7 @@ namespace System.Collections.Async.Tests
         {
             try
             {
-                AsyncEnumerable.ToArrayAsync<int>(null, CancellationToken.None).Wait();
+                AsyncEnumerable.ToArray<int>(null, CancellationToken.None).Wait();
                 Assert.Fail();
             }
             catch (Exception e)
@@ -29,7 +29,7 @@ namespace System.Collections.Async.Tests
         public void EmptyCase()
         {
             var xs = AsyncEnumerable.Empty<int>();
-            var rs = xs.ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.ToArray(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 0);
         }
 
@@ -37,7 +37,7 @@ namespace System.Collections.Async.Tests
         public void SingleElement()
         {
             var xs = AsyncEnumerable.FromValue(42);
-            var rs = xs.ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.ToArray(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 1 && rs[0] == 42);
         }
         
@@ -45,7 +45,7 @@ namespace System.Collections.Async.Tests
         public void MultipleElements()
         {
             var xs = AsyncEnumerable.FromValues(new[] { 10, 20, 30 });
-            var rs = xs.ToArrayAsync(CancellationToken.None).Result;
+            var rs = xs.ToArray(CancellationToken.None).Result;
             Assert.IsTrue(rs.Length == 3 && rs[0] == 10 && rs[1] == 20 && rs[2] == 30);
         }
     }

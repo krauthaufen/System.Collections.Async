@@ -12,7 +12,7 @@ namespace System.Collections.Async.Tests
         {
             try
             {
-                AsyncEnumerable.ForEachAsync<int>(null, _ => { }, CancellationToken.None).Wait();
+                AsyncEnumerable.ForEach<int>(null, _ => { }, CancellationToken.None).Wait();
                 Assert.Fail();
             }
             catch (Exception e)
@@ -29,7 +29,7 @@ namespace System.Collections.Async.Tests
             try
             {
                 var xs = AsyncEnumerable.FromValues(new[] { 10, 20, 30, 40, 50 });
-                xs.ForEachAsync(null, CancellationToken.None).Wait();
+                xs.ForEach(null, CancellationToken.None).Wait();
                 Assert.Fail();
             }
             catch (Exception e)
@@ -44,7 +44,7 @@ namespace System.Collections.Async.Tests
         public void ForEachOnEmpty()
         {
             var xs = AsyncEnumerable.Empty<int>();
-            xs.ForEachAsync(_ => Assert.Fail(), CancellationToken.None).Wait();
+            xs.ForEach(_ => Assert.Fail(), CancellationToken.None).Wait();
         }
 
         [TestMethod]
@@ -52,7 +52,7 @@ namespace System.Collections.Async.Tests
         {
             var xs = AsyncEnumerable.FromValues<int>(new[] { 1, 2, 3, 4 });
             var result = 0;
-            xs.ForEachAsync(x => result += x, CancellationToken.None).Wait();
+            xs.ForEach(x => result += x, CancellationToken.None).Wait();
             Assert.IsTrue(result == 10);
         }
 
@@ -63,7 +63,7 @@ namespace System.Collections.Async.Tests
 
             try
             {
-                xs.ForEachAsync(_ => { }, Helper.CANCELLED).Wait();
+                xs.ForEach(_ => { }, Helper.CANCELLED).Wait();
                 Assert.Fail();
             }
             catch

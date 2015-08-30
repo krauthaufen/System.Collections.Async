@@ -9,7 +9,7 @@ namespace System.Collections.Async
 {
     public static partial class AsyncEnumerable
     {
-        public static async Task<TSource> AggregateAsync<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, TSource, TSource> func, CancellationToken ct)
+        public static async Task<TSource> Aggregate<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, TSource, TSource> func, CancellationToken ct)
         {
             if (source == null) throw new ArgumentNullException("source");
             if (func == null) throw new ArgumentNullException("func");
@@ -32,7 +32,7 @@ namespace System.Collections.Async
             return aggregate;
         }
 
-        public static async Task<TAccumulate> AggregateAsync<TSource, TAccumulate>(this IAsyncEnumerable<TSource> source, TAccumulate seed, Func<TAccumulate, TSource, TAccumulate> func, CancellationToken ct)
+        public static async Task<TAccumulate> Aggregate<TSource, TAccumulate>(this IAsyncEnumerable<TSource> source, TAccumulate seed, Func<TAccumulate, TSource, TAccumulate> func, CancellationToken ct)
         {
             if (source == null) throw new ArgumentNullException("source");
             if (func == null) throw new ArgumentNullException("func");
@@ -52,7 +52,7 @@ namespace System.Collections.Async
             return aggregate;
         }
 
-        public static async Task<TResult> AggregateAsync<TSource, TAccumulate, TResult>(this IAsyncEnumerable<TSource> source, TAccumulate seed, Func<TAccumulate, TSource, TAccumulate> func, Func<TAccumulate, TResult> resultSelector, CancellationToken ct)
+        public static async Task<TResult> Aggregate<TSource, TAccumulate, TResult>(this IAsyncEnumerable<TSource> source, TAccumulate seed, Func<TAccumulate, TSource, TAccumulate> func, Func<TAccumulate, TResult> resultSelector, CancellationToken ct)
         {
             if (source == null) throw new ArgumentNullException("source");
             if (func == null) throw new ArgumentNullException("func");

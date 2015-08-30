@@ -9,7 +9,7 @@ namespace System.Collections.Async
 {
     public static partial class AsyncEnumerable
     {
-        public static async Task<decimal> MinAsync(this IAsyncEnumerable<decimal> source, CancellationToken ct = default(CancellationToken))
+        public static async Task<decimal> Min(this IAsyncEnumerable<decimal> source, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
 
@@ -27,7 +27,7 @@ namespace System.Collections.Async
             x.ThrowIfCancelledOrFaulted();
             return result;
         }
-        public static async Task<decimal?> MinAsync(this IAsyncEnumerable<decimal?> source, CancellationToken ct = default(CancellationToken))
+        public static async Task<decimal?> Min(this IAsyncEnumerable<decimal?> source, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
 
@@ -45,7 +45,7 @@ namespace System.Collections.Async
             x.ThrowIfCancelledOrFaulted();
             return result;
         }
-        public static async Task<double> MinAsync(this IAsyncEnumerable<double> source, CancellationToken ct = default(CancellationToken))
+        public static async Task<double> Min(this IAsyncEnumerable<double> source, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
 
@@ -63,7 +63,7 @@ namespace System.Collections.Async
             x.ThrowIfCancelledOrFaulted();
             return result;
         }
-        public static async Task<double?> MinAsync(this IAsyncEnumerable<double?> source, CancellationToken ct = default(CancellationToken))
+        public static async Task<double?> Min(this IAsyncEnumerable<double?> source, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
 
@@ -81,7 +81,7 @@ namespace System.Collections.Async
             x.ThrowIfCancelledOrFaulted();
             return result;
         }
-        public static async Task<float> MinAsync(this IAsyncEnumerable<float> source, CancellationToken ct = default(CancellationToken))
+        public static async Task<float> Min(this IAsyncEnumerable<float> source, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
 
@@ -99,7 +99,7 @@ namespace System.Collections.Async
             x.ThrowIfCancelledOrFaulted();
             return result;
         }
-        public static async Task<float?> MinAsync(this IAsyncEnumerable<float?> source, CancellationToken ct = default(CancellationToken))
+        public static async Task<float?> Min(this IAsyncEnumerable<float?> source, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
 
@@ -117,7 +117,7 @@ namespace System.Collections.Async
             x.ThrowIfCancelledOrFaulted();
             return result;
         }
-        public static async Task<int> MinAsync(this IAsyncEnumerable<int> source, CancellationToken ct = default(CancellationToken))
+        public static async Task<int> Min(this IAsyncEnumerable<int> source, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
 
@@ -135,7 +135,7 @@ namespace System.Collections.Async
             x.ThrowIfCancelledOrFaulted();
             return result;
         }
-        public static async Task<int?> MinAsync(this IAsyncEnumerable<int?> source, CancellationToken ct = default(CancellationToken))
+        public static async Task<int?> Min(this IAsyncEnumerable<int?> source, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
 
@@ -153,7 +153,7 @@ namespace System.Collections.Async
             x.ThrowIfCancelledOrFaulted();
             return result;
         }
-        public static async Task<long> MinAsync(this IAsyncEnumerable<long> source, CancellationToken ct = default(CancellationToken))
+        public static async Task<long> Min(this IAsyncEnumerable<long> source, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
 
@@ -171,7 +171,7 @@ namespace System.Collections.Async
             x.ThrowIfCancelledOrFaulted();
             return result;
         }
-        public static async Task<long?> MinAsync(this IAsyncEnumerable<long?> source, CancellationToken ct = default(CancellationToken))
+        public static async Task<long?> Min(this IAsyncEnumerable<long?> source, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
 
@@ -189,7 +189,7 @@ namespace System.Collections.Async
             x.ThrowIfCancelledOrFaulted();
             return result;
         }
-        public static async Task<uint> MinAsync(this IAsyncEnumerable<uint> source, CancellationToken ct = default(CancellationToken))
+        public static async Task<uint> Min(this IAsyncEnumerable<uint> source, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
 
@@ -207,7 +207,7 @@ namespace System.Collections.Async
             x.ThrowIfCancelledOrFaulted();
             return result;
         }
-        public static async Task<uint?> MinAsync(this IAsyncEnumerable<uint?> source, CancellationToken ct = default(CancellationToken))
+        public static async Task<uint?> Min(this IAsyncEnumerable<uint?> source, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
 
@@ -225,7 +225,7 @@ namespace System.Collections.Async
             x.ThrowIfCancelledOrFaulted();
             return result;
         }
-        public static async Task<ulong> MinAsync(this IAsyncEnumerable<ulong> source, CancellationToken ct = default(CancellationToken))
+        public static async Task<ulong> Min(this IAsyncEnumerable<ulong> source, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
 
@@ -243,7 +243,7 @@ namespace System.Collections.Async
             x.ThrowIfCancelledOrFaulted();
             return result;
         }
-        public static async Task<ulong?> MinAsync(this IAsyncEnumerable<ulong?> source, CancellationToken ct = default(CancellationToken))
+        public static async Task<ulong?> Min(this IAsyncEnumerable<ulong?> source, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
 
@@ -263,7 +263,7 @@ namespace System.Collections.Async
         }
 
 
-        public static async Task<decimal> MinAsync<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, decimal> selector, CancellationToken ct = default(CancellationToken))
+        public static async Task<decimal> Min<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, decimal> selector, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
@@ -283,7 +283,7 @@ namespace System.Collections.Async
             x.ThrowIfCancelledOrFaulted();
             return result;
         }
-        public static async Task<decimal?> MinAsync<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, decimal?> selector, CancellationToken ct = default(CancellationToken))
+        public static async Task<decimal?> Min<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, decimal?> selector, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
@@ -303,7 +303,7 @@ namespace System.Collections.Async
             x.ThrowIfCancelledOrFaulted();
             return result;
         }
-        public static async Task<double> MinAsync<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, double> selector, CancellationToken ct = default(CancellationToken))
+        public static async Task<double> Min<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, double> selector, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
@@ -323,7 +323,7 @@ namespace System.Collections.Async
             x.ThrowIfCancelledOrFaulted();
             return result;
         }
-        public static async Task<double?> MinAsync<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, double?> selector, CancellationToken ct = default(CancellationToken))
+        public static async Task<double?> Min<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, double?> selector, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
@@ -343,7 +343,7 @@ namespace System.Collections.Async
             x.ThrowIfCancelledOrFaulted();
             return result;
         }
-        public static async Task<float> MinAsync<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, float> selector, CancellationToken ct = default(CancellationToken))
+        public static async Task<float> Min<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, float> selector, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
@@ -363,7 +363,7 @@ namespace System.Collections.Async
             x.ThrowIfCancelledOrFaulted();
             return result;
         }
-        public static async Task<float?> MinAsync<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, float?> selector, CancellationToken ct = default(CancellationToken))
+        public static async Task<float?> Min<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, float?> selector, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
@@ -383,7 +383,7 @@ namespace System.Collections.Async
             x.ThrowIfCancelledOrFaulted();
             return result;
         }
-        public static async Task<int> MinAsync<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, int> selector, CancellationToken ct = default(CancellationToken))
+        public static async Task<int> Min<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, int> selector, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
@@ -403,7 +403,7 @@ namespace System.Collections.Async
             x.ThrowIfCancelledOrFaulted();
             return result;
         }
-        public static async Task<int?> MinAsync<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, int?> selector, CancellationToken ct = default(CancellationToken))
+        public static async Task<int?> Min<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, int?> selector, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
@@ -423,7 +423,7 @@ namespace System.Collections.Async
             x.ThrowIfCancelledOrFaulted();
             return result;
         }
-        public static async Task<long> MinAsync<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, long> selector, CancellationToken ct = default(CancellationToken))
+        public static async Task<long> Min<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, long> selector, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
@@ -443,7 +443,7 @@ namespace System.Collections.Async
             x.ThrowIfCancelledOrFaulted();
             return result;
         }
-        public static async Task<long?> MinAsync<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, long?> selector, CancellationToken ct = default(CancellationToken))
+        public static async Task<long?> Min<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, long?> selector, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
@@ -463,7 +463,7 @@ namespace System.Collections.Async
             x.ThrowIfCancelledOrFaulted();
             return result;
         }
-        public static async Task<uint> MinAsync<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, uint> selector, CancellationToken ct = default(CancellationToken))
+        public static async Task<uint> Min<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, uint> selector, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
@@ -483,7 +483,7 @@ namespace System.Collections.Async
             x.ThrowIfCancelledOrFaulted();
             return result;
         }
-        public static async Task<uint?> MinAsync<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, uint?> selector, CancellationToken ct = default(CancellationToken))
+        public static async Task<uint?> Min<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, uint?> selector, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
@@ -503,7 +503,7 @@ namespace System.Collections.Async
             x.ThrowIfCancelledOrFaulted();
             return result;
         }
-        public static async Task<ulong> MinAsync<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, ulong> selector, CancellationToken ct = default(CancellationToken))
+        public static async Task<ulong> Min<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, ulong> selector, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
@@ -523,7 +523,7 @@ namespace System.Collections.Async
             x.ThrowIfCancelledOrFaulted();
             return result;
         }
-        public static async Task<ulong?> MinAsync<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, ulong?> selector, CancellationToken ct = default(CancellationToken))
+        public static async Task<ulong?> Min<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, ulong?> selector, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");

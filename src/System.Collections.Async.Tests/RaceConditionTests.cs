@@ -29,7 +29,7 @@
 //        [TestMethod]
 //        public void Race1()
 //        {
-//            var result = CreateInTask().SumAsync(x => x).Result;
+//            var result = CreateInTask().Sum(x => x).Result;
 //            Assert.IsTrue(result == 100, $"{result} == 100");
 //        }
 
