@@ -13,15 +13,22 @@ namespace System.Collections.Async
         {
             if (source == null) throw new ArgumentNullException("source");
             if (func == null) throw new ArgumentNullException("func");
-            
-            var e = await source.GetEnumerator(ct);
-            if (!await e.MoveNext(ct)) throw new InvalidOperationException();
-            var aggregate = e.Current; // seed value for aggregate is first value
 
-            while (await e.MoveNext(ct))
+            var e = await source.GetEnumerator(ct);
+            ct.ThrowIfCancellationRequested();
+
+            var x = await e.MoveNext(ct);
+            x.ThrowIfCancelledOrFaulted();
+            if (x.IsCompleted) throw new InvalidOperationException();
+            var aggregate = x.Value; // seed value for aggregate is first value
+
+            while (x.IsValue)
             {
-                aggregate = func(aggregate, e.Current);
+                ct.ThrowIfCancellationRequested();
+                aggregate = func(aggregate, x.Value);
+                x = await e.MoveNext(ct);
             }
+            x.ThrowIfCancelledOrFaulted();
             return aggregate;
         }
 
@@ -31,12 +38,17 @@ namespace System.Collections.Async
             if (func == null) throw new ArgumentNullException("func");
 
             var e = await source.GetEnumerator(ct);
-            var aggregate = seed;
+            ct.ThrowIfCancellationRequested();
 
-            while (await e.MoveNext(ct))
+            var aggregate = seed;
+            var x = await e.MoveNext(ct);
+            while (x.IsValue)
             {
-                aggregate = func(aggregate, e.Current);
+                ct.ThrowIfCancellationRequested();
+                aggregate = func(aggregate, x.Value);
+                x = await e.MoveNext(ct);
             }
+            x.ThrowIfCancelledOrFaulted();
             return aggregate;
         }
 
@@ -46,12 +58,17 @@ namespace System.Collections.Async
             if (func == null) throw new ArgumentNullException("func");
 
             var e = await source.GetEnumerator(ct);
-            var aggregate = seed;
+            ct.ThrowIfCancellationRequested();
 
-            while (await e.MoveNext(ct))
+            var aggregate = seed;
+            var x = await e.MoveNext(ct);
+            while (x.IsValue)
             {
-                aggregate = func(aggregate, e.Current);
+                ct.ThrowIfCancellationRequested();
+                aggregate = func(aggregate, x.Value);
+                x = await e.MoveNext(ct);
             }
+            x.ThrowIfCancelledOrFaulted();
             return resultSelector(aggregate);
         }
     }

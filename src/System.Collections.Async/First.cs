@@ -14,10 +14,13 @@ namespace System.Collections.Async
             if (source == null) throw new ArgumentNullException("source");
 
             var e = await source.GetEnumerator(ct);
-            if (await e.MoveNext(ct))
-            {
-                return e.Current;
-            }
+            ct.ThrowIfCancellationRequested();
+
+            var x = await e.MoveNext(ct);
+            x.ThrowIfCancelledOrFaulted();
+
+            if (x.IsValue) return x.Value;
+            
             throw new InvalidOperationException();
         }
 
@@ -27,10 +30,16 @@ namespace System.Collections.Async
             if (predicate == null) throw new ArgumentNullException("predicate");
 
             var e = await source.GetEnumerator(ct);
-            while (await e.MoveNext(ct))
+            ct.ThrowIfCancellationRequested();
+
+            var x = await e.MoveNext(ct);
+            while (x.IsValue)
             {
-                if (predicate(e.Current)) return e.Current;
+                x.ThrowIfCancelledOrFaulted();
+                if (predicate(x.Value)) return x.Value;
+                x = await e.MoveNext(ct);
             }
+            x.ThrowIfCancelledOrFaulted();
             throw new InvalidOperationException();
         }
     }

@@ -24,6 +24,7 @@ namespace System.Collections.Async
     {
         private CancellationToken _ct;
         private IEnumerator<T> _e;
+        private IMoveNextResult<T> _finished;
 
         public _AsyncEnumeratorFromValues(IEnumerable<T> values, CancellationToken ct)
         {
@@ -31,19 +32,24 @@ namespace System.Collections.Async
             _ct = ct;
         }
 
-        public T Current
+        Task<IMoveNextResult<T>> IAsyncEnumerator<T>.MoveNext(CancellationToken ct)
         {
-            get
+            if (_finished != null) return Task.FromResult(_finished);
+            if (_ct.IsCancellationRequested || ct.IsCancellationRequested)
             {
-                _ct.ThrowIfCancellationRequested();
-                return _e.Current;
+                _finished = MoveNext.Cancelled<T>();
+                return Task.FromResult(_finished);
             }
-        }
 
-        public Task<bool> MoveNext(CancellationToken ct)
-        {
-            ct.ThrowIfCancellationRequested();
-            return Task.FromResult(_e.MoveNext());
+            if (_e.MoveNext())
+            {
+                return Task.FromResult(MoveNext.Value(_e.Current));
+            }
+            else
+            {
+                _finished = MoveNext.Completed<T>();
+                return Task.FromResult(_finished);
+            }
         }
     }
 }

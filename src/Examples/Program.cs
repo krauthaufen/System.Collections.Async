@@ -13,7 +13,7 @@ namespace Examples
         static void Main(string[] args)
         {
             Example1().Wait();
-            Example2().Wait();
+            //Example2().Wait();
         }
 
         static async Task Example1()
@@ -33,20 +33,20 @@ namespace Examples
             await work;
         }
 
-        static async Task Example2()
-        {
-            var work = PagedDataGenerator()
-                .ToAsyncEnumerable()
-                .SelectMany(x => x)
-                .TakeFor(TimeSpan.FromSeconds(5))
-                .Where(x => x % 5 == 0)
-                .ForEachAsync(Console.WriteLine)
-                ;
+        //static async Task Example2()
+        //{
+        //    var work = PagedDataGenerator()
+        //        .ToAsyncEnumerable()
+        //        .SelectMany(x => x)
+        //        .TakeFor(TimeSpan.FromSeconds(5))
+        //        .Where(x => x % 5 == 0)
+        //        .ForEachAsync(Console.WriteLine)
+        //        ;
 
-            Console.WriteLine("Example 2");
+        //    Console.WriteLine("Example 2");
 
-            await work;
-        }
+        //    await work;
+        //}
 
 
         static IEnumerable<Task<int[]>> PagedDataGenerator()

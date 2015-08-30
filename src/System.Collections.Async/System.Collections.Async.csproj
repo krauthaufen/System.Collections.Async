@@ -80,12 +80,14 @@
     <Compile Include="Sum.cs" />
     <Compile Include="ToArray.cs" />
     <Compile Include="ToList.cs" />
-    <Compile Include="EmptyImpl.cs" />
+    <Compile Include="_FaultedImpl.cs" />
+    <Compile Include="_CancelledImpl.cs" />
+    <Compile Include="_EmptyImpl.cs" />
     <Compile Include="FromValuesImpl.cs" />
     <Compile Include="IAsyncEnumerator.cs" />
     <Compile Include="IAsyncEnumerable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GenericImpl.cs" />
+    <Compile Include="_GenericImpl.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -22,11 +22,11 @@ namespace System.Collections.Async
                     ct2.ThrowIfCancellationRequested();
                     if (i++ < count)
                     {
-                        return Task.FromResult(Tuple.Create(element, true));
+                        return Task.FromResult(MoveNext.Value<TResult>(element));
                     }
                     else
                     {
-                        return Task.FromResult(Tuple.Create(default(TResult), false));
+                        return Task.FromResult(MoveNext.Completed<TResult>());
                     }
                 });
             });

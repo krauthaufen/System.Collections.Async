@@ -17,16 +17,26 @@ namespace System.Collections.Async
             return new _AsyncEnumerable<TResult>(async ct2 =>
             {
                 var e = await source.GetEnumerator(ct2);
+                
                 return new _AsyncEnumerator<TResult>(async () =>
                 {
-                    if (await e.MoveNext(ct))
+                    var x = await e.MoveNext(ct);
+                    ct2.ThrowIfCancellationRequested();
+
+                    if (x.IsValue)
                     {
-                        var x = selector(e.Current);
-                        return Tuple.Create(x, true);
+                        try
+                        {
+                            return MoveNext.Value(selector(x.Value));
+                        }
+                        catch (Exception ex)
+                        {
+                            return MoveNext.Faulted<TResult>(ex);
+                        }
                     }
                     else
                     {
-                        return Tuple.Create(default(TResult), false);
+                        return MoveNext.Convert<TSource, TResult>(x);
                     }
                 });
             });

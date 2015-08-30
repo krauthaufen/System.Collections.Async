@@ -25,11 +25,11 @@ namespace System.Collections.Async
                     ct2.ThrowIfCancellationRequested();
                     if (i < iMax)
                     {
-                        return Task.FromResult(Tuple.Create((int)i++, true));
+                        return Task.FromResult(MoveNext.Value((int)i++));
                     }
                     else
                     {
-                        return Task.FromResult(Tuple.Create(0, false));
+                        return Task.FromResult(MoveNext.Completed<int>());
                     }
                 });
             });

@@ -14,7 +14,12 @@ namespace System.Collections.Async
             if (source == null) throw new ArgumentNullException("source");
 
             var e = await source.GetEnumerator(ct);
-            return await e.MoveNext(ct) ? e.Current : default(TSource);
+            ct.ThrowIfCancellationRequested();
+
+            var x = await e.MoveNext(ct);
+            x.ThrowIfCancelledOrFaulted();
+
+            return x.IsValue ? x.Value : default(TSource);
         }
 
         public static async Task<TSource> FirstOrDefaultAsync<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, bool> predicate, CancellationToken ct = default(CancellationToken))
@@ -23,10 +28,16 @@ namespace System.Collections.Async
             if (predicate == null) throw new ArgumentNullException("predicate");
 
             var e = await source.GetEnumerator(ct);
-            while (await e.MoveNext(ct))
+            ct.ThrowIfCancellationRequested();
+
+            var x = await e.MoveNext(ct);
+            while (x.IsValue)
             {
-                if (predicate(e.Current)) return e.Current;
+                x.ThrowIfCancelledOrFaulted();
+                if (predicate(x.Value)) return x.Value;
+                x = await e.MoveNext(ct);
             }
+            x.ThrowIfCancelledOrFaulted();
             return default(TSource);
         }
     }

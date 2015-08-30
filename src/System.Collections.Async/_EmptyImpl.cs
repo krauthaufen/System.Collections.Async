@@ -9,11 +9,9 @@ namespace System.Collections.Async
 {
     internal class _AsyncEnumeratorEmpty<T> : IAsyncEnumerator<T>
     {
-        public T Current { get; }
-
-        public Task<bool> MoveNext(CancellationToken ct)
+        Task<IMoveNextResult<T>> IAsyncEnumerator<T>.MoveNext(CancellationToken ct)
         {
-            return Task.FromResult(false);
+            return Task.FromResult(MoveNext.Completed<T>());
         }
     }
 }

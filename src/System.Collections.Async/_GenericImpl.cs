@@ -30,21 +30,16 @@ namespace System.Collections.Async
 
     internal class _AsyncEnumerator<T> : IAsyncEnumerator<T>
     {
-        private Func<Task<Tuple<T, bool>>> _next;
-        private T _current;
+        private Func<Task<IMoveNextResult<T>>> _next;
 
-        public _AsyncEnumerator(Func<Task<Tuple<T, bool>>> next)
+        public _AsyncEnumerator(Func<Task<IMoveNextResult<T>>> next)
         {
             _next = next;
         }
-
-        public T Current => _current;
-
-        public async Task<bool> MoveNext(CancellationToken ct)
+        
+        public async Task<IMoveNextResult<T>> MoveNext(CancellationToken ct)
         {
-            var x = await _next();
-            if (x.Item2) _current = x.Item1;
-            return x.Item2;
+            return await _next();
         }
     }
 }

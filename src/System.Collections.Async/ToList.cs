@@ -13,12 +13,18 @@ namespace System.Collections.Async
         {
             if (source == null) throw new ArgumentNullException("source");
 
-            var result = new List<TSource>();
             var e = await source.GetEnumerator(ct);
-            while (await e.MoveNext(ct))
+            ct.ThrowIfCancellationRequested();
+
+            var result = new List<TSource>();
+            var x = await e.MoveNext(ct);
+            while (x.IsValue)
             {
-                result.Add(e.Current);
+                ct.ThrowIfCancellationRequested();
+                result.Add(x.Value);
+                x = await e.MoveNext(ct);
             }
+            x.ThrowIfCancelledOrFaulted();
             return result;
         }
     }

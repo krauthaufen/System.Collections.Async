@@ -15,10 +15,16 @@ namespace System.Collections.Async
             if (predicate == null) throw new ArgumentNullException("predicate");
 
             var e = await source.GetEnumerator(ct);
-            while (await e.MoveNext(ct))
+            ct.ThrowIfCancellationRequested();
+
+            var x = await e.MoveNext(ct);
+            while (x.IsValue)
             {
-                if (!predicate(e.Current)) return false;
+                ct.ThrowIfCancellationRequested();
+                if (!predicate(x.Value)) return false;
+                x = await e.MoveNext(ct);
             }
+            x.ThrowIfCancelledOrFaulted();
             return true;
         }
     }

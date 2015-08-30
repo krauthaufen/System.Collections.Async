@@ -15,10 +15,16 @@ namespace System.Collections.Async
             if (action == null) throw new ArgumentNullException("action");
 
             var e = await source.GetEnumerator(ct);
-            while (await e.MoveNext(ct))
+            ct.ThrowIfCancellationRequested();
+
+            var x = await e.MoveNext(ct);
+            while (x.IsValue)
             {
-                action(e.Current);
+                ct.ThrowIfCancellationRequested();
+                action(x.Value);
+                x = await e.MoveNext(ct);
             }
+            x.ThrowIfCancelledOrFaulted();
         }
     }
 }

@@ -17,24 +17,30 @@ namespace System.Collections.Async
             return new _AsyncEnumerable<TSource>(async ct2 =>
             {
                 var e = await first.GetEnumerator(ct2);
+                ct2.ThrowIfCancellationRequested();
+
                 var switched = false;
                 return new _AsyncEnumerator<TSource>(async () =>
                 {
                     while (true)
                     {
-                        if (await e.MoveNext(ct))
+                        var x = await e.MoveNext(ct2);
+                        ct2.ThrowIfCancellationRequested();
+
+                        if (x.IsValue)
                         {
-                            return Tuple.Create(e.Current, true);
+                            return MoveNext.Value(x.Value);
                         }
                         else
                         {
                             if (switched)
                             {
-                                return Tuple.Create(default(TSource), false);
+                                return x;
                             }
                             else
                             {
                                 e = await second.GetEnumerator(ct2);
+                                ct2.ThrowIfCancellationRequested();
                                 switched = true;
                             }
                         }

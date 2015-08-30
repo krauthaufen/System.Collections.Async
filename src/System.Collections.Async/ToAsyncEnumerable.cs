@@ -20,11 +20,11 @@ namespace System.Collections.Async
                 {
                     if (e.MoveNext())
                     {
-                        return Tuple.Create(await e.Current, true);
+                        return MoveNext.Value(await e.Current);
                     }
                     else
                     {
-                        return Tuple.Create(default(TSource), false);
+                        return MoveNext.Completed<TSource>();
                     }
                 });
             });
@@ -41,12 +41,12 @@ namespace System.Collections.Async
                 {
                     if (done)
                     {
-                        return Tuple.Create(default(TSource), false);
+                        return MoveNext.Completed<TSource>();
                     }
                     else
                     {
                         done = true;
-                        return Tuple.Create(await source, true);
+                        return MoveNext.Value(await source);
                     }
                 });
             });
@@ -65,11 +65,11 @@ namespace System.Collections.Async
                     if (e.MoveNext())
                     {
                         var x = selector(e.Current);
-                        return Tuple.Create(await x, true);
+                        return MoveNext.Value(await x);
                     }
                     else
                     {
-                        return Tuple.Create(default(TResult), false);
+                        return MoveNext.Completed<TResult>();
                     }
                 });
             });
