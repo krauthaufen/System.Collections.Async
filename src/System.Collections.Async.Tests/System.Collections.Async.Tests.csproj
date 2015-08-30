@@ -59,6 +59,7 @@
     <Compile Include="ToAsyncEnumerableTests.cs" />
     <Compile Include="ToListTests.cs" />
     <Compile Include="ToArrayTests.cs" />
+    <Compile Include="RaceConditionTests.cs" />
     <Compile Include="WhereTests.cs" />
     <Compile Include="TakeWhileTests.cs" />
     <Compile Include="TakeTests.cs" />
