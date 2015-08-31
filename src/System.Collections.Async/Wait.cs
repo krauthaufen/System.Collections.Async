@@ -25,7 +25,7 @@ namespace System.Collections.Async
                 ct.ThrowIfCancellationRequested();
                 x = e.MoveNext(ct).Result;
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             ct.ThrowIfCancellationRequested();
         }
     }

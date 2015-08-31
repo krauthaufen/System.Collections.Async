@@ -18,7 +18,7 @@ namespace System.Collections.Async
             ct.ThrowIfCancellationRequested();
 
             var x = await e.MoveNext(ct);
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             if (x.IsCompleted) throw new InvalidOperationException();
             var aggregate = x.Value; // seed value for aggregate is first value
 
@@ -28,7 +28,7 @@ namespace System.Collections.Async
                 aggregate = func(aggregate, x.Value);
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return aggregate;
         }
 
@@ -48,7 +48,7 @@ namespace System.Collections.Async
                 aggregate = func(aggregate, x.Value);
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return aggregate;
         }
 
@@ -68,7 +68,7 @@ namespace System.Collections.Async
                 aggregate = func(aggregate, x.Value);
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return resultSelector(aggregate);
         }
     }

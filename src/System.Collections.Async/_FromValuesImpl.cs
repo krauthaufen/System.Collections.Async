@@ -24,32 +24,41 @@ namespace System.Collections.Async
     {
         private CancellationToken _ct;
         private IEnumerator<T> _e;
-        private IMoveNextResult<T> _finished;
+        private Task<IMoveNextResult<T>> _finished;
 
         public _AsyncEnumeratorFromValues(IEnumerable<T> values, CancellationToken ct)
         {
             _e = values.GetEnumerator();
             _ct = ct;
+            Status = MoveNextStatus.None;
         }
 
         Task<IMoveNextResult<T>> IAsyncEnumerator<T>.MoveNext(CancellationToken ct)
         {
-            if (_finished != null) return Task.FromResult(_finished);
+            if (_finished != null) return _finished;
             if (_ct.IsCancellationRequested || ct.IsCancellationRequested)
             {
-                _finished = MoveNext.Cancelled<T>();
-                return Task.FromResult(_finished);
+                _finished = Task.FromResult(MoveNext.Canceled<T>());
+                Status = MoveNextStatus.Canceled;
+                return _finished;
             }
 
             if (_e.MoveNext())
             {
-                return Task.FromResult(MoveNext.Value(_e.Current));
+                var x = Task.FromResult(MoveNext.Value(_e.Current));
+                Status = MoveNextStatus.Value;
+                return x;
             }
             else
             {
-                _finished = MoveNext.Completed<T>();
-                return Task.FromResult(_finished);
+                _finished = Task.FromResult(MoveNext.Completed<T>());
+                Status = MoveNextStatus.Completed;
+                return _finished;
             }
         }
+
+        public MoveNextStatus Status { get; private set; }
+
+        public Exception Exception => null;
     }
 }

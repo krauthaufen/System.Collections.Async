@@ -24,7 +24,7 @@ namespace System.Collections.Async
                 if (!predicate(x.Value)) return false;
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return true;
         }
     }

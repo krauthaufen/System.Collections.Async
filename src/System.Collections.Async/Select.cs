@@ -14,14 +14,18 @@ namespace System.Collections.Async
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
 
+            if (ct.IsCancellationRequested) return _CanceledEnumerable<TResult>.Default;
+
             return new _AsyncEnumerable<TResult>(async ct2 =>
             {
                 var e = await source.GetEnumerator(ct2);
+                if (e.Status == MoveNextStatus.Canceled) return new _CanceledEnumerator<TResult>();
+                if (e.Status == MoveNextStatus.Faulted) return new _FaultedEnumerator<TResult>(e.Exception);
                 
                 return new _AsyncEnumerator<TResult>(async () =>
                 {
                     var x = await e.MoveNext(ct);
-                    ct2.ThrowIfCancellationRequested();
+                    if (ct.IsCancellationRequested || ct2.IsCancellationRequested) return MoveNext.Canceled<TResult>();
 
                     if (x.IsValue)
                     {

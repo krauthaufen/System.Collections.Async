@@ -24,7 +24,7 @@ namespace System.Collections.Async
                 count++;
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return count;
         }
 
@@ -44,7 +44,7 @@ namespace System.Collections.Async
                 if (predicate(x.Value)) count++;
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return count;
         }
     }

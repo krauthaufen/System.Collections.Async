@@ -17,7 +17,7 @@ namespace System.Collections.Async
             ct.ThrowIfCancellationRequested();
 
             var x = await e.MoveNext(ct);
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return x.IsValue;
         }
 
@@ -32,11 +32,11 @@ namespace System.Collections.Async
             var x = await e.MoveNext(ct);
             while (x.IsValue)
             {
-                x.ThrowIfCancelledOrFaulted();
+                x.ThrowIfCanceledOrFaulted();
                 if (predicate(x.Value)) return true;
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return false;
         }
     }

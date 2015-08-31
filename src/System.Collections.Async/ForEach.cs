@@ -24,7 +24,7 @@ namespace System.Collections.Async
                 action(x.Value);
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
         }
     }
 }

@@ -17,7 +17,7 @@ namespace System.Collections.Async
             ct.ThrowIfCancellationRequested();
 
             var x = await e.MoveNext(ct);
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
 
             if (x.IsValue) return x.Value;
             
@@ -35,11 +35,11 @@ namespace System.Collections.Async
             var x = await e.MoveNext(ct);
             while (x.IsValue)
             {
-                x.ThrowIfCancelledOrFaulted();
+                x.ThrowIfCanceledOrFaulted();
                 if (predicate(x.Value)) return x.Value;
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             throw new InvalidOperationException();
         }
     }

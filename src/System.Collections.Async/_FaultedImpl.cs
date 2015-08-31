@@ -7,18 +7,37 @@ using System.Threading.Tasks;
 
 namespace System.Collections.Async
 {
-    internal class _AsyncEnumeratorFaulted<T> : IAsyncEnumerator<T>
+    internal class _FaultedEnumerable<T> : IAsyncEnumerable<T>
     {
-        private Exception _exception;
+        private Task<IAsyncEnumerator<T>> _enumerator;
 
-        public _AsyncEnumeratorFaulted(Exception e)
+        public _FaultedEnumerable(Exception e)
         {
-            _exception = e;
+            _enumerator = Task.FromResult<IAsyncEnumerator<T>>(new _FaultedEnumerator<T>(e));
+        }
+
+        public Task<IAsyncEnumerator<T>> GetEnumerator(CancellationToken ct)
+        {
+            return _enumerator;
+        }
+    }
+    internal class _FaultedEnumerator<T> : IAsyncEnumerator<T>
+    {
+        private Task<IMoveNextResult<T>> _result;
+
+        public _FaultedEnumerator(Exception e)
+        {
+            Exception = e;
+            _result = Task.FromResult(MoveNext.Faulted<T>(e));
         }
 
         Task<IMoveNextResult<T>> IAsyncEnumerator<T>.MoveNext(CancellationToken ct)
         {
-            return Task.FromResult(MoveNext.Faulted<T>(_exception));
+            return _result;
         }
+
+        public MoveNextStatus Status => MoveNextStatus.Faulted;
+
+        public Exception Exception { get; }
     }
 }

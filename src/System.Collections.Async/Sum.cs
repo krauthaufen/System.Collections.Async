@@ -24,7 +24,7 @@ namespace System.Collections.Async
                 result += x.Value;
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return result;
         }
         public static async Task<decimal?> Sum(this IAsyncEnumerable<decimal?> source, CancellationToken ct = default(CancellationToken))
@@ -42,7 +42,7 @@ namespace System.Collections.Async
                 result += x.Value;
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return result;
         }
         public static async Task<double> Sum(this IAsyncEnumerable<double> source, CancellationToken ct = default(CancellationToken))
@@ -60,7 +60,7 @@ namespace System.Collections.Async
                 result += x.Value;
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return result;
         }
         public static async Task<double?> Sum(this IAsyncEnumerable<double?> source, CancellationToken ct = default(CancellationToken))
@@ -78,7 +78,7 @@ namespace System.Collections.Async
                 result += x.Value;
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return result;
         }
         public static async Task<float> Sum(this IAsyncEnumerable<float> source, CancellationToken ct = default(CancellationToken))
@@ -96,7 +96,7 @@ namespace System.Collections.Async
                 result += x.Value;
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return result;
         }
         public static async Task<float?> Sum(this IAsyncEnumerable<float?> source, CancellationToken ct = default(CancellationToken))
@@ -114,7 +114,7 @@ namespace System.Collections.Async
                 result += x.Value;
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return result;
         }
         public static async Task<int> Sum(this IAsyncEnumerable<int> source, CancellationToken ct = default(CancellationToken))
@@ -132,7 +132,7 @@ namespace System.Collections.Async
                 result += x.Value;
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return result;
         }
         public static async Task<int?> Sum(this IAsyncEnumerable<int?> source, CancellationToken ct = default(CancellationToken))
@@ -150,7 +150,7 @@ namespace System.Collections.Async
                 result += x.Value;
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return result;
         }
         public static async Task<long> Sum(this IAsyncEnumerable<long> source, CancellationToken ct = default(CancellationToken))
@@ -168,7 +168,7 @@ namespace System.Collections.Async
                 result += x.Value;
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return result;
         }
         public static async Task<long?> Sum(this IAsyncEnumerable<long?> source, CancellationToken ct = default(CancellationToken))
@@ -186,7 +186,7 @@ namespace System.Collections.Async
                 result += x.Value;
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return result;
         }
         public static async Task<uint> Sum(this IAsyncEnumerable<uint> source, CancellationToken ct = default(CancellationToken))
@@ -204,7 +204,7 @@ namespace System.Collections.Async
                 result += x.Value;
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return result;
         }
         public static async Task<uint?> Sum(this IAsyncEnumerable<uint?> source, CancellationToken ct = default(CancellationToken))
@@ -222,7 +222,7 @@ namespace System.Collections.Async
                 result += x.Value;
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return result;
         }
         public static async Task<ulong> Sum(this IAsyncEnumerable<ulong> source, CancellationToken ct = default(CancellationToken))
@@ -240,7 +240,7 @@ namespace System.Collections.Async
                 result += x.Value;
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return result;
         }
         public static async Task<ulong?> Sum(this IAsyncEnumerable<ulong?> source, CancellationToken ct = default(CancellationToken))
@@ -258,7 +258,7 @@ namespace System.Collections.Async
                 result += x.Value;
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return result;
         }
 
@@ -278,7 +278,7 @@ namespace System.Collections.Async
                 result += selector(x.Value);
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return result;
         }
         public static async Task<decimal?> Sum<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, decimal?> selector, CancellationToken ct = default(CancellationToken))
@@ -297,7 +297,7 @@ namespace System.Collections.Async
                 result += selector(x.Value);
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return result;
         }
         public static async Task<double> Sum<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, double> selector, CancellationToken ct = default(CancellationToken))
@@ -316,7 +316,7 @@ namespace System.Collections.Async
                 result += selector(x.Value);
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return result;
         }
         public static async Task<double?> Sum<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, double?> selector, CancellationToken ct = default(CancellationToken))
@@ -335,7 +335,7 @@ namespace System.Collections.Async
                 result += selector(x.Value);
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return result;
         }
         public static async Task<float> Sum<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, float> selector, CancellationToken ct = default(CancellationToken))
@@ -354,7 +354,7 @@ namespace System.Collections.Async
                 result += selector(x.Value);
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return result;
         }
         public static async Task<float?> Sum<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, float?> selector, CancellationToken ct = default(CancellationToken))
@@ -373,7 +373,7 @@ namespace System.Collections.Async
                 result += selector(x.Value);
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return result;
         }
         public static async Task<int> Sum<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, int> selector, CancellationToken ct = default(CancellationToken))
@@ -392,7 +392,7 @@ namespace System.Collections.Async
                 result += selector(x.Value);
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return result;
         }
         public static async Task<int?> Sum<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, int?> selector, CancellationToken ct = default(CancellationToken))
@@ -411,7 +411,7 @@ namespace System.Collections.Async
                 result += selector(x.Value);
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return result;
         }
         public static async Task<long> Sum<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, long> selector, CancellationToken ct = default(CancellationToken))
@@ -430,7 +430,7 @@ namespace System.Collections.Async
                 result += selector(x.Value);
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return result;
         }
         public static async Task<long?> Sum<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, long?> selector, CancellationToken ct = default(CancellationToken))
@@ -449,7 +449,7 @@ namespace System.Collections.Async
                 result += selector(x.Value);
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return result;
         }
         public static async Task<uint> Sum<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, uint> selector, CancellationToken ct = default(CancellationToken))
@@ -468,7 +468,7 @@ namespace System.Collections.Async
                 result += selector(x.Value);
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return result;
         }
         public static async Task<uint?> Sum<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, uint?> selector, CancellationToken ct = default(CancellationToken))
@@ -487,7 +487,7 @@ namespace System.Collections.Async
                 result += selector(x.Value);
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return result;
         }
         public static async Task<ulong> Sum<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, ulong> selector, CancellationToken ct = default(CancellationToken))
@@ -506,7 +506,7 @@ namespace System.Collections.Async
                 result += selector(x.Value);
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return result;
         }
         public static async Task<ulong?> Sum<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, ulong?> selector, CancellationToken ct = default(CancellationToken))
@@ -525,7 +525,7 @@ namespace System.Collections.Async
                 result += selector(x.Value);
                 x = await e.MoveNext(ct);
             }
-            x.ThrowIfCancelledOrFaulted();
+            x.ThrowIfCanceledOrFaulted();
             return result;
         }
     }

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace System.Collections.Async
 {
-    internal class _AsyncEnumeratorCancelled<T> : IAsyncEnumerator<T>
+    public static partial class AsyncEnumerable
     {
-        Task<IMoveNextResult<T>> IAsyncEnumerator<T>.MoveNext(CancellationToken ct)
+        public static IAsyncEnumerable<T> Canceled<T>()
         {
-            return Task.FromResult(MoveNext.Cancelled<T>());
+            return new _CanceledEnumerable<T>();
         }
     }
 }

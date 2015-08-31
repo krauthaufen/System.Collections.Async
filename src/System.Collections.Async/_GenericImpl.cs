@@ -34,13 +34,21 @@ namespace System.Collections.Async
 
         public _AsyncEnumerator(Func<Task<IMoveNextResult<T>>> next)
         {
+            Status = MoveNextStatus.None;
             _next = next;
         }
-        
+
         public async Task<IMoveNextResult<T>> MoveNext(CancellationToken ct)
         {
             ct.ThrowIfCancellationRequested();
-            return await _next();
+            var x = await _next();
+            if (x.Status == MoveNextStatus.Faulted) Exception = x.Exception;
+            Status = x.Status;
+            return x;
         }
+        
+        public MoveNextStatus Status { get; private set; }
+
+        public Exception Exception { get; private set; }
     }
 }

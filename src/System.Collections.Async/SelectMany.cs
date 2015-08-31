@@ -25,8 +25,8 @@ namespace System.Collections.Async
                 ct2.ThrowIfCancellationRequested();
                 if (!x.IsValue)
                 {
-                    x.ThrowIfCancelledOrFaulted();
-                    return new _AsyncEnumeratorEmpty<TResult>();
+                    x.ThrowIfCanceledOrFaulted();
+                    return new _EmptyEnumerator<TResult>();
                 }
 
                 var inner = selector(x.Value).GetEnumerator();
@@ -50,7 +50,7 @@ namespace System.Collections.Async
                             }
                             else
                             {
-                                x.ThrowIfCancelledOrFaulted();
+                                x.ThrowIfCanceledOrFaulted();
                                 return MoveNext.Completed<TResult>();
                             }
                         }

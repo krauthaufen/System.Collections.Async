@@ -9,9 +9,9 @@ namespace System.Collections.Async
 {
     public static partial class AsyncEnumerable
     {
-        public static IAsyncEnumerable<T> Empty<T>()
+        public static IAsyncEnumerable<T> Faulted<T>(Exception e)
         {
-            return new _EmptyEnumerable<T>();
+            return new _FaultedEnumerable<T>(e);
         }
     }
 }

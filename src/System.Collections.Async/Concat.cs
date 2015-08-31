@@ -17,6 +17,7 @@ namespace System.Collections.Async
             return new _AsyncEnumerable<TSource>(async ct2 =>
             {
                 var e = await first.GetEnumerator(ct2);
+                ct.ThrowIfCancellationRequested();
                 ct2.ThrowIfCancellationRequested();
 
                 var switched = false;
@@ -25,6 +26,7 @@ namespace System.Collections.Async
                     while (true)
                     {
                         var x = await e.MoveNext(ct2);
+                        ct.ThrowIfCancellationRequested();
                         ct2.ThrowIfCancellationRequested();
 
                         if (x.IsValue)
@@ -40,6 +42,7 @@ namespace System.Collections.Async
                             else
                             {
                                 e = await second.GetEnumerator(ct2);
+                                ct.ThrowIfCancellationRequested();
                                 ct2.ThrowIfCancellationRequested();
                                 switched = true;
                             }

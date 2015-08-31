@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Canceled.cs" />
+    <Compile Include="Faulted.cs" />
+    <Compile Include="Latest.cs" />
     <Compile Include="Wait.cs" />
     <Compile Include="IAsyncEnumerableSource.cs" />
     <Compile Include="Source.cs" />
@@ -82,7 +85,7 @@
     <Compile Include="ToArray.cs" />
     <Compile Include="ToList.cs" />
     <Compile Include="_FaultedImpl.cs" />
-    <Compile Include="_CancelledImpl.cs" />
+    <Compile Include="_CanceledImpl.cs" />
     <Compile Include="_EmptyImpl.cs" />
     <Compile Include="_FromValuesImpl.cs" />
     <Compile Include="IAsyncEnumerator.cs" />
