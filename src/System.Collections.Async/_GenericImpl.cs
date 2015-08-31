@@ -23,7 +23,7 @@ namespace System.Collections.Async
 
         public Task<IAsyncEnumerator<T>> GetEnumerator(CancellationToken ct)
         {
-            ct.ThrowIfCancellationRequested();
+            if (ct.IsCancellationRequested) return Task.FromResult(_CanceledEnumerator<T>.Default);
             return _createEnumerator(ct);
         }
     }
@@ -40,7 +40,7 @@ namespace System.Collections.Async
 
         public async Task<IMoveNextResult<T>> MoveNext(CancellationToken ct)
         {
-            ct.ThrowIfCancellationRequested();
+            if (ct.IsCancellationRequested) return Async.MoveNext.Canceled<T>();
             var x = await _next();
             if (x.Status == MoveNextStatus.Faulted) Exception = x.Exception;
             Status = x.Status;

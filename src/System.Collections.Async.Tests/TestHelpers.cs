@@ -33,17 +33,7 @@ namespace System.Collections.Async.Tests
                 .ToAsyncEnumerable();
             }
         }
-
-        public static CancellationToken Cancelled
-        {
-            get
-            {
-                var cts = new CancellationTokenSource();
-                cts.Cancel();
-                return cts.Token;
-            }
-        }
-
+        
         public static void ThrowsArgumentNullException(Action action)
         {
             try
@@ -139,7 +129,7 @@ namespace System.Collections.Async.Tests
         public static void TestFaultedOrCanceled(Action<IAsyncEnumerable<int>, CancellationToken> action)
         {
             ThrowsAggregateTaskCanceledException(() =>
-                action(AsyncEnumerable.Empty<int>(), Cancelled)
+                action(AsyncEnumerable.Empty<int>(), new CancellationToken(true))
                 );
             ThrowsAggregateTestException(() =>
                 action(FaultedIntSequence, CancellationToken.None)

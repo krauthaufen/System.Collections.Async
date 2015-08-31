@@ -13,6 +13,7 @@ namespace System.Collections.Async
         {
             if (source == null) throw new ArgumentNullException("source");
             if (func == null) throw new ArgumentNullException("func");
+            ct.ThrowIfCancellationRequested();
 
             var e = await source.GetEnumerator(ct);
             ct.ThrowIfCancellationRequested();
@@ -36,6 +37,7 @@ namespace System.Collections.Async
         {
             if (source == null) throw new ArgumentNullException("source");
             if (func == null) throw new ArgumentNullException("func");
+            ct.ThrowIfCancellationRequested();
 
             var e = await source.GetEnumerator(ct);
             ct.ThrowIfCancellationRequested();

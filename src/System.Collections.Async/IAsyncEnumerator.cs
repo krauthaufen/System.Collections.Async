@@ -51,19 +51,26 @@ namespace System.Collections.Async
         void ThrowIfCanceledOrFaulted();
     }
 
+    internal static class MoveNext<T>
+    {
+        public static readonly IMoveNextResult<T> None = new MoveNextNone<T>();
+        public static readonly IMoveNextResult<T> Canceled = new MoveNextCanceled<T>();
+        public static readonly IMoveNextResult<T> Completed = new MoveNextCompleted<T>();
+    }
+
     internal static class MoveNext
     {
         public static IMoveNextResult<T> None<T>()
         {
-            return new MoveNextNone<T>();
+            return MoveNext<T>.None;
         }
         public static IMoveNextResult<T> Canceled<T>()
         {
-            return new MoveNextCanceled<T>();
+            return MoveNext<T>.Canceled;
         }
         public static IMoveNextResult<T> Completed<T>()
         {
-            return new MoveNextCompleted<T>();
+            return MoveNext<T>.Completed;
         }
         public static IMoveNextResult<T> Faulted<T>(Exception e)
         {
@@ -89,133 +96,133 @@ namespace System.Collections.Async
                     throw new NotImplementedException();
             }
         }
+    }
 
-        private class MoveNextNone<T> : IMoveNextResult<T>
+    internal class MoveNextNone<T> : IMoveNextResult<T>
+    {
+        public T Value { get { throw new InvalidOperationException("Can't get value from stream in state 'None'."); } }
+
+        public Exception Exception => null;
+
+        public MoveNextStatus Status => MoveNextStatus.None;
+
+        public bool IsCanceled => false;
+        public bool IsCompleted => false;
+        public bool IsFaulted => false;
+        public bool IsValue => false;
+        public bool IsNone => true;
+
+        public void ThrowIfCanceledOrFaulted()
         {
-            public T Value { get { throw new InvalidOperationException("Can't get value from stream in state 'None'."); } }
-
-            public Exception Exception => null;
-
-            public MoveNextStatus Status => MoveNextStatus.None;
-
-            public bool IsCanceled => false;
-            public bool IsCompleted => false;
-            public bool IsFaulted => false;
-            public bool IsValue => false;
-            public bool IsNone => true;
-
-            public void ThrowIfCanceledOrFaulted()
-            {
-            }
-
-            public override string ToString()
-            {
-                return $"MoveNextNone<{typeof(T)}>()";
-            }
         }
-        private class MoveNextCanceled<T> : IMoveNextResult<T>
+
+        public override string ToString()
         {
-            public T Value { get { throw new OperationCanceledException(); } }
-
-            public Exception Exception => null;
-
-            public MoveNextStatus Status => MoveNextStatus.Canceled;
-
-            public bool IsCanceled => true;
-            public bool IsCompleted => false;
-            public bool IsFaulted => false;
-            public bool IsValue => false;
-            public bool IsNone => false;
-
-            public void ThrowIfCanceledOrFaulted()
-            {
-                throw new OperationCanceledException();
-            }
-
-            public override string ToString()
-            {
-                return $"MoveNextCanceled<{typeof(T)}>()";
-            }
+            return $"MoveNextNone<{typeof(T)}>()";
         }
-        private class MoveNextCompleted<T> : IMoveNextResult<T>
+    }
+    internal class MoveNextCanceled<T> : IMoveNextResult<T>
+    {
+        public T Value { get { throw new OperationCanceledException(); } }
+
+        public Exception Exception => null;
+
+        public MoveNextStatus Status => MoveNextStatus.Canceled;
+
+        public bool IsCanceled => true;
+        public bool IsCompleted => false;
+        public bool IsFaulted => false;
+        public bool IsValue => false;
+        public bool IsNone => false;
+
+        public void ThrowIfCanceledOrFaulted()
         {
-            public T Value { get { throw new InvalidOperationException(); } }
-
-            public Exception Exception => null;
-
-            public MoveNextStatus Status => MoveNextStatus.Completed;
-
-            public bool IsCanceled => false;
-            public bool IsCompleted => true;
-            public bool IsFaulted => false;
-            public bool IsValue => false;
-            public bool IsNone => false;
-
-            public void ThrowIfCanceledOrFaulted()
-            {
-            }
-
-            public override string ToString()
-            {
-                return $"MoveNextCompleted<{typeof(T)}>()";
-            }
+            throw new OperationCanceledException();
         }
-        private class MoveNextException<T> : IMoveNextResult<T>
+
+        public override string ToString()
         {
-            public MoveNextException(Exception e)
-            {
-                Exception = e;
-            }
-
-            public T Value { get { throw new InvalidOperationException("Can't get value from faulted stream.", Exception); } }
-
-            public Exception Exception { get; }
-
-            public MoveNextStatus Status => MoveNextStatus.Faulted;
-
-            public bool IsCanceled => false;
-            public bool IsCompleted => false;
-            public bool IsFaulted => true;
-            public bool IsValue => false;
-            public bool IsNone => false;
-
-            public void ThrowIfCanceledOrFaulted()
-            {
-                throw Exception;
-            }
-
-            public override string ToString()
-            {
-                return $"MoveNextException<{typeof(T)}>({Exception})";
-            }
+            return $"MoveNextCanceled<{typeof(T)}>()";
         }
-        private class MoveNextValue<T> : IMoveNextResult<T>
+    }
+    internal class MoveNextCompleted<T> : IMoveNextResult<T>
+    {
+        public T Value { get { throw new InvalidOperationException(); } }
+
+        public Exception Exception => null;
+
+        public MoveNextStatus Status => MoveNextStatus.Completed;
+
+        public bool IsCanceled => false;
+        public bool IsCompleted => true;
+        public bool IsFaulted => false;
+        public bool IsValue => false;
+        public bool IsNone => false;
+
+        public void ThrowIfCanceledOrFaulted()
         {
-            public MoveNextValue(T x)
-            {
-                Value = x;
-            }
+        }
 
-            public T Value { get; }
+        public override string ToString()
+        {
+            return $"MoveNextCompleted<{typeof(T)}>()";
+        }
+    }
+    internal class MoveNextException<T> : IMoveNextResult<T>
+    {
+        public MoveNextException(Exception e)
+        {
+            Exception = e;
+        }
 
-            public Exception Exception => null;
+        public T Value { get { throw new InvalidOperationException("Can't get value from faulted stream.", Exception); } }
 
-            public MoveNextStatus Status => MoveNextStatus.Value;
+        public Exception Exception { get; }
 
-            public bool IsCanceled => false;
-            public bool IsCompleted => false;
-            public bool IsFaulted => false;
-            public bool IsValue => true;
-            public bool IsNone => false;
+        public MoveNextStatus Status => MoveNextStatus.Faulted;
 
-            public void ThrowIfCanceledOrFaulted()
-            {
-            }
+        public bool IsCanceled => false;
+        public bool IsCompleted => false;
+        public bool IsFaulted => true;
+        public bool IsValue => false;
+        public bool IsNone => false;
 
-            public override string ToString()
-            {
-                return $"MoveNextValue<{typeof(T)}>({Value})";
-            }
+        public void ThrowIfCanceledOrFaulted()
+        {
+            throw Exception;
+        }
+
+        public override string ToString()
+        {
+            return $"MoveNextException<{typeof(T)}>({Exception})";
+        }
+    }
+    internal class MoveNextValue<T> : IMoveNextResult<T>
+    {
+        public MoveNextValue(T x)
+        {
+            Value = x;
+        }
+
+        public T Value { get; }
+
+        public Exception Exception => null;
+
+        public MoveNextStatus Status => MoveNextStatus.Value;
+
+        public bool IsCanceled => false;
+        public bool IsCompleted => false;
+        public bool IsFaulted => false;
+        public bool IsValue => true;
+        public bool IsNone => false;
+
+        public void ThrowIfCanceledOrFaulted()
+        {
+        }
+
+        public override string ToString()
+        {
+            return $"MoveNextValue<{typeof(T)}>({Value})";
         }
     }
 }

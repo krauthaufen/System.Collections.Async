@@ -20,7 +20,7 @@ namespace System.Collections.Async
     {
         public static readonly IAsyncEnumerator<T> Default = new _CanceledEnumerator<T>();
 
-        private static readonly Task<IMoveNextResult<T>> _result = Task.FromResult(MoveNext.Canceled<T>());
+        private static readonly Task<IMoveNextResult<T>> _result = Task.FromResult(MoveNext<T>.Canceled);
 
         Task<IMoveNextResult<T>> IAsyncEnumerator<T>.MoveNext(CancellationToken ct)
         {

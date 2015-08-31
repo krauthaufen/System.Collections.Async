@@ -19,7 +19,7 @@ namespace System.Collections.Async
             return new _AsyncEnumerable<TResult>(async ct2 =>
             {
                 var e = await source.GetEnumerator(ct2);
-                if (e.Status == MoveNextStatus.Canceled) return new _CanceledEnumerator<TResult>();
+                if (e.Status == MoveNextStatus.Canceled || ct.IsCancellationRequested || ct2.IsCancellationRequested) return new _CanceledEnumerator<TResult>();
                 if (e.Status == MoveNextStatus.Faulted) return new _FaultedEnumerator<TResult>(e.Exception);
                 
                 return new _AsyncEnumerator<TResult>(async () =>

@@ -42,11 +42,10 @@ namespace System.Collections.Async.Tests
             }
         }
         [TestMethod]
-        public void SelectMany_Cancelled()
+        public void SelectMany_Canceled()
         {
-            TestHelpers.ThrowsAggregateTaskCanceledException(() =>
-                AsyncEnumerable.Empty<int[]>().SelectMany(x => x, TestHelpers.Cancelled).Wait()
-                );
+            var e = AsyncEnumerable.Empty<int[]>().SelectMany(x => x, new CancellationToken(true)).GetEnumerator(CancellationToken.None);
+            Assert.IsTrue(e.Result.Status == MoveNextStatus.Canceled);
         }
         [TestMethod]
         public void SelectMany_Faulted()

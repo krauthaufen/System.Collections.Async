@@ -13,25 +13,33 @@ namespace System.Collections.Async
         {
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
-            
+
+            if (ct.IsCancellationRequested) return _CanceledEnumerable<TResult>.Default;
+
             return new _AsyncEnumerable<TResult>(async ct2 =>
             {
+                if (ct.IsCancellationRequested || ct2.IsCancellationRequested) return _CanceledEnumerator<TResult>.Default;
+
                 var outer = await source.GetEnumerator(ct2);
-                ct.ThrowIfCancellationRequested();
-                ct2.ThrowIfCancellationRequested();
+                if (outer.Status == MoveNextStatus.Canceled) return _CanceledEnumerator<TResult>.Default;
+                if (outer.Status == MoveNextStatus.Faulted) return new _FaultedEnumerator<TResult>(outer.Exception);
 
                 var x = await outer.MoveNext(ct2);
-                ct.ThrowIfCancellationRequested();
-                ct2.ThrowIfCancellationRequested();
-                if (!x.IsValue)
+                switch (x.Status)
                 {
-                    x.ThrowIfCanceledOrFaulted();
-                    return new _EmptyEnumerator<TResult>();
+                    case MoveNextStatus.Canceled:
+                        return _CanceledEnumerator<TResult>.Default;
+                    case MoveNextStatus.Faulted:
+                        return new _FaultedEnumerator<TResult>(x.Exception);
+                    case MoveNextStatus.Completed:
+                        return _EmptyEnumerator<TResult>.Default;
                 }
 
                 var inner = selector(x.Value).GetEnumerator();
                 return new _AsyncEnumerator<TResult>(async () =>
                 {
+                    if (ct.IsCancellationRequested || ct2.IsCancellationRequested) return MoveNext<TResult>.Canceled;
+
                     while (true)
                     {
                         if (inner.MoveNext())
@@ -41,8 +49,6 @@ namespace System.Collections.Async
                         else
                         {
                             x = await outer.MoveNext(ct2);
-                            ct.ThrowIfCancellationRequested();
-                            ct2.ThrowIfCancellationRequested();
 
                             if (x.IsValue)
                             {
@@ -50,8 +56,7 @@ namespace System.Collections.Async
                             }
                             else
                             {
-                                x.ThrowIfCanceledOrFaulted();
-                                return MoveNext.Completed<TResult>();
+                                return MoveNext.Convert<TSource, TResult>(x);
                             }
                         }
                     }
