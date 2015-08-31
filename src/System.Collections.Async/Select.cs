@@ -18,14 +18,24 @@ namespace System.Collections.Async
 
             return new _AsyncEnumerable<TResult>(async ct2 =>
             {
+                if (ct.IsCancellationRequested || ct2.IsCancellationRequested) return _CanceledEnumerator<TResult>.Default;
+
                 var e = await source.GetEnumerator(ct2);
-                if (e.Status == MoveNextStatus.Canceled || ct.IsCancellationRequested || ct2.IsCancellationRequested) return new _CanceledEnumerator<TResult>();
-                if (e.Status == MoveNextStatus.Faulted) return new _FaultedEnumerator<TResult>(e.Exception);
-                
+                switch (e.Status)
+                {
+                    case MoveNextStatus.Canceled:
+                        return _CanceledEnumerator<TResult>.Default;
+                    case MoveNextStatus.Faulted:
+                        return new _FaultedEnumerator<TResult>(e.Exception);
+                    case MoveNextStatus.Completed:
+                        return _EmptyEnumerator<TResult>.Default;
+                }
+
                 return new _AsyncEnumerator<TResult>(async () =>
                 {
-                    var x = await e.MoveNext(ct);
                     if (ct.IsCancellationRequested || ct2.IsCancellationRequested) return MoveNext.Canceled<TResult>();
+
+                    var x = await e.MoveNext(ct);
 
                     if (x.IsValue)
                     {
