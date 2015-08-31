@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Wait.cs" />
     <Compile Include="IAsyncEnumerableSource.cs" />
     <Compile Include="Source.cs" />
     <Compile Include="Generate.cs" />
