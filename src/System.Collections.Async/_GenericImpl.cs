@@ -39,6 +39,7 @@ namespace System.Collections.Async
         
         public async Task<IMoveNextResult<T>> MoveNext(CancellationToken ct)
         {
+            ct.ThrowIfCancellationRequested();
             return await _next();
         }
     }

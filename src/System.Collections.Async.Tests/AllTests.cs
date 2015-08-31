@@ -8,58 +8,41 @@ namespace System.Collections.Async.Tests
     public class AllTests
     {
         [TestMethod]
-        public void ThrowsWhenSourceIsNull()
+        public void All_ThrowsWhenSourceIsNull()
         {
-            try
-            {
-                AsyncEnumerable.All<int>(null, _ => true, CancellationToken.None).Wait();
-                Assert.Fail();
-            }
-            catch (Exception e)
-            {
-                var a = e as AggregateException;
-                if (a == null || a.InnerExceptions.Count != 1 || !(a.InnerException is ArgumentNullException))
-                {
-                    Assert.Fail();
-                }
-            }
+            TestHelpers.ThrowsAggregateArgumentNullException(() =>
+                AsyncEnumerable.All<int>(null, _ => true, CancellationToken.None).Wait()
+                );
         }
-
         [TestMethod]
-        public void ThrowsWhenPredicateIsNull()
+        public void All_ThrowsWhenPredicateIsNull()
         {
-            try
-            {
-                var xs = AsyncEnumerable.FromValues(new[] { 10, 20, 30, 40, 50 });
-                xs.All(null, CancellationToken.None).Wait();
-                Assert.Fail();
-            }
-            catch (Exception e)
-            {
-                var a = e as AggregateException;
-                if (a == null || a.InnerExceptions.Count != 1 || !(a.InnerException is ArgumentNullException))
-                {
-                    Assert.Fail();
-                }
-            }
+            TestHelpers.ThrowsAggregateArgumentNullException(() =>
+                AsyncEnumerable.FromValues(new[] { 10, 20, 30, 40, 50 }).All(null, CancellationToken.None).Wait()
+                );
         }
-
         [TestMethod]
-        public void TrueWhenEmpty()
+        public void All_FaultedOrCancelled()
+        {
+            TestHelpers.TestFaultedOrCanceled((source, ct) =>
+                AsyncEnumerable.All(source, x => true, ct).Wait()
+                );
+        }
+        
+        [TestMethod]
+        public void All_TrueWhenEmpty()
         {
             var xs = AsyncEnumerable.Empty<int>();
             Assert.IsTrue(xs.All(x => x == 0, CancellationToken.None).Result);
         }
-        
         [TestMethod]
-        public void TrueWhenNotEmptyWithPredicateMatch()
+        public void All_TrueWhenNotEmptyWithPredicateMatch()
         {
             var xs = AsyncEnumerable.FromValues(new[] { 10, 20, 30, 40, 50 });
             Assert.IsTrue(xs.All(x => x % 10 == 0, CancellationToken.None).Result);
         }
-
         [TestMethod]
-        public void FalseWhenNotEmptyWithPredicateNonMatch()
+        public void All_FalseWhenNotEmptyWithPredicateNonMatch()
         {
             var xs = AsyncEnumerable.FromValues(new[] { 10, 20, 30, 4, 50 });
             Assert.IsFalse(xs.All(x => x % 10 == 0, CancellationToken.None).Result);
