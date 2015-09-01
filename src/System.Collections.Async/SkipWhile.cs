@@ -1,75 +1,103 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading;
-//using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
-//namespace System.Collections.Async
-//{
-//    public static partial class AsyncEnumerable
-//    {
-//        public static IAsyncEnumerable<TSource> SkipWhile<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, bool> predicate, CancellationToken ct = default(CancellationToken))
-//        {
-//            if (source == null) throw new ArgumentNullException("source");
+namespace System.Collections.Async
+{
+    public static partial class AsyncEnumerable
+    {
+        public static IAsyncEnumerable<TSource> SkipWhile<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, bool> predicate, CancellationToken ct = default(CancellationToken))
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+            if (ct.IsCancellationRequested) return FrozenEnumerable<TSource>.Canceled;
 
-//            return new _AsyncEnumerable<TSource>(async ct2 =>
-//            {
-//                var skipping = true;
-//                var e = await source.GetEnumerator(ct2);
-//                return new _AsyncEnumerator<TSource>(async () =>
-//                {
-//                    while (true)
-//                    {
-//                        if (await e.MoveNext(ct))
-//                        {
-//                            if (skipping)
-//                            {
-//                                if (predicate(e.Current)) continue;
-//                                skipping = false;
-//                            }
+            return new _AsyncEnumerable<TSource>(async ct2 =>
+            {
+                var e = await source.GetEnumerator(ct2);
+                if (e.IsFrozen) return e;
 
-//                            return Tuple.Create(e.Current, true);
-//                        }
-//                        else
-//                        {
-//                            return Tuple.Create(default(TSource), false);
-//                        }
-//                    }
-//                });
-//            });
-//        }
+                IMoveNextResult<TSource> frozen = null;
+                var skipping = true;
+                return new _AsyncEnumerator<TSource>(async () =>
+                {
+                    if (frozen != null) return frozen;
 
-//        public static IAsyncEnumerable<TSource> SkipWhile<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, int, bool> predicate, CancellationToken ct)
-//        {
-//            if (source == null) throw new ArgumentNullException("source");
+                    while (true)
+                    {
+                        var x = await e.MoveNext(ct);
+                        if (x.IsValue)
+                        {
+                            if (skipping)
+                            {
+                                if (predicate(x.Value))
+                                {
+                                    continue;
+                                }
+                                else
+                                {
+                                    skipping = false;
+                                }
+                            }
+                            return x;
+                        }
+                        else
+                        {
+                            frozen = x;
+                            return frozen;
+                        }
+                    }
+                });
+            });
+        }
 
-//            return new _AsyncEnumerable<TSource>(async ct2 =>
-//            {
-//                var i = 0;
-//                var skipping = true;
-//                var e = await source.GetEnumerator(ct2);
-//                return new _AsyncEnumerator<TSource>(async () =>
-//                {
-//                    while (true)
-//                    {
-//                        if (await e.MoveNext(ct))
-//                        {
-//                            if (skipping)
-//                            {
-//                                if (predicate(e.Current, i++)) continue;
-//                                skipping = false;
-//                            }
+        public static IAsyncEnumerable<TSource> SkipWhile<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, int, bool> predicate, CancellationToken ct)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+            if (ct.IsCancellationRequested) return FrozenEnumerable<TSource>.Canceled;
 
-//                            return Tuple.Create(e.Current, true);
-//                        }
-//                        else
-//                        {
-//                            return Tuple.Create(default(TSource), false);
-//                        }
-//                    }
-//                });
-//            });
-//        }
-//    }
-//}
+            return new _AsyncEnumerable<TSource>(async ct2 =>
+            {
+                var e = await source.GetEnumerator(ct2);
+                if (e.IsFrozen) return e;
+
+                IMoveNextResult<TSource> frozen = null;
+                var skipping = true;
+                var index = 0;
+                return new _AsyncEnumerator<TSource>(async () =>
+                {
+                    if (frozen != null) return frozen;
+
+                    while (true)
+                    {
+                        var x = await e.MoveNext(ct);
+                        if (x.IsValue)
+                        {
+                            if (skipping)
+                            {
+                                if (predicate(x.Value, index++))
+                                {
+                                    continue;
+                                }
+                                else
+                                {
+                                    skipping = false;
+                                }
+                            }
+                            return x;
+                        }
+                        else
+                        {
+                            frozen = x;
+                            return frozen;
+                        }
+                    }
+                });
+            });
+        }
+    }
+}
