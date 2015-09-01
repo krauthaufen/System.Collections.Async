@@ -8,20 +8,35 @@ namespace System.Collections.Async.Tests
     public class SkipWhileTests
     {
         [TestMethod]
-        public void ThrowsWhenSourceIsNull()
+        public void ThrowsWhenSourceIsNull1()
         {
-            try
-            {
-                AsyncEnumerable.SkipWhile<int>(null, x => true, CancellationToken.None);
-                Assert.Fail();
-            }
-            catch (ArgumentNullException)
-            {
-            }
-            catch
-            {
-                Assert.Fail();
-            }
+            TestHelpers.ThrowsArgumentNullException(() =>
+                AsyncEnumerable.SkipWhile<int>(null, x => true, CancellationToken.None)
+                );
+        }
+
+        [TestMethod]
+        public void ThrowsWhenSourceIsNull2()
+        {
+            TestHelpers.ThrowsArgumentNullException(() =>
+                AsyncEnumerable.SkipWhile<int>(null, (x, i) => true, CancellationToken.None)
+                );
+        }
+
+        [TestMethod]
+        public void ThrowsWhenPredicateIsNull1()
+        {
+            TestHelpers.ThrowsArgumentNullException(() =>
+                AsyncEnumerable.SkipWhile<int>(AsyncEnumerable.Empty<int>(), (Func<int, bool>)null, CancellationToken.None)
+                );
+        }
+
+        [TestMethod]
+        public void ThrowsWhenPredicateIsNull2()
+        {
+            TestHelpers.ThrowsArgumentNullException(() =>
+                AsyncEnumerable.SkipWhile<int>(AsyncEnumerable.Empty<int>(), (Func<int, int, bool>)null, CancellationToken.None)
+                );
         }
 
         [TestMethod]
