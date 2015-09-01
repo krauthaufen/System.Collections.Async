@@ -13,7 +13,6 @@ namespace System.Collections.Async
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
-            
             if (ct.IsCancellationRequested) return FrozenEnumerable<TSource>.Canceled;
 
             return new _AsyncEnumerable<TSource>(async ct2 =>
@@ -46,7 +45,6 @@ namespace System.Collections.Async
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
-
             if (ct.IsCancellationRequested) return FrozenEnumerable<TSource>.Canceled;
 
             return new _AsyncEnumerable<TSource>(async ct2 =>

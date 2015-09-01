@@ -14,8 +14,6 @@ namespace System.Collections.Async
             if (source == null) throw new ArgumentNullException("source");
             if (ct.IsCancellationRequested) return FrozenEnumerable<TSource>.Canceled;
 
-            if (ct.IsCancellationRequested) return FrozenEnumerable<TSource>.Canceled;
-
             return new _AsyncEnumerable<TSource>(async ct2 =>
             {
                 var e = await source.GetEnumerator(ct2);
