@@ -9,7 +9,7 @@ namespace System.Collections.Async
 {
     public static partial class AsyncEnumerable
     {
-        public static async Task<TSource> ElementAtOrDefaultAsync<TSource>(this IAsyncEnumerable<TSource> source, int index, CancellationToken ct = default(CancellationToken))
+        public static async Task<TSource> ElementAtOrDefault<TSource>(this IAsyncEnumerable<TSource> source, int index, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
             if (index < 0) throw new ArgumentOutOfRangeException(nameof(index), index, "Negative index.");
