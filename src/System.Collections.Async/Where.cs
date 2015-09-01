@@ -13,7 +13,7 @@ namespace System.Collections.Async
         {
             if (source == null) throw new ArgumentNullException("source");
             if (predicate == null) throw new ArgumentNullException("predicate");
-            if (ct.IsCancellationRequested) return _CanceledEnumerable<TSource>.Default;
+            if (ct.IsCancellationRequested) return FrozenEnumerable<TSource>.Canceled;
 
             return new _AsyncEnumerable<TSource>(async ct2 =>
             {
@@ -21,11 +21,11 @@ namespace System.Collections.Async
                 switch (e.Status)
                 {
                     case MoveNextStatus.Canceled:
-                        return _CanceledEnumerator<TSource>.Default;
+                        return FrozenEnumerator<TSource>.Canceled;
                     case MoveNextStatus.Faulted:
-                        return new _FaultedEnumerator<TSource>(e.Exception);
+                        return FrozenEnumerator<TSource>.Faulted(e.Exception);
                     case MoveNextStatus.Completed:
-                        return _EmptyEnumerator<TSource>.Default;
+                        return FrozenEnumerator<TSource>.Completed;
                 }
 
                 return new _AsyncEnumerator<TSource>(async () =>
@@ -44,7 +44,7 @@ namespace System.Collections.Async
         {
             if (source == null) throw new ArgumentNullException("source");
             if (predicate == null) throw new ArgumentNullException("predicate");
-            if (ct.IsCancellationRequested) return _CanceledEnumerable<TSource>.Default;
+            if (ct.IsCancellationRequested) return FrozenEnumerable<TSource>.Canceled;
 
             return new _AsyncEnumerable<TSource>(async ct2 =>
             {
@@ -52,11 +52,11 @@ namespace System.Collections.Async
                 switch (e.Status)
                 {
                     case MoveNextStatus.Canceled:
-                        return _CanceledEnumerator<TSource>.Default;
+                        return FrozenEnumerator<TSource>.Canceled;
                     case MoveNextStatus.Faulted:
-                        return new _FaultedEnumerator<TSource>(e.Exception);
+                        return FrozenEnumerator<TSource>.Faulted(e.Exception);
                     case MoveNextStatus.Completed:
-                        return _EmptyEnumerator<TSource>.Default;
+                        return FrozenEnumerator<TSource>.Completed;
                 }
 
                 var i = 0;

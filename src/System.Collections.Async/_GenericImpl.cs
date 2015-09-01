@@ -23,7 +23,7 @@ namespace System.Collections.Async
 
         public Task<IAsyncEnumerator<T>> GetEnumerator(CancellationToken ct)
         {
-            if (ct.IsCancellationRequested) return Task.FromResult(_CanceledEnumerator<T>.Default);
+            if (ct.IsCancellationRequested) return Task.FromResult(FrozenEnumerator<T>.Canceled);
             return _createEnumerator(ct);
         }
     }
@@ -50,5 +50,7 @@ namespace System.Collections.Async
         public MoveNextStatus Status { get; private set; }
 
         public Exception Exception { get; private set; }
+
+        public bool IsFrozen => Status != MoveNextStatus.None && Status != MoveNextStatus.Value;
     }
 }

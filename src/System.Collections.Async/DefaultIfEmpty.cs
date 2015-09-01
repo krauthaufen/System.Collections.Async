@@ -17,7 +17,7 @@ namespace System.Collections.Async
         public static IAsyncEnumerable<TSource> DefaultIfEmpty<TSource>(this IAsyncEnumerable<TSource> source, TSource defaultValue, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
-            if (ct.IsCancellationRequested) return _CanceledEnumerable<TSource>.Default;
+            if (ct.IsCancellationRequested) return FrozenEnumerable<TSource>.Canceled;
 
             return new _AsyncEnumerable<TSource>(async ct2 =>
             {
@@ -25,9 +25,9 @@ namespace System.Collections.Async
                 switch (e.Status)
                 {
                     case MoveNextStatus.Canceled:
-                        return _CanceledEnumerator<TSource>.Default;
+                        return FrozenEnumerator<TSource>.Canceled;
                     case MoveNextStatus.Faulted:
-                        return new _FaultedEnumerator<TSource>(e.Exception);
+                        return FrozenEnumerator<TSource>.Faulted(e.Exception);
                     case MoveNextStatus.Completed:
                         return await FromValue(defaultValue).GetEnumerator(ct2);
                     case MoveNextStatus.Value:

@@ -11,7 +11,7 @@ namespace System.Collections.Async
     {
         public static IAsyncEnumerable<T> Empty<T>()
         {
-            return new _EmptyEnumerable<T>();
+            return FrozenEnumerable<T>.Completed;
         }
     }
 }

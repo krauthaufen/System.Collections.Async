@@ -23,6 +23,8 @@ namespace System.Collections.Async
         /// Contains exception if status is Faulted, null otherwise.
         /// </summary>
         Exception Exception { get; }
+
+        bool IsFrozen { get; }
     }
 
     public enum MoveNextStatus
@@ -50,27 +52,20 @@ namespace System.Collections.Async
 
         void ThrowIfCanceledOrFaulted();
     }
-
-    internal static class MoveNext<T>
-    {
-        public static readonly IMoveNextResult<T> None = new MoveNextNone<T>();
-        public static readonly IMoveNextResult<T> Canceled = new MoveNextCanceled<T>();
-        public static readonly IMoveNextResult<T> Completed = new MoveNextCompleted<T>();
-    }
-
+    
     internal static class MoveNext
     {
         public static IMoveNextResult<T> None<T>()
         {
-            return MoveNext<T>.None;
+            return MoveNextNone<T>.Default;
         }
         public static IMoveNextResult<T> Canceled<T>()
         {
-            return MoveNext<T>.Canceled;
+            return MoveNextCanceled<T>.Default;
         }
         public static IMoveNextResult<T> Completed<T>()
         {
-            return MoveNext<T>.Completed;
+            return MoveNextCompleted<T>.Default;
         }
         public static IMoveNextResult<T> Faulted<T>(Exception e)
         {
@@ -100,6 +95,8 @@ namespace System.Collections.Async
 
     internal class MoveNextNone<T> : IMoveNextResult<T>
     {
+        public static readonly IMoveNextResult<T> Default = new MoveNextNone<T>();
+
         public T Value { get { throw new InvalidOperationException("Can't get value from stream in state 'None'."); } }
 
         public Exception Exception => null;
@@ -123,6 +120,8 @@ namespace System.Collections.Async
     }
     internal class MoveNextCanceled<T> : IMoveNextResult<T>
     {
+        public static readonly IMoveNextResult<T> Default = new MoveNextCanceled<T>();
+
         public T Value { get { throw new OperationCanceledException(); } }
 
         public Exception Exception => null;
@@ -147,6 +146,8 @@ namespace System.Collections.Async
     }
     internal class MoveNextCompleted<T> : IMoveNextResult<T>
     {
+        public static readonly IMoveNextResult<T> Default = new MoveNextCompleted<T>();
+
         public T Value { get { throw new InvalidOperationException(); } }
 
         public Exception Exception => null;
@@ -225,4 +226,33 @@ namespace System.Collections.Async
             return $"MoveNextValue<{typeof(T)}>({Value})";
         }
     }
+    
+    internal static class AsyncEnumeratorExtensions
+    {
+        public static IAsyncEnumerator<R> Convert<T, R>(this IAsyncEnumerator<T> source)
+        {
+            if (!source.IsFrozen) throw new InvalidOperationException();
+
+            switch (source.Status)
+            {
+                case MoveNextStatus.Canceled:
+                    return FrozenEnumerator<R>.Canceled;
+                case MoveNextStatus.Completed:
+                    return FrozenEnumerator<R>.Completed;
+                case MoveNextStatus.Faulted:
+                    return FrozenEnumerator<R>.Faulted(source.Exception);
+                case MoveNextStatus.Value:
+                case MoveNextStatus.None:
+                    throw new InvalidOperationException();
+                default:
+                    throw new NotImplementedException();
+            }
+        }
+
+        public static bool IsFrozen(this MoveNextStatus x)
+        {
+            return x == MoveNextStatus.Completed || x == MoveNextStatus.Canceled || x == MoveNextStatus.Faulted;
+        }
+    }
+
 }

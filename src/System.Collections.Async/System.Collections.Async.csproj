@@ -61,7 +61,6 @@
     <Compile Include="Min.cs" />
     <Compile Include="Max.cs" />
     <Compile Include="Repeat.cs" />
-    <Compile Include="TakeFor.cs" />
     <Compile Include="ToAsyncEnumerable.cs" />
     <Compile Include="Single.cs" />
     <Compile Include="SkipWhile.cs" />
@@ -84,13 +83,11 @@
     <Compile Include="Sum.cs" />
     <Compile Include="ToArray.cs" />
     <Compile Include="ToList.cs" />
-    <Compile Include="_FaultedImpl.cs" />
-    <Compile Include="_CanceledImpl.cs" />
-    <Compile Include="_EmptyImpl.cs" />
     <Compile Include="_FromValuesImpl.cs" />
     <Compile Include="IAsyncEnumerator.cs" />
     <Compile Include="IAsyncEnumerable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="_Frozen.cs" />
     <Compile Include="_GenericImpl.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

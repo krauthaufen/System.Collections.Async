@@ -11,7 +11,7 @@ namespace System.Collections.Async
     {
         public static IAsyncEnumerable<T> Canceled<T>()
         {
-            return new _CanceledEnumerable<T>();
+            return FrozenEnumerable<T>.Canceled;
         }
     }
 }

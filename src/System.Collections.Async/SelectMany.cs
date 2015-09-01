@@ -14,31 +14,22 @@ namespace System.Collections.Async
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
 
-            if (ct.IsCancellationRequested) return _CanceledEnumerable<TResult>.Default;
+            if (ct.IsCancellationRequested) return FrozenEnumerable<TResult>.Canceled;
 
             return new _AsyncEnumerable<TResult>(async ct2 =>
             {
-                if (ct.IsCancellationRequested || ct2.IsCancellationRequested) return _CanceledEnumerator<TResult>.Default;
+                if (ct.IsCancellationRequested || ct2.IsCancellationRequested) return FrozenEnumerator<TResult>.Canceled;
 
                 var outer = await source.GetEnumerator(ct2);
-                if (outer.Status == MoveNextStatus.Canceled) return _CanceledEnumerator<TResult>.Default;
-                if (outer.Status == MoveNextStatus.Faulted) return new _FaultedEnumerator<TResult>(outer.Exception);
+                if (outer.IsFrozen) return outer.Convert<TSource, TResult>();
 
                 var x = await outer.MoveNext(ct2);
-                switch (x.Status)
-                {
-                    case MoveNextStatus.Canceled:
-                        return _CanceledEnumerator<TResult>.Default;
-                    case MoveNextStatus.Faulted:
-                        return new _FaultedEnumerator<TResult>(x.Exception);
-                    case MoveNextStatus.Completed:
-                        return _EmptyEnumerator<TResult>.Default;
-                }
-
+                if (x.Status.IsFrozen()) return outer.Convert<TSource, TResult>();
+                
                 var inner = selector(x.Value).GetEnumerator();
                 return new _AsyncEnumerator<TResult>(async () =>
                 {
-                    if (ct.IsCancellationRequested || ct2.IsCancellationRequested) return MoveNext<TResult>.Canceled;
+                    if (ct.IsCancellationRequested || ct2.IsCancellationRequested) return MoveNext.Canceled<TResult>();
 
                     while (true)
                     {

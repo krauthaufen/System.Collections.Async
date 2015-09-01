@@ -28,7 +28,7 @@
 //        public void EmptyCase()
 //        {
 //            var xs = AsyncEnumerable.FromValues(new int[] { });
-//            var rs = xs.Distinct(CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+//            var rs = xs.Distinct(CancellationToken.None).ToArray(CancellationToken.None).Result;
 //            Assert.IsTrue(rs.Length == 0);
 //        }
 
@@ -36,7 +36,7 @@
 //        public void SingleCase()
 //        {
 //            var xs = AsyncEnumerable.FromValues(new int[] { 42 });
-//            var rs = xs.Distinct(CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+//            var rs = xs.Distinct(CancellationToken.None).ToArray(CancellationToken.None).Result;
 //            Assert.IsTrue(rs.Length == 1 && rs[0] == 42);
 //        }
 
@@ -44,7 +44,7 @@
 //        public void SingleDuplicateCase()
 //        {
 //            var xs = AsyncEnumerable.FromValues(new int[] { 42, 42, 42 });
-//            var rs = xs.Distinct(CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+//            var rs = xs.Distinct(CancellationToken.None).ToArray(CancellationToken.None).Result;
 //            Assert.IsTrue(rs.Length == 1 && rs[0] == 42);
 //        }
 
@@ -52,7 +52,7 @@
 //        public void MultipleDuplicateCase()
 //        {
 //            var xs = AsyncEnumerable.FromValues(new int[] { 1, 2, 1, 3, 2, 4, 3, 5 });
-//            var rs = xs.Distinct(CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+//            var rs = xs.Distinct(CancellationToken.None).ToArray(CancellationToken.None).Result;
 //            Assert.IsTrue(rs.Length == 5 && rs[0] == 1 && rs[1] == 2 && rs[2] == 3 && rs[3] == 4 && rs[4] == 5);
 //        }
 
@@ -60,7 +60,7 @@
 //        public void AllDistinctCase()
 //        {
 //            var xs = AsyncEnumerable.FromValues(new int[] { 1, 2, 3, 4 });
-//            var rs = xs.Distinct(CancellationToken.None).ToArrayAsync(CancellationToken.None).Result;
+//            var rs = xs.Distinct(CancellationToken.None).ToArray(CancellationToken.None).Result;
 //            Assert.IsTrue(rs.Length == 4 && rs[0] == 1 && rs[1] == 2 && rs[2] == 3 && rs[3] == 4);
 //        }
 //    }

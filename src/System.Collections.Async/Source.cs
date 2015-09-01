@@ -28,6 +28,8 @@ namespace System.Collections.Async
 
             public Exception Exception => null;
 
+            public bool IsFrozen => _parent._isFrozen;
+
             public MoveNextStatus Status => _parent._status;
 
             public Task<IMoveNextResult<T>> MoveNext(CancellationToken ct)
@@ -46,6 +48,7 @@ namespace System.Collections.Async
         private Task<IAsyncEnumerator<T>> _enumerator;
         private int _subscribersCount = 0;
         private MoveNextStatus _status = MoveNextStatus.None;
+        private bool _isFrozen = false;
 
         private TaskCompletionSource<IMoveNextResult<T>> _moveNext;
         
@@ -75,9 +78,10 @@ namespace System.Collections.Async
             {
                 await _semaphore.WaitAsync();
 
-                if (_status == MoveNextStatus.Completed) return;
+                if (_isFrozen) return;
 
                 _status = MoveNextStatus.Completed;
+                _isFrozen = true;
                 _moveNext.SetResult(MoveNext.Completed<T>());
             }
             finally

@@ -60,5 +60,7 @@ namespace System.Collections.Async
         public MoveNextStatus Status { get; private set; }
 
         public Exception Exception => null;
+
+        public bool IsFrozen => Status != MoveNextStatus.None && Status != MoveNextStatus.Value;
     }
 }

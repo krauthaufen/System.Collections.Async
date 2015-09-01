@@ -12,29 +12,32 @@ namespace System.Collections.Async
         public static IAsyncEnumerable<TSource> Take<TSource>(this IAsyncEnumerable<TSource> source, int count, CancellationToken ct = default(CancellationToken))
         {
             if (source == null) throw new ArgumentNullException("source");
-            if (ct.IsCancellationRequested) return _CanceledEnumerable<TSource>.Default;
+            if (ct.IsCancellationRequested) return FrozenEnumerable<TSource>.Canceled;
+
+            if (ct.IsCancellationRequested) return FrozenEnumerable<TSource>.Canceled;
 
             return new _AsyncEnumerable<TSource>(async ct2 =>
             {
-                var taken = 0;
                 var e = await source.GetEnumerator(ct2);
-                switch (e.Status)
-                {
-                    case MoveNextStatus.Canceled:
-                        return _CanceledEnumerator<TSource>.Default;
-                    case MoveNextStatus.Faulted:
-                        return new _FaultedEnumerator<TSource>(e.Exception);
-                    case MoveNextStatus.Completed:
-                        return _EmptyEnumerator<TSource>.Default;
-                }
+                if (e.IsFrozen) return e;
 
+                IMoveNextResult<TSource> frozen = null;
+                var taken = 0;
                 return new _AsyncEnumerator<TSource>(async () =>
                 {
-                    if (ct.IsCancellationRequested) return MoveNext<TSource>.Canceled;
-                    if (taken >= count) return MoveNext<TSource>.Completed;
+                    if (frozen != null) return frozen;
 
-                    taken++;
-                    return await e.MoveNext(ct);
+                    var x = await e.MoveNext(ct);
+                    if (x.IsValue)
+                    {
+                        if (taken++ < count) return x;
+                        else frozen = MoveNext.Completed<TSource>();
+                    }
+                    else
+                    {
+                        frozen = x;
+                    }
+                    return frozen;
                 });
             });
         }

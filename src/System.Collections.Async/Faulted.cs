@@ -11,7 +11,7 @@ namespace System.Collections.Async
     {
         public static IAsyncEnumerable<T> Faulted<T>(Exception e)
         {
-            return new _FaultedEnumerable<T>(e);
+            return FrozenEnumerable<T>.Faulted(e);
         }
     }
 }
