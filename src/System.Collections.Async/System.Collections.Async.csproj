@@ -43,6 +43,7 @@
     <Compile Include="Canceled.cs" />
     <Compile Include="Faulted.cs" />
     <Compile Include="Latest.cs" />
+    <Compile Include="AsEnumerable.cs" />
     <Compile Include="Wait.cs" />
     <Compile Include="IAsyncEnumerableSource.cs" />
     <Compile Include="Source.cs" />
