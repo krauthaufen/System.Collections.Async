@@ -224,28 +224,28 @@ namespace System.Collections.Async.Tests
             }
             catch
             {
-                Assert.IsTrue(Helper.CANCELLED.IsCancellationRequested);
             }
         }
 
         [TestMethod]
         public void SumFailsWhenCancelled()
         {
-            _SumFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<decimal>().Sum(x => x, Helper.CANCELLED).Result == 0));
-            _SumFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<double>().Sum(x => x, Helper.CANCELLED).Result == 0));
-            _SumFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<float>().Sum(x => x, Helper.CANCELLED).Result == 0));
-            _SumFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<int>().Sum(x => x, Helper.CANCELLED).Result == 0));
-            _SumFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<long>().Sum(x => x, Helper.CANCELLED).Result == 0));
-            _SumFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<uint>().Sum(x => x, Helper.CANCELLED).Result == 0));
-            _SumFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<ulong>().Sum(x => x, Helper.CANCELLED).Result == 0));
+            var ct = new CancellationToken(true);
+            _SumFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<decimal>().Sum(x => x, ct).Result == 0));
+            _SumFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<double>().Sum(x => x, ct).Result == 0));
+            _SumFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<float>().Sum(x => x, ct).Result == 0));
+            _SumFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<int>().Sum(x => x, ct).Result == 0));
+            _SumFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<long>().Sum(x => x, ct).Result == 0));
+            _SumFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<uint>().Sum(x => x, ct).Result == 0));
+            _SumFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<ulong>().Sum(x => x, ct).Result == 0));
 
-            _SumFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<decimal?>().Sum(x => x, Helper.CANCELLED).Result == 0));
-            _SumFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<double?>().Sum(x => x, Helper.CANCELLED).Result == 0));
-            _SumFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<float?>().Sum(x => x, Helper.CANCELLED).Result == 0));
-            _SumFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<int?>().Sum(x => x, Helper.CANCELLED).Result == 0));
-            _SumFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<long?>().Sum(x => x, Helper.CANCELLED).Result == 0));
-            _SumFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<uint?>().Sum(x => x, Helper.CANCELLED).Result == 0));
-            _SumFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<ulong?>().Sum(x => x, Helper.CANCELLED).Result == 0));
+            _SumFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<decimal?>().Sum(x => x, ct).Result == 0));
+            _SumFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<double?>().Sum(x => x, ct).Result == 0));
+            _SumFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<float?>().Sum(x => x, ct).Result == 0));
+            _SumFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<int?>().Sum(x => x, ct).Result == 0));
+            _SumFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<long?>().Sum(x => x, ct).Result == 0));
+            _SumFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<uint?>().Sum(x => x, ct).Result == 0));
+            _SumFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<ulong?>().Sum(x => x, ct).Result == 0));
         }
 
         #endregion

@@ -36,7 +36,7 @@
 //        [TestMethod]
 //        public void Race2()
 //        {
-//            var result = CreateInTask().ToListAsync().Result;
+//            var result = CreateInTask().ToList().Result;
 //            Assert.IsTrue(result.Count == 100, $"{result} == 100");
 //        }
 //    }

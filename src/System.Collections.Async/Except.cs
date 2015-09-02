@@ -1,136 +1,190 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading;
-//using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
-//namespace System.Collections.Async
-//{
-//    public static partial class AsyncEnumerable
-//    {
-//        public static IAsyncEnumerable<TSource> Except<TSource>(this IAsyncEnumerable<TSource> first, IAsyncEnumerable<TSource> second, CancellationToken ct = default(CancellationToken))
-//        {
-//            if (first == null) throw new ArgumentNullException("first");
-//            if (second == null) throw new ArgumentNullException("second");
+namespace System.Collections.Async
+{
+    public static partial class AsyncEnumerable
+    {
+        public static IAsyncEnumerable<TSource> Except<TSource>(this IAsyncEnumerable<TSource> first, IAsyncEnumerable<TSource> second, CancellationToken ct = default(CancellationToken))
+        {
+            if (first == null) throw new ArgumentNullException(nameof(first));
+            if (second == null) throw new ArgumentNullException(nameof(second));
+            if (ct.IsCancellationRequested) return FrozenEnumerable<TSource>.Canceled;
 
-//            return new _AsyncEnumerable<TSource>(async ct2 =>
-//            {
-//                IEqualityComparer<TSource> comparer = EqualityComparer<TSource>.Default;
+            return new _AsyncEnumerable<TSource>(async ct2 =>
+            {
+                IEqualityComparer<TSource> comparer = EqualityComparer<TSource>.Default;
 
-//                var distinct = new HashSet<TSource>(comparer);
-//                var except = new HashSet<TSource>(comparer);
-//                var s = await second.GetEnumerator(ct2);
-//                while (await s.MoveNext(ct2)) except.Add(s.Current);
+                var distinct = new HashSet<TSource>(comparer);
+                var except = new HashSet<TSource>(comparer);
+                IMoveNextResult<TSource> frozen = null;
 
-//                var e = await first.GetEnumerator(ct2);
-//                return new _AsyncEnumerator<TSource>(async () =>
-//                {
-//                    while (true)
-//                    {
-//                        if (await e.MoveNext(ct))
-//                        {
-//                            if (!distinct.Add(e.Current) || except.Contains(e.Current)) continue;
-//                            return Tuple.Create(e.Current, true);
-//                        }
-//                        else
-//                        {
-//                            return Tuple.Create(default(TSource), false);
-//                        }
-//                    }
-//                });
-//            });
-//        }
+                var s = await second.GetEnumerator(ct2);
+                if (s.IsFrozen) return s;
 
-//        public static IAsyncEnumerable<TSource> Except<TSource>(this IAsyncEnumerable<TSource> first, IAsyncEnumerable<TSource> second, IEqualityComparer<TSource> comparer, CancellationToken ct = default(CancellationToken))
-//        {
-//            if (first == null) throw new ArgumentNullException("first");
-//            if (second == null) throw new ArgumentNullException("second");
+                var x = await s.MoveNext(ct2);
+                while (x.IsValue) except.Add(x.Value);
+                switch (x.Status)
+                {
+                    case MoveNextStatus.Canceled:
+                        return FrozenEnumerator<TSource>.Canceled;
+                    case MoveNextStatus.Faulted:
+                        return FrozenEnumerator<TSource>.Faulted(x.Exception);
+                }
 
-//            return new _AsyncEnumerable<TSource>(async ct2 =>
-//            {
-//                var distinct = new HashSet<TSource>(comparer);
-//                var except = new HashSet<TSource>(comparer);
-//                var s = await second.GetEnumerator(ct2);
-//                while (await s.MoveNext(ct2)) except.Add(s.Current);
+                var e = await first.GetEnumerator(ct2);
+                if (e.IsFrozen) return e;
+                
+                return new _AsyncEnumerator<TSource>(async () =>
+                {
+                    if (frozen != null) return frozen;
 
-//                var e = await first.GetEnumerator(ct2);
-//                return new _AsyncEnumerator<TSource>(async () =>
-//                {
-//                    while (true)
-//                    {
-//                        if (await e.MoveNext(ct))
-//                        {
-//                            if (!distinct.Add(e.Current) || except.Contains(e.Current)) continue;
-//                            return Tuple.Create(e.Current, true);
-//                        }
-//                        else
-//                        {
-//                            return Tuple.Create(default(TSource), false);
-//                        }
-//                    }
-//                });
-//            });
-//        }
+                    while (true)
+                    {
+                        var y = await e.MoveNext(ct2);
+                        if (y.IsValue)
+                        {
+                            if (!distinct.Add(y.Value) || except.Contains(y.Value)) continue;
+                            return y;
+                        }
+                        else
+                        {
+                            frozen = y;
+                            return frozen;
+                        }
+                    }
+                });
+            });
+        }
 
-//        public static IAsyncEnumerable<TSource> Except<TSource>(this IAsyncEnumerable<TSource> first, IEnumerable<TSource> second, CancellationToken ct = default(CancellationToken))
-//        {
-//            if (first == null) throw new ArgumentNullException("first");
-//            if (second == null) throw new ArgumentNullException("second");
-            
-//            return new _AsyncEnumerable<TSource>(async ct2 =>
-//            {
-//                var comparer = EqualityComparer<TSource>.Default;
+        public static IAsyncEnumerable<TSource> Except<TSource>(this IAsyncEnumerable<TSource> first, IAsyncEnumerable<TSource> second, IEqualityComparer<TSource> comparer, CancellationToken ct = default(CancellationToken))
+        {
+            if (first == null) throw new ArgumentNullException(nameof(first));
+            if (second == null) throw new ArgumentNullException(nameof(second));
+            if (ct.IsCancellationRequested) return FrozenEnumerable<TSource>.Canceled;
 
-//                var distinct = new HashSet<TSource>(comparer);
-//                var except = new HashSet<TSource>(second, comparer);
+            return new _AsyncEnumerable<TSource>(async ct2 =>
+            {
+                var distinct = new HashSet<TSource>(comparer);
+                var except = new HashSet<TSource>(comparer);
+                IMoveNextResult<TSource> frozen = null;
 
-//                var e = await first.GetEnumerator(ct2);
-//                return new _AsyncEnumerator<TSource>(async () =>
-//                {
-//                    while (true)
-//                    {
-//                        if (await e.MoveNext(ct))
-//                        {
-//                            if (!distinct.Add(e.Current) || except.Contains(e.Current)) continue;
-//                            return Tuple.Create(e.Current, true);
-//                        }
-//                        else
-//                        {
-//                            return Tuple.Create(default(TSource), false);
-//                        }
-//                    }
-//                });
-//            });
-//        }
+                var s = await second.GetEnumerator(ct2);
+                if (s.IsFrozen) return s;
 
-//        public static IAsyncEnumerable<TSource> Except<TSource>(this IAsyncEnumerable<TSource> first, IEnumerable<TSource> second, IEqualityComparer<TSource> comparer, CancellationToken ct = default(CancellationToken))
-//        {
-//            if (first == null) throw new ArgumentNullException("first");
-//            if (second == null) throw new ArgumentNullException("second");
+                var x = await s.MoveNext(ct2);
+                while (x.IsValue) except.Add(x.Value);
+                switch (x.Status)
+                {
+                    case MoveNextStatus.Canceled:
+                        return FrozenEnumerator<TSource>.Canceled;
+                    case MoveNextStatus.Faulted:
+                        return FrozenEnumerator<TSource>.Faulted(x.Exception);
+                }
 
-//            return new _AsyncEnumerable<TSource>(async ct2 =>
-//            {
-//                var distinct = new HashSet<TSource>(comparer);
-//                var except = new HashSet<TSource>(second, comparer);
+                var e = await first.GetEnumerator(ct2);
+                if (e.IsFrozen) return e;
 
-//                var e = await first.GetEnumerator(ct2);
-//                return new _AsyncEnumerator<TSource>(async () =>
-//                {
-//                    while (true)
-//                    {
-//                        if (await e.MoveNext(ct))
-//                        {
-//                            if (!distinct.Add(e.Current) || except.Contains(e.Current)) continue;
-//                            return Tuple.Create(e.Current, true);
-//                        }
-//                        else
-//                        {
-//                            return Tuple.Create(default(TSource), false);
-//                        }
-//                    }
-//                });
-//            });
-//        }
-//    }
-//}
+                return new _AsyncEnumerator<TSource>(async () =>
+                {
+                    if (frozen != null) return frozen;
+
+                    while (true)
+                    {
+                        var y = await e.MoveNext(ct2);
+                        if (y.IsValue)
+                        {
+                            if (!distinct.Add(y.Value) || except.Contains(y.Value)) continue;
+                            return y;
+                        }
+                        else
+                        {
+                            frozen = y;
+                            return frozen;
+                        }
+                    }
+                });
+            });
+        }
+
+        public static IAsyncEnumerable<TSource> Except<TSource>(this IAsyncEnumerable<TSource> first, IEnumerable<TSource> second, CancellationToken ct = default(CancellationToken))
+        {
+            if (first == null) throw new ArgumentNullException(nameof(first));
+            if (second == null) throw new ArgumentNullException(nameof(second));
+            if (ct.IsCancellationRequested) return FrozenEnumerable<TSource>.Canceled;
+
+            return new _AsyncEnumerable<TSource>(async ct2 =>
+            {
+                var comparer = EqualityComparer<TSource>.Default;
+
+                var distinct = new HashSet<TSource>(comparer);
+                var except = new HashSet<TSource>(second, comparer);
+                IMoveNextResult<TSource> frozen = null;
+
+                var e = await first.GetEnumerator(ct2);
+                if (e.IsFrozen) return e;
+
+                return new _AsyncEnumerator<TSource>(async () =>
+                {
+                    if (frozen != null) return frozen;
+
+                    while (true)
+                    {
+                        var x = await e.MoveNext(ct2);
+                        if (x.IsValue)
+                        {
+                            if (!distinct.Add(x.Value) || except.Contains(x.Value)) continue;
+                            return x;
+                        }
+                        else
+                        {
+                            frozen = x;
+                            return frozen;
+                        }
+                    }
+                });
+            });
+        }
+
+        public static IAsyncEnumerable<TSource> Except<TSource>(this IAsyncEnumerable<TSource> first, IEnumerable<TSource> second, IEqualityComparer<TSource> comparer, CancellationToken ct = default(CancellationToken))
+        {
+            if (first == null) throw new ArgumentNullException(nameof(first));
+            if (second == null) throw new ArgumentNullException(nameof(second));
+            if (ct.IsCancellationRequested) return FrozenEnumerable<TSource>.Canceled;
+
+            return new _AsyncEnumerable<TSource>(async ct2 =>
+            {
+                var distinct = new HashSet<TSource>(comparer);
+                var except = new HashSet<TSource>(second, comparer);
+                IMoveNextResult<TSource> frozen = null;
+
+                var e = await first.GetEnumerator(ct2);
+                if (e.IsFrozen) return e;
+
+                return new _AsyncEnumerator<TSource>(async () =>
+                {
+                    if (frozen != null) return frozen;
+
+                    while (true)
+                    {
+                        var x = await e.MoveNext(ct2);
+                        if (x.IsValue)
+                        {
+                            if (!distinct.Add(x.Value) || except.Contains(x.Value)) continue;
+                            return x;
+                        }
+                        else
+                        {
+                            frozen = x;
+                            return frozen;
+                        }
+                    }
+                });
+            });
+        }
+    }
+}

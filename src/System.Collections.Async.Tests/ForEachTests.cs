@@ -63,12 +63,11 @@ namespace System.Collections.Async.Tests
 
             try
             {
-                xs.ForEach(_ => { }, Helper.CANCELLED).Wait();
+                xs.ForEach(_ => { }, new CancellationToken(true)).Wait();
                 Assert.Fail();
             }
             catch
             {
-                Assert.IsTrue(Helper.CANCELLED.IsCancellationRequested);
             }
         }
     }

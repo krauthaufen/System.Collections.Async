@@ -294,28 +294,28 @@ namespace System.Collections.Async.Tests
             }
             catch
             {
-                Assert.IsTrue(Helper.CANCELLED.IsCancellationRequested);
             }
         }
 
         [TestMethod]
         public void MinFailsWhenCancelled()
         {
-            _MinFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<decimal>().Min(x => x, Helper.CANCELLED).Result == 0));
-            _MinFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<double>().Min(x => x, Helper.CANCELLED).Result == 0));
-            _MinFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<float>().Min(x => x, Helper.CANCELLED).Result == 0));
-            _MinFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<int>().Min(x => x, Helper.CANCELLED).Result == 0));
-            _MinFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<long>().Min(x => x, Helper.CANCELLED).Result == 0));
-            _MinFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<uint>().Min(x => x, Helper.CANCELLED).Result == 0));
-            _MinFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<ulong>().Min(x => x, Helper.CANCELLED).Result == 0));
+            var ct = new CancellationToken(true);
+            _MinFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<decimal>().Min(x => x, ct).Result == 0));
+            _MinFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<double>().Min(x => x, ct).Result == 0));
+            _MinFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<float>().Min(x => x, ct).Result == 0));
+            _MinFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<int>().Min(x => x, ct).Result == 0));
+            _MinFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<long>().Min(x => x, ct).Result == 0));
+            _MinFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<uint>().Min(x => x, ct).Result == 0));
+            _MinFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<ulong>().Min(x => x, ct).Result == 0));
 
-            _MinFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<decimal?>().Min(x => x, Helper.CANCELLED).Result == 0));
-            _MinFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<double?>().Min(x => x, Helper.CANCELLED).Result == 0));
-            _MinFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<float?>().Min(x => x, Helper.CANCELLED).Result == 0));
-            _MinFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<int?>().Min(x => x, Helper.CANCELLED).Result == 0));
-            _MinFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<long?>().Min(x => x, Helper.CANCELLED).Result == 0));
-            _MinFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<uint?>().Min(x => x, Helper.CANCELLED).Result == 0));
-            _MinFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<ulong?>().Min(x => x, Helper.CANCELLED).Result == 0));
+            _MinFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<decimal?>().Min(x => x, ct).Result == 0));
+            _MinFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<double?>().Min(x => x, ct).Result == 0));
+            _MinFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<float?>().Min(x => x, ct).Result == 0));
+            _MinFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<int?>().Min(x => x, ct).Result == 0));
+            _MinFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<long?>().Min(x => x, ct).Result == 0));
+            _MinFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<uint?>().Min(x => x, ct).Result == 0));
+            _MinFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<ulong?>().Min(x => x, ct).Result == 0));
         }
 
         #endregion

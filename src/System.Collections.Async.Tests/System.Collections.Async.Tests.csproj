@@ -82,7 +82,6 @@
     <Compile Include="ForEachTests.cs" />
     <Compile Include="FromValuesTests.cs" />
     <Compile Include="EmptyTests.cs" />
-    <Compile Include="Helper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

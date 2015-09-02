@@ -294,28 +294,28 @@ namespace System.Collections.Async.Tests
             }
             catch
             {
-                Assert.IsTrue(Helper.CANCELLED.IsCancellationRequested);
             }
         }
 
         [TestMethod]
         public void MaxFailsWhenCancelled()
         {
-            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<decimal>().Max(x => x, Helper.CANCELLED).Result == 0));
-            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<double>().Max(x => x, Helper.CANCELLED).Result == 0));
-            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<float>().Max(x => x, Helper.CANCELLED).Result == 0));
-            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<int>().Max(x => x, Helper.CANCELLED).Result == 0));
-            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<long>().Max(x => x, Helper.CANCELLED).Result == 0));
-            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<uint>().Max(x => x, Helper.CANCELLED).Result == 0));
-            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<ulong>().Max(x => x, Helper.CANCELLED).Result == 0));
+            var ct = new CancellationToken(true);
+            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<decimal>().Max(x => x, ct).Result == 0));
+            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<double>().Max(x => x, ct).Result == 0));
+            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<float>().Max(x => x, ct).Result == 0));
+            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<int>().Max(x => x, ct).Result == 0));
+            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<long>().Max(x => x, ct).Result == 0));
+            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<uint>().Max(x => x, ct).Result == 0));
+            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<ulong>().Max(x => x, ct).Result == 0));
 
-            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<decimal?>().Max(x => x, Helper.CANCELLED).Result == 0));
-            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<double?>().Max(x => x, Helper.CANCELLED).Result == 0));
-            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<float?>().Max(x => x, Helper.CANCELLED).Result == 0));
-            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<int?>().Max(x => x, Helper.CANCELLED).Result == 0));
-            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<long?>().Max(x => x, Helper.CANCELLED).Result == 0));
-            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<uint?>().Max(x => x, Helper.CANCELLED).Result == 0));
-            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<ulong?>().Max(x => x, Helper.CANCELLED).Result == 0));
+            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<decimal?>().Max(x => x, ct).Result == 0));
+            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<double?>().Max(x => x, ct).Result == 0));
+            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<float?>().Max(x => x, ct).Result == 0));
+            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<int?>().Max(x => x, ct).Result == 0));
+            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<long?>().Max(x => x, ct).Result == 0));
+            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<uint?>().Max(x => x, ct).Result == 0));
+            _MaxFailsWhenCancelled(() => Assert.IsTrue(AsyncEnumerable.Empty<ulong?>().Max(x => x, ct).Result == 0));
         }
 
         #endregion
