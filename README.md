@@ -1,10 +1,8 @@
 # System.Collections.Async
 
-An implementation of async enumerables including many LINQ operators.
+An implementation of async enumerables with cancelation and exception handling.
+Many operators are available out-of-the-box:
 
-
-## Operators
-The following operators are implemented:
 * Aggregate
 * All
 * Any
