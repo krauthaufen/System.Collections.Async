@@ -1,6 +1,6 @@
 # System.Collections.Async
 
-An implementation of async enumerables with cancelation and exception handling.
+An implementation of async enumerables with cancellation and exception handling.
 Many operators are available out-of-the-box:
 
 * Aggregate
