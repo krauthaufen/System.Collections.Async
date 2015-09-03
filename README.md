@@ -7,6 +7,7 @@ Many operators are available out-of-the-box:
 * All
 * Any
 * AsEnumerable
+* BufferedSource
 * Canceled
 * Concat
 * Contains
@@ -30,6 +31,7 @@ Many operators are available out-of-the-box:
 * LongCount
 * Max
 * Min
+* Next
 * Range
 * Repeat
 * Select
