@@ -43,6 +43,7 @@
     <Compile Include="BufferedSource.cs" />
     <Compile Include="Canceled.cs" />
     <Compile Include="Faulted.cs" />
+    <Compile Include="Next.cs" />
     <Compile Include="Latest.cs" />
     <Compile Include="AsEnumerable.cs" />
     <Compile Include="Wait.cs" />
